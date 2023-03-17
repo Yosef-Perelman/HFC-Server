@@ -1,13 +1,20 @@
-import json
+
+# *** imports ***
+
 from datetime import datetime
 
 from flask import Flask, request
-import pymongo
-from pymongo import MongoClient
 import firebase_admin
 from firebase_admin import credentials, firestore
 
+#from add_food_record import add_food_record
+from nutrient_info import food_get_info
+from recipe_order import recipe_order
+
+# *** setup ***
+
 # flask
+
 app = Flask(__name__)
 
 # date
@@ -18,31 +25,28 @@ cred = credentials.Certificate('hfc-app-b33ed-firebase-adminsdk-oqged-96055b305b
 firebase_admin.initialize_app(cred)
 usersDB = firestore.client()
 
-# mongo
-cluster = MongoClient("mongodb+srv://yosef:QV2NewXImbi9RCwI@cluster0.jy50tmb.mongodb.net/?retryWrites=true&w=majority")
-foodDB = cluster["FoodDB"]
-collection = foodDB["Food and Calories"]
-
-
 # make the parameters fit to the DB
-def capitalize_words(s):
-    return ' '.join(word.capitalize() for word in s.split())
+#def capitalize_words(s):
+#    return ' '.join(word.capitalize() for word in s.split())
+
+
+# *** code ***
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(force=True)
     print(req)
     # res = processRequest(req)
-    processRequest(req)
     # res = json.dumps(res, indent=4)
     # print(res)
+    response = process_request(req)
     return {
-        'fulfillmentText' : "Server says: The meal updated!"
+        'fulfillmentText' : response
     }
 
 
 # processing the request from dialogflow
-def processRequest(req):
+def process_request(req):
     sessionID = req.get('responseId')
     result = req.get("queryResult")
     intent = result.get("intent").get('displayName')
@@ -52,50 +56,19 @@ def processRequest(req):
     # cust_contact = parameters.get("cust_contact")
     # cust_email = parameters.get("cust_email")
 
-    if intent == 'add_food_record':
-        meal = parameters.get("Meal")
-        calories = 0
-        for food in parameters.get("Food_Type"):
-            print("food: ", food)
-            food_name = capitalize_words(food)
-            results = collection.find({"Food": food_name})
-            for result in results:
-                print(result)
-                calories = result["Calories"]
-            #doc_ref = usersDB.collection(u'users').document(u'eli')
-            doc_ref = usersDB.collection(u'users').document(u'yosef').collection(date).document(meal).\
-                collection(sessionID).document(food_name)
-            #.collection(datetime.now().strftime("%m/%d/%Y")).document(parameters.get("Meal"))
-            doc_ref.set({
-                u'name': food_name,
-                u'calories': calories
-            })
+    #if intent == 'add_food_record':
+     #   return add_food_record(req)
 
-    #return {'fulfillmentText' : "Server says: The meal updated!"}
+    if intent == 'recipe.request':
+        return recipe_order(req)
 
+    if intent == 'food.get.info':
+        return food_get_info(req)
 
-'''def test_mongo():
-    word = capitalize_words("tomato")
-    results = collection.find({"Food": word})
-    for result in results:
-        print(result)
-        print(result["Calories"])'''
-
-
-def test_firebase():
-    food_name = "Tomato"
-    results = collection.find({"Food": food_name})
-    for result in results:
-        print(result)
-        calories = result["Calories"]
-    doc_ref = usersDB.collection(u'users').document(u'yosef').collection(date).collection(u'breakfast').document(u'intent_id')
-    # .collection(datetime.now().strftime("%m/%d/%Y")).document(parameters.get("Meal"))
-    doc_ref.set({
-        u'name': food_name,
-        u'calories': calories
-    })
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
-    #test_mongo()
     #test_firebase()
+    #rapid_api_nutrition_info()
+    #rapid_api_recipes_info()
+    #edamam_try()
