@@ -36,4 +36,9 @@ def food_get_info(req):
     response_dict = json.loads(response.text)
     print(response_dict)
 
-    return response_dict['calories']
+    #return response_dict['calories']
+    return "name: " + response_dict['ingredients'][0]['text'] \
+           + "\ncalories: " + str(response_dict['totalNutrients']['ENERC_KCAL']['quantity']) \
+           + "\nprotein: " + str(response_dict['totalNutrients']['PROCNT']['quantity']) \
+           + "\nfat: " + str(response_dict['totalNutrients']['FAT']['quantity']) \
+           + "\ncarbohydrates: " + str(response_dict['totalNutrients']['CHOCDF']['quantity'])

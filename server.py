@@ -1,20 +1,19 @@
-
 # *** imports ***
-
-from datetime import datetime
 
 from flask import Flask, request
 import firebase_admin
 from firebase_admin import credentials, firestore
+from datetime import datetime
 
-#from add_food_record import add_food_record
+from add_food_record import add_food_record
 from nutrient_info import food_get_info
 from recipe_order import recipe_order
+from set_calorie_program import set_calorie_daily
+
 
 # *** setup ***
 
 # flask
-
 app = Flask(__name__)
 
 # date
@@ -25,20 +24,15 @@ cred = credentials.Certificate('hfc-app-b33ed-firebase-adminsdk-oqged-96055b305b
 firebase_admin.initialize_app(cred)
 usersDB = firestore.client()
 
-# make the parameters fit to the DB
-#def capitalize_words(s):
-#    return ' '.join(word.capitalize() for word in s.split())
-
 
 # *** code ***
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
+
     req = request.get_json(force=True)
     print(req)
-    # res = processRequest(req)
-    # res = json.dumps(res, indent=4)
-    # print(res)
+
     response = process_request(req)
     return {
         'fulfillmentText' : response
@@ -53,11 +47,9 @@ def process_request(req):
     # query_text = result.get("queryText")
     parameters = result.get("parameters")
     # cust_name = parameters.get("cust_name")
-    # cust_contact = parameters.get("cust_contact")
-    # cust_email = parameters.get("cust_email")
 
-    #if intent == 'add_food_record':
-     #   return add_food_record(req)
+    if intent == 'add.food.record':
+        return add_food_record(req)
 
     if intent == 'recipe.request':
         return recipe_order(req)
@@ -65,10 +57,10 @@ def process_request(req):
     if intent == 'food.get.info':
         return food_get_info(req)
 
+    daily_calorie_intent_name = 'calorie.program.set - bot - age - gender - weight - height - final'
+    if intent == daily_calorie_intent_name:
+        return set_calorie_daily(req)
+
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
-    #test_firebase()
-    #rapid_api_nutrition_info()
-    #rapid_api_recipes_info()
-    #edamam_try()

@@ -1,23 +1,6 @@
 import requests
 import json
 
-'''def edamam_try():
-
-    url = "https://api.edamam.com/api/recipes/v2?type=public&q=onion&app_id=3749f87d&" \
-          "app_key=191597bb0eccc02907ba8e5efb98fc8b&health=fodmap-free"
-    headers = {
-        "Accept": "application/json",
-        "Accept-Language": "en"
-    }
-
-    # return list of: name, picture, ingredients, prep time, calories per serving, link to the full recipe
-    response = requests.request("GET", url, headers=headers)
-    response_dict = json.loads(response.text)
-    print(response_dict['hits'][0]['recipe']['label'])
-    print(response_dict['hits'][0]['recipe']['images']['SMALL']['url'])
-    print(response_dict['hits'][0]['recipe']['url'])
-    print(response_dict['hits'][0]['recipe']['ingredientLines'])
-
 
 class Recipe:
     def __init__(self, name, picture, ingredients, prep_time, calories_per_serving, full_recipe_link):
@@ -30,23 +13,6 @@ class Recipe:
         self.full_recipe_link = full_recipe_link
 
 
-def rapid_api_recipes_info():
-    import requests
-
-    url = "https://recipe-by-api-ninjas.p.rapidapi.com/v1/recipe"
-
-    querystring = {"query": "italian wedding soup"}
-
-    headers = {
-        "X-RapidAPI-Key": "fe8c47f227mshd760ad2995da85bp1a536djsnd48322f3c41e",
-        "X-RapidAPI-Host": "recipe-by-api-ninjas.p.rapidapi.com"
-    }
-
-    response = requests.request("GET", url, headers=headers, params=querystring)
-
-    print(response.text)'''
-
-
 def recipe_order(req):
     result = req.get("queryResult")
     parameters = result.get("parameters")
@@ -55,14 +21,17 @@ def recipe_order(req):
     meal = parameters.get("Meal")
     meal_query = ""
     if meal:
+        print(meal)
         meal_query = "&mealType=" + meal
     health = parameters.get("Health")
     health_query = ""
     if health:
+        print(health)
         health_query = "&health=" + health # for now i allowed only one health
     diet = parameters.get("Diet")
     diet_query = ""
     if diet:
+        print(diet)
         diet_query = "&diet=" + diet # for now i allowed only one health
     #ingr = parameters.get("Food_Type")
 
@@ -84,4 +53,4 @@ def recipe_order(req):
     #print(response_dict['hits'][0]['recipe']['url'])
     #print(response_dict['hits'][0]['recipe']['ingredientLines'])
 
-    return 'new recipe'
+    return (response_dict['hits'][0]['recipe']['label'])
