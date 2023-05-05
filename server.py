@@ -1,13 +1,16 @@
 # *** imports ***
+import json
 
+import requests
 from flask import Flask, request
 import firebase_admin
 from firebase_admin import credentials, firestore
 from datetime import datetime
 
+from add_exercise import add_exercise_record
 from add_food_record import add_food_record
 from nutrient_info import food_get_info
-from recipe_order import recipe_order
+from recipe_order import recipe_order, create_recipe_object
 from set_calorie_program import set_calorie_daily
 
 
@@ -52,6 +55,7 @@ def process_request(req):
         return add_food_record(req)
 
     if intent == 'recipe.request':
+        #return "yes"
         return recipe_order(req)
 
     if intent == 'food.get.info':
@@ -61,6 +65,10 @@ def process_request(req):
     if intent == daily_calorie_intent_name:
         return set_calorie_daily(req)
 
+    if intent == 'add.exercise.record':
+        return add_exercise_record(req)
+
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    #app.run(port=5000, debug=True)
+    create_recipe_object()
