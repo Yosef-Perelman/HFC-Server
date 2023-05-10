@@ -1,5 +1,9 @@
 import requests
 import json
+import dialogflow_response
+from dialogflow_response import CardResponse
+
+
 
 
 class Recipe:
@@ -11,6 +15,7 @@ class Recipe:
         self.prep_time = prep_time
         self.calories_per_serving = calories_per_serving
         self.full_recipe_link = full_recipe_link
+        self.platform = "ACTIONS_ON_GOOGLE"
 
 
 def recipe_order(req):
@@ -47,10 +52,36 @@ def recipe_order(req):
     # return list of: name, picture, ingredients, prep time, calories per serving, link to the full recipe
     response = requests.request("GET", query_string, headers=headers)
     response_dict = json.loads(response.text)
-    print(response_dict['hits'][0])
-    #print(response_dict['hits'][0]['recipe']['label'])
-    #print(response_dict['hits'][0]['recipe']['images']['SMALL']['url'])
-    #print(response_dict['hits'][0]['recipe']['url'])
-    #print(response_dict['hits'][0]['recipe']['ingredientLines'])
+    try:
+        print(response_dict['hits'][0]['recipe']['label'])
+        #print(response_dict['hits'][0]['recipe']['label'])
+        #print(response_dict['hits'][0]['recipe']['images']['SMALL']['url'])
+        #print(response_dict['hits'][0]['recipe']['url'])
+        #print(response_dict['hits'][0]['recipe']['ingredientLines'])
+        print (response_dict['hits'][0])
+        # save image in firebase?
 
-    return (response_dict['hits'][0]['recipe']['label'])
+
+        # extract useful data:
+        title = response_dict['hits'][0]['recipe']['label'] #REGULAR
+        image = response_dict['hits'][0]['recipe']['images']['LARGE']['url']
+        url = response_dict['hits'][0]['recipe']['url']
+        description=response_dict['hits'][0]['recipe']['healthLabels']+response_dict['hits'][0]['recipe']['dietLabels']
+
+        return create_card(title, url, image, description)
+    except:
+        # try with regular picture
+        try:
+            image = response_dict['hits'][0]['recipe']['images']['REGULAR']['url']
+            return create_card(title, url, image, description)
+        except:
+            return "no recipe avaiable"
+
+def create_card(title, url, image, labels):
+    card = {"request": "recipe",
+            "title": title,
+            "subtitle": labels,
+            "imageUri": image,
+            "Url": url
+    }
+    return json.dumps(card)
