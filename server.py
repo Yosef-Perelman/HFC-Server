@@ -11,7 +11,7 @@ from add_exercise import add_exercise_record
 from add_food_record import add_food_record
 from nutrient_info import food_get_info
 from recipe_order import recipe_order
-from createDB import create_recipe_object
+from createDB import create_recipe_object, req
 from set_calorie_program import set_calorie_daily
 
 
@@ -72,5 +72,6 @@ def process_request(req):
 
 if __name__ == '__main__':
     #app.run(port=5000, debug=True)
-    #create_recipe_object()
-    pass
+    create_recipe_object()
+    #req()
+    #pass
