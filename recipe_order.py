@@ -1,9 +1,5 @@
 import requests
 import json
-import dialogflow_response
-from dialogflow_response import CardResponse
-
-
 
 
 class Recipe:

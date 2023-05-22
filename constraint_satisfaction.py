@@ -38,8 +38,8 @@ class Meal:
 
 
 class UserProfile:
-    def __init__(self, diet, health, forbidden_ingredients, recommended_calories):
-        self.diet = diet
+    def __init__(self, health, forbidden_ingredients, recommended_calories):
+        #self.diet = diet
         self.health = health
         self.forbidden_ingredients = forbidden_ingredients
         self.recommended_calories = recommended_calories
@@ -50,19 +50,39 @@ def hc(user_profile, meal, recipe, already_chosen):
     if recipe.name in already_chosen:
         return False
 
-    if user_profile.diet is not None:
-        if user_profile.diet not in recipe.dietLabels:
+    # if user_profile.diet is not None:
+    #    if user_profile.diet not in recipe.dietLabels:
+    #        return False
+
+    if user_profile.health:
+        flag = False
+        for tag in user_profile.health:
+            flag = False
+            tag_lower = tag.lower()
+            for label in recipe.healthLabels:
+                label_lower = label.lower()  # Convert string in list to lowercase
+                if tag_lower in label_lower:
+                    flag = True
+                    break
+            if not flag:
+                break
+        if not flag:
             return False
 
-    if user_profile.health is not None:
-        if user_profile.health not in recipe.healthLabels:
+    if user_profile.forbidden_ingredients:
+        flag = True
+        for food in user_profile.forbidden_ingredients:
+            flag = True
+            food_lower = food.lower()
+            for ingredient in recipe.ingredients:
+                ingredient_lower = ingredient.lower()  # Convert string in list to lowercase
+                if food_lower in ingredient_lower:
+                    flag = False
+                    break
+            if not flag:
+                break
+        if not flag:
             return False
-
-    if user_profile.forbidden_ingredients is not None:
-        for i in user_profile.forbidden_ingredients:
-            if i in recipe.ingredients:
-                return False
-
 
     # todo: add the constraint that the recipe didn't chosen yet
 
@@ -92,12 +112,12 @@ def count_unique_and_duplicates(list1, list2, list3):
     return len(unique_list), num_duplicates
 
 
-def remove_apostrophe(strings):
+'''def remove_apostrophe(strings):
     cleaned_strings = []
     for string in strings:
         cleaned_string = string.replace("'", "")
         cleaned_strings.append(cleaned_string)
-    return cleaned_strings
+    return cleaned_strings'''
 
 
 def sc(user_profile, recipe, current_assign):
@@ -105,27 +125,23 @@ def sc(user_profile, recipe, current_assign):
                     float(recipe.calories) - user_profile.recommended_calories) / 100
     if deviation <= 0.5:
         return 0
-    #list1 = remove_apostrophe(current_assign[0].recipe.ingredients)
-    #list2 = remove_apostrophe(current_assign[1].recipe.ingredients)
-    #list3 = remove_apostrophe(recipe.ingredients)
     unique_ingredients, duplicate_ingredients = count_unique_and_duplicates(current_assign[0].recipe.ingredients,
                                                                             current_assign[1].recipe.ingredients,
                                                                             recipe.ingredients)
-    variation = duplicate_ingredients / unique_ingredients / 2
-    #variation = 0
+    variation = duplicate_ingredients / unique_ingredients
     return variation + deviation
 
 
 '''**********************************'''
 
 
-def get_csv_row(filename, row_num):
+'''def get_csv_row(filename, row_num):
     with open(filename, 'r') as csvfile:
         csv_reader = csv.reader(csvfile)
         for i, row in enumerate(csv_reader):
             if i == row_num + 1:
                 return row
-    return None
+    return None'''
 
 
 def create_recipe(row):
@@ -152,7 +168,7 @@ def constraint_satisfaction(user, number_of_days):
         dnnr = Meal(2, 'dinner')
         best_sol = [bf, lnch, dnnr]
 
-        end_of_the_file = 500
+        end_of_the_file = 498
         breakfast_index = 1
         lunch_index = 1
         dinner_index = 1
@@ -206,7 +222,7 @@ def constraint_satisfaction(user, number_of_days):
                                 if index < end_of_the_file:
                                     index += 1
                                 else:
-                                    breakfast_index += 1
+                                    #breakfast_index += 1
                                     lunch_index = 1
                                     stop_flag = True
                                     break
@@ -230,7 +246,7 @@ def constraint_satisfaction(user, number_of_days):
                                         index += 1
                                     else:
                                         breakfast_index -= 1
-                                        lunch_index += 1
+                                        #lunch_index += 1
                                         break
                             else:
                                 if index < end_of_the_file:
@@ -240,73 +256,73 @@ def constraint_satisfaction(user, number_of_days):
                                     lunch_index += 1
                                     break
 
-        for x in best_sol:
-            already_chosen.append(x.recipe.name)
-            meals.append(x)
-
-        '''else:
-            if index < end_of_the_file:
-                index += 1
-            else:
-                if ass.type == 'breakfast':
-                    # If the search go over all the breakfasts it means that the search failed and need
-                    # to finish
-                    print("the search over without good results")
-                    end = False
-                    stop_flag = True
-                    break
-                elif ass.type == 'lunch':
-                    # If the search go over all the lunches it means that no proper lunch and dinner found and need to
-                    # move on to the next breakfast, so break the loop to start from the next breakfast and from the
-                    # first lunch
-                    breakfast_index += 1
-                    lunch_index = 1
-                    stop_flag = True
-                    break
-                else:
-                    # If the search go over all the dinners it means that no proper dinner found and need to
-                    # move on to the next lunch, so return the breakfast index so it will chose again the same breakfast,
-                    # and move the lunch index one step forward to start from the next lunch, and break the loop
-                    dinner_index = 1
-                    breakfast_index -= 1
-                    lunch_index += 1
-                    break'''
+        if best_sol[2].recipe is not None:
+            for x in best_sol:
+                already_chosen.append(x.recipe.name)
+                meals.append(x)
+        else:
+            break
 
     day_calories = 0
-    for n in range(number_of_days*3):
-        if n % 3 == 0:
-            if n != 0:
-                print("calories of the day = " + str(day_calories))
-            print("day number " + str(n / 3 + 1) + ":")
-            day_calories = 0
-        if meals[n].recipe is not None:
-            print(meals[n].type + ":")
-            print("name: " + meals[n].recipe.name)
-            print("dietLabels: ")
-            diet = ""
-            for string in meals[n].recipe.dietLabels:
-                diet += string + " "
-            print(diet)
-            print("healthLabels: ")
-            health = ""
-            for string in meals[n].recipe.healthLabels:
-                health += string + " "
-            print(health)
-            print("ingredients: ")
-            ingredients = ""
-            for string in meals[n].recipe.ingredients:
-                ingredients += string + " "
-            print(ingredients)
-            print("calories: " + meals[n].recipe.calories)
-            day_calories += float(meals[n].recipe.calories)
-    print("calories of the day = " + str(day_calories))
+    if meals:
+        for n in range(number_of_days*3):
+            if n % 3 == 0:
+                if n != 0:
+                    print("calories of the day = " + str(day_calories))
+                print("day number " + str(n / 3 + 1) + ":")
+                day_calories = 0
+            if meals[n].recipe is not None:
+                print(meals[n].type + ":")
+                print("name: " + meals[n].recipe.name)
+                print("dietLabels: ")
+                diet = ""
+                for string in meals[n].recipe.dietLabels:
+                    diet += string + " "
+                print(diet)
+                print("healthLabels: ")
+                health = ""
+                for string in meals[n].recipe.healthLabels:
+                    health += string + " "
+                print(health)
+                print("ingredients: ")
+                ingredients = ""
+                for string in meals[n].recipe.ingredients:
+                    ingredients += string + " "
+                print(ingredients)
+                print("calories: " + meals[n].recipe.calories)
+                day_calories += float(meals[n].recipe.calories)
+        print("calories of the day = " + str(day_calories))
+    else:
+        print("the search finished. no legal solution")
 
 
-
-if __name__ == '__main__':
-    number_of_days = 3
-    user = UserProfile(None, 'Vegetarian', ['sugar', 'onion'], 2000)
+'''if __name__ == '__main__':
+    number_of_days = 5
+    user = UserProfile(['gluten-Free'], ['onion'], 2000)
     start_time = time.time()
     constraint_satisfaction(user, number_of_days)
     end_time = time.time()
+    print("Total time:", end_time - start_time, "seconds")'''
+
+
+def from_bot(req, usersDB):
+    number_of_days = 5
+    session_id = req.get("session").split('/')[-1]
+    users_ref = usersDB.collection('Users')
+    #todo check if he fill details
+
+    # Create a query against the collection
+    query_ref = users_ref.where('sessionId', '==', session_id)
+    doc = next(query_ref.stream())
+    doc_ref = users_ref.document(doc.id)
+    document_snapshot = doc_ref.get()
+    healthLabels = document_snapshot.get('healthLabels')
+    forbiddenfoods = document_snapshot.get('forbiddenfoods')
+    daily_calories = document_snapshot.get('daily_calories')
+    user = UserProfile(healthLabels, forbiddenfoods, daily_calories)
+    start_time = time.time()
+    print("start to make the meal plan")
+    constraint_satisfaction(user, number_of_days)
+    end_time = time.time()
     print("Total time:", end_time - start_time, "seconds")
+    return "finish"
