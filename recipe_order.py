@@ -1,42 +1,21 @@
 import requests
 import json
-import csv
-import time
+import dialogflow_response
+from dialogflow_response import CardResponse
+
+
 
 
 class Recipe:
-    def __init__(self, name, picture, link, High_Protein, Low_Carb, Low_Fat, Dairy_Free, egg_free,
-                 fodmap_free, gluten_free, keto_freindly, kosher, low_sugar, paleo, peanut_free,
-                 soy_free, vegan, vegetarian, ingredientLines, fat, carbs, protein, ingredients,
-                 calories_per_serving, meal_type):
-        #self.recipe_bool = True # for using in the app to distinguish between messages
-        self.id
+    def __init__(self, name, picture, ingredients, prep_time, calories_per_serving, full_recipe_link):
+        self.recipe_bool = True # for using in the app to distinguish between messages
         self.name = name
         self.picture = picture
-        self.full_recipe_link = link
-        self.High_Protein = High_Protein
-        self.Low_Carb = Low_Carb
-        self.Low_Fat = Low_Fat
-        self.Dairy_Free = Dairy_Free
-        self.egg_free = egg_free
-        self.fodmap_free = fodmap_free
-        self.gluten_free = gluten_free
-        self.keto_freindly = keto_freindly
-        self.kosher = kosher
-        self.low_sugar = low_sugar
-        self.paleo = paleo
-        self.peanut_free = peanut_free
-        self.soy_free = soy_free
-        self.vegan = vegan
-        self.vegetarian = vegetarian
-        self.ingredientLines = ingredientLines
         self.ingredients = ingredients
+        self.prep_time = prep_time
         self.calories_per_serving = calories_per_serving
-        self.fat = fat
-        self.carbs = carbs
-        self.protein = protein
-        self.meal_type = meal_type
-
+        self.full_recipe_link = full_recipe_link
+        self.platform = "ACTIONS_ON_GOOGLE"
 
 
 def recipe_order(req):
@@ -73,10 +52,36 @@ def recipe_order(req):
     # return list of: name, picture, ingredients, prep time, calories per serving, link to the full recipe
     response = requests.request("GET", query_string, headers=headers)
     response_dict = json.loads(response.text)
-    print(response_dict['hits'][0])
-    #print(response_dict['hits'][0]['recipe']['label'])
-    #print(response_dict['hits'][0]['recipe']['images']['SMALL']['url'])
-    #print(response_dict['hits'][0]['recipe']['url'])
-    #print(response_dict['hits'][0]['recipe']['ingredientLines'])
+    try:
+        print(response_dict['hits'][0]['recipe']['label'])
+        #print(response_dict['hits'][0]['recipe']['label'])
+        #print(response_dict['hits'][0]['recipe']['images']['SMALL']['url'])
+        #print(response_dict['hits'][0]['recipe']['url'])
+        #print(response_dict['hits'][0]['recipe']['ingredientLines'])
+        print (response_dict['hits'][0])
+        # save image in firebase?
 
-    return response_dict['hits'][0]['recipe']['label']
+
+        # extract useful data:
+        title = response_dict['hits'][0]['recipe']['label'] #REGULAR
+        image = response_dict['hits'][0]['recipe']['images']['LARGE']['url']
+        url = response_dict['hits'][0]['recipe']['url']
+        description=response_dict['hits'][0]['recipe']['healthLabels']+response_dict['hits'][0]['recipe']['dietLabels']
+
+        return create_card(title, url, image, description)
+    except:
+        # try with regular picture
+        try:
+            image = response_dict['hits'][0]['recipe']['images']['REGULAR']['url']
+            return create_card(title, url, image, description)
+        except:
+            return "no recipe avaiable"
+
+def create_card(title, url, image, labels):
+    card = {"request": "recipe",
+            "title": title,
+            "subtitle": labels,
+            "imageUri": image,
+            "Url": url
+    }
+    return json.dumps(card)
