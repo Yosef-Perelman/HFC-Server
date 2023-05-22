@@ -17,28 +17,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\breakfast2.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\db.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\dinner2.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\lunch2.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
