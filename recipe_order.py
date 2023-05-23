@@ -1,9 +1,5 @@
 import requests
 import json
-import dialogflow_response
-from dialogflow_response import CardResponse
-
-
 
 
 class Recipe:
@@ -63,18 +59,21 @@ def recipe_order(req):
 
 
         # extract useful data:
-        title = response_dict['hits'][0]['recipe']['label'] #REGULAR
-        image = response_dict['hits'][0]['recipe']['images']['LARGE']['url']
+        title = response_dict['hits'][0]['recipe']['label']
         url = response_dict['hits'][0]['recipe']['url']
-        description=response_dict['hits'][0]['recipe']['healthLabels']+response_dict['hits'][0]['recipe']['dietLabels']
+        description = response_dict['hits'][0]['recipe']['healthLabels'] + response_dict['hits'][0]['recipe'][
+            'dietLabels']
+
+        image = response_dict['hits'][0]['recipe']['images']['LARGE']['url']
 
         return create_card(title, url, image, description)
     except:
-        # try with regular picture
+        # try with regular picture becouse some dont have large
         try:
             image = response_dict['hits'][0]['recipe']['images']['REGULAR']['url']
             return create_card(title, url, image, description)
         except:
+            print("problem in sending..,")
             return "no recipe avaiable"
 
 def create_card(title, url, image, labels):
