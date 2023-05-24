@@ -67,4 +67,4 @@ def more_personal_details_update(req, usersDB):
     doc = next(query_ref.stream())
     doc_ref = users_ref.document(doc.id)
 
-    doc_ref.update({"healthLabels": healthLabels, "forbiddenfoods": forbiddenfoods, "fill_details": "True"})
+    doc_ref.update({"healthLabels": healthLabels, "forbiddenfoods": forbiddenfoods, "fill_details": True})
