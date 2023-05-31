@@ -1,5 +1,4 @@
 import json
-
 import requests
 
 fill_text = '%20'

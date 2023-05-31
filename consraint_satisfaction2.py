@@ -274,13 +274,20 @@ def constraint_satisfaction(user, number_of_days):
         print("the search finished. no legal solution")
 
 
-'''if __name__ == '__main__':
-    number_of_days = 5
-    user = UserProfile(['gluten-Free'], ['onion'], 2000)
-    start_time = time.time()
-    constraint_satisfaction(user, number_of_days)
-    end_time = time.time()
-    print("Total time:", end_time - start_time, "seconds")'''
+def get_false_rated_recipes(user_name, usersDB):
+    user_name = 'kn9MUrNTtiAwQwAPWLY0'
+
+    # Query the 'Rate' collection to get recipes rated as false by the user
+    ratings_ref = usersDB.collection('Rate').where('userId', '==', user_name).where('like', '==', False)
+    rated_recipes = []
+    for rating in ratings_ref.stream():
+        recipe_id = rating.get('recipeId')
+        recipe_doc = usersDB.collection('Recipes').document(recipe_id).get()
+        recipe_data = recipe_doc.to_dict()
+        rated_recipes.append(recipe_data.get('title'))
+
+    print(rated_recipes)
+    return rated_recipes
 
 
 def from_bot(req, usersDB):
@@ -292,6 +299,7 @@ def from_bot(req, usersDB):
     # Create a query against the collection
     query_ref = users_ref.where('sessionId', '==', session_id)
     doc = next(query_ref.stream())
+    dislike_recipes = get_false_rated_recipes(doc.id, usersDB)
     doc_ref = users_ref.document(doc.id)
     document_snapshot = doc_ref.get()
     healthLabels = document_snapshot.get('healthLabels')
