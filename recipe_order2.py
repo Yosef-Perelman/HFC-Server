@@ -163,12 +163,18 @@ def choose_recipe(recipes, session_id, usersDB):
     return selected_item
 
 
-def create_card(title, url, image, labels):
+def create_card(recipe):
     card = {"request": "recipe",
-            "title": title,
-            "subtitle": labels,
-            "imageUri": image,
-            "Url": url
+            'title': recipe.name,
+            'image': recipe.picture,
+            'url': recipe.full_recipe_link,
+            'calories': recipe.calories,
+            'healthLabels': recipe.healthLabels,
+            'dietLabels': recipe.dietLabels,
+            'ingredients': recipe.ingredients,
+            'fat': recipe.fat,
+            'protein': recipe.protein,
+            'carbs': recipe.carbs
             }
     return json.dumps(card)
 
@@ -218,7 +224,20 @@ def recipe_order(req, usersDB):
 
     print(recipe.name)
 
-    #return create_card(recipe.name, recipe.url, recipe.image, recipe.healthLabels)
-    return recipe.name
+    data = {
+        'title': recipe.name,
+        'image': recipe.picture,
+        'url': recipe.full_recipe_link,
+        'calories': recipe.calories,
+        'healthLabels': recipe.healthLabels,
+        'dietLabels': recipe.dietLabels,
+        'ingredients': recipe.ingredients,
+        'fat': recipe.fat,
+        'protein': recipe.protein,
+        'carbs': recipe.carbs
+    }
+    usersDB.collection('Recipes').add(data)
+
+    return create_card(recipe)
 
 
