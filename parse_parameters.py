@@ -1,5 +1,6 @@
 
-def parse_parameters2(req):
+
+def parse_parameters(req):
     result = req.get("queryResult")
     session_id = req.get("session").split('/')[-1]
     parameters = result.get("parameters")
