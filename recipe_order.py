@@ -3,7 +3,7 @@ import numpy as np
 import requests
 import json
 import data as dta
-
+import send
 
 SERVINGS = 5
 
@@ -30,6 +30,8 @@ def parse_recipes_from_DB(results):
         url = recipe["url"]
         health = recipe["healthLabels"]
         diet = recipe["dietLabels"]
+        #health = recipe["healtlabels"]
+        #diet = recipe["dietlabels"]
         fat = recipe["fat"]
         carbs = recipe["carbs"]
         protein = recipe["protein"]
@@ -162,8 +164,7 @@ def choose_recipe(recipes, session_id, usersDB):
 
 
 def create_card(recipe):
-    card = {"request": "recipe",
-            'title': recipe.name,
+    card = {'title': recipe.name,
             'image': recipe.picture,
             'url': recipe.full_recipe_link,
             'calories': recipe.calories,
@@ -260,6 +261,16 @@ def recipe_order(req, usersDB):
         }
         usersDB.collection('Recipes').add(data)
 
-    return create_card(recipe)
+    users_ref = usersDB.collection('Users')
+    # get the user name by the session_id
+    query_ref = users_ref.where('sessionId', '==', session_id)
+    doc = next(query_ref.stream())
+    token = doc.to_dict().get('token')
+
+    tokens = [token]
+    card = create_card(recipe)
+    send.send_recipe("recipe", "Are you satisfied with this recipe?", tokens, card)
+
+    return None
 
 
