@@ -2,6 +2,7 @@ import random
 import numpy as np
 import requests
 import json
+import data as dta
 
 
 SERVINGS = 5
@@ -181,40 +182,9 @@ def format_string(input_string):
     return formatted_string
 
 
-def recipe_order(req, usersDB):
-    session_id = req.get("session").split('/')[-1]
-    result = req.get("queryResult")
-    parameters = result.get("parameters")
-
-    meal = parameters.get("Meal")
-    meal_query = ""
-    if meal:
-        print(meal)
-        meal_query = "&mealType=" + meal
-    health = parameters.get("Health")
-    health_query = ""
-    if health:
-        print(health)
-        if health == 'DASH':
-            health = 'DASH'
-        else:
-            health = format_string(health)
-        health_query = "&health=" + health
-    diet = parameters.get("Diet")
-    diet_query = ""
-    if diet:
-        diet = format_string(diet)
-        print(diet)
-        diet_query = "&diet=" + diet
-    dish = parameters.get("Dish_Type")
-    dish_query = ""
-    if dish:
-        dish.replace(' ', '%20')
-        print(dish)
-        dish_query = "&dishType=" + dish
-
+def api_request(meal_query, health_query, diet_query, dish_query):
     query_string = "https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&" \
-          "app_key=191597bb0eccc02907ba8e5efb98fc8b" + meal_query + health_query + diet_query + dish_query +"&random=true"
+                   "app_key=191597bb0eccc02907ba8e5efb98fc8b" + meal_query + health_query + diet_query + dish_query + "&random=true"
     print(query_string)
 
     headers = {
@@ -224,6 +194,50 @@ def recipe_order(req, usersDB):
 
     response = requests.request("GET", query_string, headers=headers)
     response_dict = json.loads(response.text)
+    return response_dict
+
+
+def recipe_order(req, usersDB):
+    session_id = req.get("session").split('/')[-1]
+    result = req.get("queryResult")
+    parameters = result.get("parameters")
+
+    meal = parameters.get("Meal")
+    if meal not in dta.meals:
+        meal = None
+    meal_query = ""
+    if meal:
+        print(meal)
+        meal_query = "&mealType=" + meal
+    health = parameters.get("Health")
+    if health not in dta.health_tags:
+        health = None
+    health_query = ""
+    if health:
+        print(health)
+        if health != 'DASH':
+            health = format_string(health)
+        if health == 'mediterranean':
+            health = 'Mediterranean'
+        health_query = "&health=" + health
+    diet = parameters.get("Diet")
+    if diet not in dta.diet_tags:
+        diet = None
+    diet_query = ""
+    if diet:
+        diet = format_string(diet)
+        print(diet)
+        diet_query = "&diet=" + diet
+    dish = parameters.get("Dish_Type")
+    if dish not in dta.dish_types:
+        dish = None
+    dish_query = ""
+    if dish:
+        dish.replace(' ', '%20')
+        print(dish)
+        dish_query = "&dishType=" + dish
+
+    response_dict = api_request(meal_query, health_query, diet_query, dish_query)
 
     recipes = parse_recipes_from_api(response_dict['hits'])
     recipe = choose_recipe(recipes, session_id, usersDB)
