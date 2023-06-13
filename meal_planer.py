@@ -3,6 +3,7 @@ import json
 import time
 import pandas as pd
 import data
+import send
 
 
 class UserProfile:
@@ -35,8 +36,7 @@ class Recipe:
 
 
 def create_card(recipe):
-    card = {"request": "recipe",
-            'title': recipe.name,
+    card = {'title': recipe.name,
             'image': recipe.picture,
             'url': recipe.full_recipe_link,
             'calories': recipe.calories,
@@ -120,8 +120,8 @@ def sc(user_profile, recipe, current_assign):
     return deviation + variation
 
 
-#def constraint_satisfaction(user, number_of_days, usersDB):
-def constraint_satisfaction(user, number_of_days):
+def constraint_satisfaction(user, number_of_days, usersDB, session_id):
+#def constraint_satisfaction(user, number_of_days):
 
     final_solution = []
     already_chosen_names = []
@@ -276,13 +276,8 @@ def constraint_satisfaction(user, number_of_days):
         day_calories += value.recipe.calories
     print("calories of the day:" + str(day_calories))
     print("************\n")
-    '''print("cards:\n")
-    for i in cards:
-        print(i)'''
 
-    # send the recipes to app
-
-    '''for meal in final_solution:
+    for meal in final_solution:
         recipe = meal.recipe
         recipe_check = usersDB.collection('Recipes').where('name', '==', recipe.name).get()
         if len(recipe_check) == 0:
@@ -298,7 +293,19 @@ def constraint_satisfaction(user, number_of_days):
                 'protein': recipe.protein,
                 'carbs': recipe.carbs
             }
-            usersDB.collection('Recipes').add(data)'''
+            usersDB.collection('Recipes').add(data)
+
+    users_ref = usersDB.collection('Users')
+    # get the user name by the session_id
+    query_ref = users_ref.where('sessionId', '==', session_id)
+    doc = next(query_ref.stream())
+    token = doc.to_dict().get('token')
+
+    tokens = [token]
+    send.send_text("text", text, tokens)
+    length = len(cards)
+    for i in range(length):
+        send.send_meal_plan("meal_plan", str(length), str(i + 1), tokens, cards[i])
 
 
 def plan_meal(req, usersDB):
@@ -331,9 +338,10 @@ def plan_meal(req, usersDB):
     user = UserProfile(healthLabels, forbiddenfoods, daily_calories, dislike_recipes)
     start_time = time.time()
     print("start to make the meal plan")
-    constraint_satisfaction(user, number_of_days, usersDB)
+    constraint_satisfaction(user, number_of_days, usersDB, session_id)
     end_time = time.time()
     print("Total time:", end_time - start_time, "seconds")
+
     return "finish"
 
 

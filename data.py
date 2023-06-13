@@ -5,7 +5,7 @@ health_tags = ["Wheat-Free","Vegetarian","Vegan","No oil added","Sugar-Conscious
 
 diet_tags = ["low-sodium","low-fat","low-carb","high-protein","high-fiber","balanced"]
 
-meals = ["breakfast","lunch","dinner"]
+meals = ["Breakfast","Lunch","Dinner"]
 
 dish_types = ["main course","bread","starter","special occasions","soup","sandwiches","salad","preserve","preps",
               "pancake","egg","drinks","desserts","condiments and sauces","cereals",
