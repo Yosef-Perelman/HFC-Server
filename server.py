@@ -22,7 +22,7 @@ date = datetime.now().strftime("%m%d%Y")
 
 # firebase
 cred = credentials.Certificate('hfc-app-b33ed-firebase-adminsdk-oqged-96055b305b.json')
-firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app(cred, {'storageBucket': 'hfc-app-b33ed.appspot.com'})
 usersDB = firestore.client()
 
 

@@ -131,9 +131,9 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
     lunch_recipes_origin = pd.read_csv('DB/mini_lunch.csv')
     dinner_recipes_origin = pd.read_csv('DB/mini_dinner.csv')'''
 
-    breakfast_recipes_origin = pd.read_csv('DB/filtered/filtered_breakfast.csv')
-    lunch_recipes_origin = pd.read_csv('DB/filtered/filtered_lunch.csv')
-    dinner_recipes_origin = pd.read_csv('DB/filtered/filtered_dinner.csv')
+    breakfast_recipes_origin = pd.read_csv('DB/filtered with images/breakfast.csv')
+    lunch_recipes_origin = pd.read_csv('DB/filtered with images/lunch.csv')
+    dinner_recipes_origin = pd.read_csv('DB/filtered with images/dinner.csv')
 
     breakfast_recipes = breakfast_recipes_origin.sample(frac=1)
     lunch_recipes = lunch_recipes_origin.sample(frac=1)
@@ -261,7 +261,24 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
     print(text)
     day_calories = 0
     for index, value in enumerate(final_solution):
+
         cards.append(create_card(value.recipe))
+        recipe_check = usersDB.collection('Recipes').where('name', '==', value.recipe.name).get()
+        if len(recipe_check) == 0:
+            data = {
+                'title': value.recipe.name,
+                'image': value.recipe.picture,
+                'url': value.recipe.full_recipe_link,
+                'calories': value.recipe.calories,
+                'healthLabels': value.recipe.healthLabels,
+                'dietLabels': value.recipe.dietLabels,
+                'ingredients': value.recipe.ingredients,
+                'fat': value.recipe.fat,
+                'protein': value.recipe.protein,
+                'carbs': value.recipe.carbs
+            }
+            usersDB.collection('Recipes').add(data)
+
         if index % 3 == 0:
             if index != 0:
                 print("calories of the day:" + str(day_calories))
@@ -276,24 +293,6 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
         day_calories += value.recipe.calories
     print("calories of the day:" + str(day_calories))
     print("************\n")
-
-    for meal in final_solution:
-        recipe = meal.recipe
-        recipe_check = usersDB.collection('Recipes').where('name', '==', recipe.name).get()
-        if len(recipe_check) == 0:
-            data = {
-                'title': recipe.name,
-                'image': recipe.picture,
-                'url': recipe.full_recipe_link,
-                'calories': recipe.calories,
-                'healthLabels': recipe.healthLabels,
-                'dietLabels': recipe.dietLabels,
-                'ingredients': recipe.ingredients,
-                'fat': recipe.fat,
-                'protein': recipe.protein,
-                'carbs': recipe.carbs
-            }
-            usersDB.collection('Recipes').add(data)
 
     users_ref = usersDB.collection('Users')
     # get the user name by the session_id

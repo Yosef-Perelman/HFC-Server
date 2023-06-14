@@ -3,6 +3,7 @@ import numpy as np
 import requests
 import json
 import data as dta
+import image_loading
 import send
 
 SERVINGS = 5
@@ -163,9 +164,9 @@ def choose_recipe(recipes, session_id, usersDB):
     return selected_item
 
 
-def create_card(recipe):
+def create_card(recipe, image):
     card = {'title': recipe.name,
-            'image': recipe.picture,
+            'image': image,
             'url': recipe.full_recipe_link,
             'calories': recipe.calories,
             'healthLabels': recipe.healthLabels,
@@ -245,11 +246,13 @@ def recipe_order(req, usersDB):
 
     print(recipe.name)
 
+    image = image_loading.download_image(recipe.picture, recipe.name)
+
     recipe_check = usersDB.collection('Recipes').where('name', '==', recipe.name).get()
     if len(recipe_check) == 0:
         data = {
             'title': recipe.name,
-            'image': recipe.picture,
+            'image': image,
             'url': recipe.full_recipe_link,
             'calories': recipe.calories,
             'healthLabels': recipe.healthLabels,
@@ -268,7 +271,7 @@ def recipe_order(req, usersDB):
     token = doc.to_dict().get('token')
 
     tokens = [token]
-    card = create_card(recipe)
+    card = create_card(recipe, image)
     send.send_recipe("recipe", "Are you satisfied with this recipe?", tokens, card)
 
     return None
