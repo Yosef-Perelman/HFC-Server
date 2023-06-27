@@ -40,7 +40,7 @@ def test_communication():
                        'roasted chickpeas', 'man pleasing chicken',
                        'matzo kugel', 'chunky vegetable chicken spaghetti bolognaise']
 
-    healthLabels = ['Vegetarian']
+    healthLabels = ['Diary-Free']
     healthLabels = [string.lower() for string in healthLabels]
 
     number_of_days = 3

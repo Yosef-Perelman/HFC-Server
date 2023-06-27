@@ -2,6 +2,7 @@ import ast
 import json
 import time
 import pandas as pd
+
 import data
 import send
 
@@ -318,6 +319,11 @@ def plan_meal(req, usersDB):
     # dislike_recipes is all the recipes that the client marked as not liked
     dislike_recipes = get_false_rated_recipes(doc.id, usersDB)
 
+    token = doc.to_dict().get('token')
+    text = "Generating your meal plan. This may take some time. Please wait."
+    tokens = [token]
+    send.send_text("text", text, tokens)
+
     doc_ref = users_ref.document(doc.id)
     document_snapshot = doc_ref.get()
     daily_calories = document_snapshot.get('daily_calories')
@@ -328,7 +334,7 @@ def plan_meal(req, usersDB):
     healthLabels = parameters.get('Health')
     healthLabels = [string.lower() for string in healthLabels]
     for label in healthLabels:
-        if label not in data.health_tags:
+        if label not in data.meal_plan_health_tags:
             healthLabels.remove(label)
     forbiddenfoods = parameters.get('Food_Type')
     forbiddenfoods = [string.lower() for string in forbiddenfoods]

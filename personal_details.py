@@ -1,5 +1,6 @@
 import json
 import requests
+
 import parse_parameters
 from datetime import datetime
 
@@ -64,6 +65,6 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
 
 
 def personal_details(req, usersDB):
-    session_id, age, height, weight, activity_level, purpose_str = parse_parameter2.parse_parameters(req)
+    session_id, age, height, weight, activity_level, purpose_str = parse_parameters.parse_parameters(req)
     set_calorie_daily(session_id, age, height, weight, activity_level, purpose_str, usersDB)
-    return "Good"
+    return "Thank's! Your details updated!"

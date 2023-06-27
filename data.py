@@ -3,6 +3,11 @@ health_tags = ["Wheat-Free","Vegetarian","Vegan","No oil added","Sugar-Conscious
               "Gluten-Free","FODMAP-Free","Fish-Free","Egg-Free","Dairy-Free","Tree-Nut-Free","Sulfite-Free",
                "Mustard-Free","Low Potassium","Kidney-Friendly","Immuno-Supportive","DASH","Alcohol-Free","Kosher"]
 
+meal_plan_health_tags = ["Wheat-Free","Vegetarian","Vegan","No oil added","Sugar-Conscious","Soy-Free","Sesame-Free",
+               "Red-Meat-Free","Pescatarian","Peanut-Free","Paleo","Mediterranean","Low Sugar","Keto-Friendly",
+              "Gluten-Free","FODMAP-Free","Fish-Free","Egg-Free","dairy-free","Tree-Nut-Free","Sulfite-Free",
+               "Mustard-Free","Low Potassium","Kidney-Friendly","Immuno-Supportive","DASH","Alcohol-Free","Kosher"]
+
 diet_tags = ["low-sodium","low-fat","low-carb","high-protein","high-fiber","balanced"]
 
 meals = ["Breakfast","Lunch","Dinner"]
