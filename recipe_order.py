@@ -6,6 +6,13 @@ import json
 import data as dta
 import image_loading
 import send
+import logging
+
+# logging
+# logging.basicConfig(filename="logs/recipe_order.log",
+#                     format="%(asctime)s %(levelname)s %(message)s",
+#                     datefmt="%Y-%m-%d %H:%M:%S",
+#                     level=logging.INFO)
 
 SERVINGS = 5
 
@@ -203,15 +210,15 @@ def api_request(meal_query, health_query, diet_query, dish_query):
 def recipe_order(req, usersDB):
     session_id = req.get("session").split('/')[-1]
 
-    users_ref = usersDB.collection('Users')
-    # todo check if he fill details
-    # Create a query against the collection
-    query_ref = users_ref.where('sessionId', '==', session_id)
-    doc = next(query_ref.stream())
-    token = doc.to_dict().get('token')
-    text = "Searching for your perfect recipe. Please wait."
-    tokens = [token]
-    send.send_text("text", text, tokens)
+    # users_ref = usersDB.collection('Users')
+    # # todo check if he fill details
+    # # Create a query against the collection
+    # query_ref = users_ref.where('sessionId', '==', session_id)
+    # doc = next(query_ref.stream())
+    # token = doc.to_dict().get('token')
+    # text = "Searching for your perfect recipe. Please wait."
+    # tokens = [token]
+    # send.send_text("text", text, tokens)
 
     result = req.get("queryResult")
     parameters = result.get("parameters")

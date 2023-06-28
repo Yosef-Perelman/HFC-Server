@@ -2,7 +2,13 @@ import json
 import pandas as pd
 import requests
 from firebase_admin import storage
+import logging
 
+# logging
+# logging.basicConfig(filename="logs/image_loading.log",
+#                     format="%(asctime)s %(levelname)s %(message)s",
+#                     datefmt="%Y-%m-%d %H:%M:%S",
+#                     level=logging.INFO)
 
 def download_image(url, name):
     bucket = storage.bucket()

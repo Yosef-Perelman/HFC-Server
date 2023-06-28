@@ -5,6 +5,13 @@ import pandas as pd
 
 import data
 import send
+import logging
+
+# logging
+# logging.basicConfig(filename="logs/meal_planer.log",
+#                     format="%(asctime)s %(levelname)s %(message)s",
+#                     datefmt="%Y-%m-%d %H:%M:%S",
+#                     level=logging.INFO)
 
 
 class UserProfile:
@@ -310,19 +317,19 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
 
 def plan_meal(req, usersDB):
     session_id = req.get("session").split('/')[-1]
+
     users_ref = usersDB.collection('Users')
     #todo check if he fill details
-
     # Create a query against the collection
     query_ref = users_ref.where('sessionId', '==', session_id)
     doc = next(query_ref.stream())
     # dislike_recipes is all the recipes that the client marked as not liked
     dislike_recipes = get_false_rated_recipes(doc.id, usersDB)
 
-    token = doc.to_dict().get('token')
-    text = "Generating your meal plan. This may take some time. Please wait."
-    tokens = [token]
-    send.send_text("text", text, tokens)
+    # token = doc.to_dict().get('token')
+    # text = "Generating your meal plan. This may take some time. Please wait."
+    # tokens = [token]
+    # send.send_text("text", text, tokens)
 
     doc_ref = users_ref.document(doc.id)
     document_snapshot = doc_ref.get()

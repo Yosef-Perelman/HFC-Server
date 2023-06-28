@@ -1,6 +1,13 @@
 import firebase_admin
 from firebase_admin import credentials, messaging, firestore
 #from firebase_admin import messaging
+import logging
+
+# logging
+# logging.basicConfig(filename="logs/send.log",
+#                     format="%(asctime)s %(levelname)s %(message)s",
+#                     datefmt="%Y-%m-%d %H:%M:%S",
+#                     level=logging.INFO)
 
 # cred = credentials.Certificate('hfc-app-b33ed-firebase-adminsdk-oqged-96055b305b.json')
 # firebase_admin.initialize_app(cred, {'storageBucket': 'hfc-app-b33ed.appspot.com'})
@@ -21,6 +28,7 @@ from firebase_admin import credentials, messaging, firestore
 
 
 def send_text(title, msg, registration_token):
+    logging.info(f"Trying to send text message. content:{msg}")
     message = messaging.MulticastMessage(
         data= {"request":title,"text": msg},
         tokens=registration_token,
@@ -30,6 +38,7 @@ def send_text(title, msg, registration_token):
 
 
 def send_meal_plan(title, messagesNumber, currentMessage, registration_token, recipe):
+    logging.info(f"Trying to send meal plan message. current message number: {currentMessage}")
     message = messaging.MulticastMessage(
         data={"request": title,
               "messagesNumber": messagesNumber,
@@ -43,6 +52,7 @@ def send_meal_plan(title, messagesNumber, currentMessage, registration_token, re
 
 
 def send_recipe(title, msg, registration_token, recipe):
+    logging.info(f"Trying to send recipe message.")
     message = messaging.MulticastMessage(
         data= {"request":title,"text": msg, "card": recipe},
         tokens=registration_token,

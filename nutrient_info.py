@@ -1,5 +1,12 @@
 import json
 import requests
+import logging
+
+# logging
+# logging.basicConfig(filename="logs/nutrient_info.log",
+#                     format="%(asctime)s %(levelname)s %(message)s",
+#                     datefmt="%Y-%m-%d %H:%M:%S",
+#                     level=logging.INFO)
 
 fill_text = '%20'
 
