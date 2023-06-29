@@ -149,3 +149,28 @@ the input was: health labels = ['dairy-free', 'low sugar'], forbidden foods = ['
 2023-06-29 13:56:45 INFO  * Restarting with stat
 2023-06-29 13:56:48 WARNING  * Debugger is active!
 2023-06-29 13:56:48 INFO  * Debugger PIN: 207-034-001
+2023-06-29 13:59:01 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-06-29 13:59:01 INFO [33mPress CTRL+C to quit[0m
+2023-06-29 13:59:01 INFO  * Restarting with stat
+2023-06-29 13:59:03 WARNING  * Debugger is active!
+2023-06-29 13:59:03 INFO  * Debugger PIN: 207-034-001
+2023-06-29 13:59:47 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-06-29 13:59:47 INFO [33mPress CTRL+C to quit[0m
+2023-06-29 13:59:47 INFO  * Restarting with stat
+2023-06-29 13:59:49 WARNING  * Debugger is active!
+2023-06-29 13:59:49 INFO  * Debugger PIN: 207-034-001
+2023-06-29 14:01:15 INFO request: {'responseId': '13d666e2-ae75-443b-8dea-471ca2d6d428-feba52e8', 'queryResult': {'queryText': 'none', 'parameters': {'Health': ['Vegetarian', 'Dairy-Free', 'Low Sugar'], 'number': 3.0, 'Food_Type': ['none']}, 'allRequiredParamsPresent': True, 'fulfillmentText': "I'm making the plan for you, it may take some time.", 'fulfillmentMessages': [{'text': {'text': ["I'm making the plan for you, it may take some time."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/RrYc3mPELK5t/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Health': ['Vegetarian', 'Dairy-Free', 'Low Sugar'], 'Health.original': ['vegetarian', 'dairy free', 'low in sugar'], 'number': 3.0, 'number.original': '3', 'Food_Type': ['none'], 'Food_Type.original': ['none']}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/69e07da3-968a-4bfd-86ee-8740c754c958', 'displayName': 'meal.planning'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/RrYc3mPELK5t'}
+2023-06-29 14:01:15 INFO Enter to 'meal.planning' intent
+2023-06-29 14:01:15 INFO start plan meal func
+2023-06-29 14:01:17 INFO start constraint satisfaction func
+2023-06-29 14:01:19 INFO Trying to send text message. content:This is the result of meal plan for 3 days.
+the input was: health labels = ['vegetarian', 'dairy-free', 'low sugar'], forbidden foods = ['none'].
+
+2023-06-29 14:01:19 INFO Successfully sent message
+2023-06-29 14:01:19 INFO Trying to send text message. content:I apologize, but we couldn't find a suitable meal plan based on your preferences. Please try adjusting your preferences or consider exploring individual recipes instead. Need help formulating your request? Check out our guide in the main menu for instructions.
+2023-06-29 14:01:20 INFO Successfully sent message
+2023-06-29 14:01:20 INFO 127.0.0.1 - - [29/Jun/2023 14:01:20] "POST /webhook HTTP/1.1" 200 -
+2023-06-29 14:05:01 INFO  * Detected change in 'C:\\Users\\User\\PycharmProjects\\HFC-Server\\meal_planer.py', reloading
+2023-06-29 14:05:02 INFO  * Restarting with stat

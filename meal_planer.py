@@ -320,11 +320,15 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
 
     else:
         send.send_text("text", text, tokens)
-        send.send_text("no meal plan", "I apologize, but we couldn't find a suitable meal plan based on your preferences."
+        # send.send_text("no meal plan", "I apologize, but we couldn't find a suitable meal plan based on your preferences."
+        #                " Please try adjusting your preferences or consider exploring individual recipes instead."
+        #                " Need help formulating your request? Check out our guide in the main menu for instructions.",
+        #                tokens)
+        send.send_text("text",
+                       "I apologize, but we couldn't find a suitable meal plan based on your preferences."
                        " Please try adjusting your preferences or consider exploring individual recipes instead."
                        " Need help formulating your request? Check out our guide in the main menu for instructions.",
                        tokens)
-
 
 
 def plan_meal(req, usersDB):
@@ -359,6 +363,8 @@ def plan_meal(req, usersDB):
     healthLabels = [string.lower() for string in healthLabels]
     forbiddenfoods = parameters.get('Food_Type')
     forbiddenfoods = [string.lower() for string in forbiddenfoods]
+    if forbiddenfoods[0] == "none":
+        forbiddenfoods.clear()
     number_of_days = int(parameters.get('number'))
 
     user = UserProfile(healthLabels, forbiddenfoods, daily_calories, dislike_recipes)
