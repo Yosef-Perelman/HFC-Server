@@ -136,9 +136,13 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
     already_chosen_names = []
     finish = False  # finish = var that inform that the search over
 
-    '''breakfast_recipes_origin = pd.read_csv('DB/mini_breakfast.csv')
-    lunch_recipes_origin = pd.read_csv('DB/mini_lunch.csv')
-    dinner_recipes_origin = pd.read_csv('DB/mini_dinner.csv')'''
+    # breakfast_recipes_origin = pd.read_csv('DB/mini_breakfast.csv')
+    # lunch_recipes_origin = pd.read_csv('DB/mini_lunch.csv')
+    # dinner_recipes_origin = pd.read_csv('DB/mini_dinner.csv')
+
+    # breakfast_recipes_origin = pd.read_csv('DB/test/breakfast_test.csv')
+    # lunch_recipes_origin = pd.read_csv('DB/test/lunch_test.csv')
+    # dinner_recipes_origin = pd.read_csv('DB/test/dinner_test.csv')
 
     breakfast_recipes_origin = pd.read_csv('DB/filtered with images/breakfast.csv')
     lunch_recipes_origin = pd.read_csv('DB/filtered with images/lunch.csv')
@@ -156,10 +160,11 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
 
     for i in range(number_of_days):
 
-        end_time = time.time()
-        if end_time - start_time > 60:
-            logging.warning("the 60 seconds over, the search stopped")
-            break
+        # end_time = time.time()
+        # logging.info(f"checking the time condition. time = {end_time - start_time}")
+        # if end_time - start_time > 60:
+        #     logging.warning("the 60 seconds over, the search stopped")
+        #     break
 
         if finish:
             break
@@ -176,7 +181,17 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
         flag = False # var that inform that the search for the current day need to jump to the end
 
         while not end:
+
+            end_time = time.time()
+            logging.info(f"checking the time condition. time = {end_time - start_time}")
+            if end_time - start_time > 60:
+                logging.warning("the 60 seconds over, the search stopped")
+                finish = True
+                break
+
+            # logging.info("starting new loop in the while loop")
             for ass in current_assignment:
+                # logging.info("starting new level in the current_assignment loop")
 
                 if flag:
                     flag = False
@@ -266,7 +281,7 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
 
     cards = []
     text = f"This is the result of meal plan for {number_of_days} days.\nthe input was: " \
-           f"health labels = {user.health}, forbidden foods = {user.forbidden_ingredients}.\n"
+           f"health labels = {user.health}, forbidden foods = {user.forbidden_ingredients}."
 
     users_ref = usersDB.collection('Users')
     # get the user name by the session_id
@@ -276,8 +291,8 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
     tokens = [token]
 
     if final_solution:
-        print("****************")
-        print(text)
+        logging.info("****************")
+        logging.info(text)
         day_calories = 0
         for index, value in enumerate(final_solution):
 
@@ -300,19 +315,20 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
 
             if index % 3 == 0:
                 if index != 0:
-                    print("calories of the day:" + str(day_calories))
-                    print("************\n")
+                    logging.info("calories of the day:" + str(day_calories))
+                    logging.info("************")
                 day_calories = 0
-                print("day number" + str(int(index / 3) + 1) + ":")
-            print("recipe name: " + value.recipe.name)
-            print("recipe health labels:")
-            print(value.recipe.healthLabels)
-            print("recipe ingredients:")
-            print(value.recipe.ingredients)
+                logging.info("day number" + str(int(index / 3) + 1) + ":")
+            logging.info("recipe name: " + value.recipe.name)
+            logging.info("recipe health labels:")
+            logging.info(value.recipe.healthLabels)
+            logging.info("recipe ingredients:")
+            logging.info(value.recipe.ingredients)
             day_calories += value.recipe.calories
-        print("calories of the day:" + str(day_calories))
-        print("************\n")
+        logging.info("calories of the day:" + str(day_calories))
+        logging.info("************\n")
 
+        # todo: add checking for how many days their results and if it fit the request
         send.send_text("text", text, tokens)
         length = len(cards)
         for i in range(length):

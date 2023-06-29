@@ -6,13 +6,6 @@ import parse_parameters
 from datetime import datetime
 
 
-# logging
-# logging.basicConfig(filename="logs/personal_details.log",
-#                     format="%(asctime)s %(levelname)s %(message)s",
-#                     datefmt="%Y-%m-%d %H:%M:%S",
-#                     level=logging.INFO)
-
-
 def calculate_age(birth_date):
     try:
         birth_date = datetime.fromisoformat(birth_date.split('T')[0])
@@ -78,12 +71,14 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
 
     try:
         response = requests.request("GET", url, headers=headers, params=querystring)
-    except requests.exceptions.ConnectionError as e:
+    except Exception as e:
         logging.error(f"Error with the request from the api."
                      f"the error is {e}"
                      f"The parameters of the request - age: {age}, gender: {gender}, weight: {weight}, height: {height},"
                      f"activity_level: {activity_level}.")
-        return "Something is wrong with the api connection, Please try again. Write 'personal details' to start over."
+        return "Something is wrong with the api connection, Please try again." \
+               "Make sure all the details you entered are in the correct format." \
+               " Write 'personal details' to start over."
 
     response_dict = json.loads(response.text)
     try:
@@ -94,7 +89,9 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
         logging.info("The daily calories: " + str(daily_calories))
         update_in_DB(session_id, age, height, weight, activity_level, daily_calories, purpose_str, usersDB)
     except Exception as e:
-        return "Something is wrong with the api connection, Please try again. Write 'personal details' to start over."
+        return "Something is wrong with the api connection, Please try again." \
+               " Make sure all the details you entered are in the correct format." \
+               " Write 'personal details' to start over."
     return "Very good! Your details updated, and your recommended daily calories consumption has set."
 
 

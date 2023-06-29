@@ -10,6 +10,7 @@ def parse_parameters(req):
 
     try:
         age = parameters.get('age')
+        # todo: add validation tests to the date
         logging.info(f"age = {age}")
     except Exception:
         logging.error("error in 'age' parameter")
