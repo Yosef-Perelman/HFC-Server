@@ -4,27 +4,28 @@ import requests
 from firebase_admin import storage
 import logging
 
-# logging
-# logging.basicConfig(filename="logs/image_loading.log",
-#                     format="%(asctime)s %(levelname)s %(message)s",
-#                     datefmt="%Y-%m-%d %H:%M:%S",
-#                     level=logging.INFO)
 
 def download_image(url, name):
+    logging.info("start download image func")
     bucket = storage.bucket()
     blob = bucket.blob(f'recipes_images/{name}.jpg')
     if not blob.exists():
-        response = requests.get(url)
-        if response.status_code == 200:
-            with open("image.jpg", 'wb') as file:
-                file.write(response.content)
-            blob.upload_from_filename("image.jpg")
-            blob.make_public()
-            print("your file url", blob.public_url)
-            print("Image downloaded successfully!")
-            return blob.public_url
-        else:
-            print("Failed to download image.")
+        logging.info("the image didn't exist in the storage, trying to download it from the web...")
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                with open("image.jpg", 'wb') as file:
+                    file.write(response.content)
+                blob.upload_from_filename("image.jpg")
+                blob.make_public()
+                logging.info("Image downloaded successfully!")
+                return blob.public_url
+            else:
+                logging.info("Failed to download image.")
+                # todo: handle in the case of error in downloading image
+                return None
+        except Exception:
+            logging.error("error in getting the recipe image")
     else:
         return blob.public_url
 

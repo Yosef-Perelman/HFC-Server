@@ -1,0 +1,29 @@
+2023-06-29 10:09:22 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-06-29 10:09:22 INFO [33mPress CTRL+C to quit[0m
+2023-06-29 10:09:22 INFO  * Restarting with stat
+2023-06-29 10:09:25 WARNING  * Debugger is active!
+2023-06-29 10:09:25 INFO  * Debugger PIN: 207-034-001
+2023-06-29 10:09:48 INFO request: {'responseId': 'b6b1627b-ee4b-4d44-b3d5-0baf32572919-a33ab921', 'queryResult': {'queryText': 'i want vegetarian recipe', 'parameters': {'Health': 'Vegetarian', 'Meal': '', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'the server working on it.', 'fulfillmentMessages': [{'text': {'text': ['the server working on it.']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/4jqMfKlkOKiM/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Meal': '', 'Meal.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/4jqMfKlkOKiM/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Meal': '', 'Meal.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.7550938, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/4jqMfKlkOKiM'}
+2023-06-29 10:09:48 INFO Enter to 'recipe.request' intent
+2023-06-29 10:09:48 INFO start recipe order func
+2023-06-29 10:09:48 INFO meal:''
+2023-06-29 10:09:48 WARNING meal is not in 'data.meals'.
+2023-06-29 10:09:48 INFO health:'Vegetarian'
+2023-06-29 10:09:48 INFO &health=vegetarian
+2023-06-29 10:09:48 INFO diet:''
+2023-06-29 10:09:48 WARNING diet is not in 'data.diet'.
+2023-06-29 10:09:48 INFO dish:''
+2023-06-29 10:09:48 WARNING dish is not in 'data.dish_types'.
+2023-06-29 10:09:49 INFO start parse recipes from api func
+2023-06-29 10:09:49 INFO start choose recipe func
+2023-06-29 10:09:49 INFO start get liked recipes func.
+2023-06-29 10:09:52 INFO start parse recipes from DB func.
+2023-06-29 10:09:52 INFO start select item with probabilities func.
+2023-06-29 10:09:52 INFO Cannoli Ice Cream made with Fresh Ricotta
+2023-06-29 10:09:52 INFO start download image func
+2023-06-29 10:09:52 INFO the image didn't exist in the storage, trying to download it from the web...
+2023-06-29 10:09:55 INFO Image downloaded successfully!
+2023-06-29 10:09:57 INFO Trying to send recipe message.
+2023-06-29 10:09:57 INFO Successfully sent message:
+2023-06-29 10:09:57 INFO 127.0.0.1 - - [29/Jun/2023 10:09:57] "POST /webhook HTTP/1.1" 200 -

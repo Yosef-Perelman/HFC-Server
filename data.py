@@ -1,12 +1,7 @@
-health_tags = ["Wheat-Free","Vegetarian","Vegan","No oil added","Sugar-Conscious","Soy-Free","Sesame-Free",
-               "Red-Meat-Free","Pescatarian","Peanut-Free","Paleo","Mediterranean","Low Sugar","Keto-Friendly",
-              "Gluten-Free","FODMAP-Free","Fish-Free","Egg-Free","Dairy-Free","Tree-Nut-Free","Sulfite-Free",
-               "Mustard-Free","Low Potassium","Kidney-Friendly","Immuno-Supportive","DASH","Alcohol-Free","Kosher"]
-
-meal_plan_health_tags = ["Wheat-Free","Vegetarian","Vegan","No oil added","Sugar-Conscious","Soy-Free","Sesame-Free",
-               "Red-Meat-Free","Pescatarian","Peanut-Free","Paleo","Mediterranean","Low Sugar","Keto-Friendly",
-              "Gluten-Free","FODMAP-Free","Fish-Free","Egg-Free","dairy-free","Tree-Nut-Free","Sulfite-Free",
-               "Mustard-Free","Low Potassium","Kidney-Friendly","Immuno-Supportive","DASH","Alcohol-Free","Kosher"]
+health_tags = ["Dairy-Free","FODMAP-Free","Gluten-Free","Kosher","Low Sugar","Paleo","Peanut-Free",
+               "Vegetarian","Alcohol-Free","Egg-Free","Fish-Free","Immuno-Supportive","Keto-Friendly","Kidney-Friendly",
+               "Low Potassium","Mediterranean","Mustard-Free","No oil added","Pescatarian","Red-Meat-Free",
+               "Sesame-Free","Soy-Free","Sugar-Conscious","Sulfite-Free","Tree-Nut-Free","Wheat-Free","Vegan"]
 
 diet_tags = ["low-sodium","low-fat","low-carb","high-protein","high-fiber","balanced"]
 

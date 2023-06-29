@@ -12,22 +12,22 @@ def parse_parameters(req):
         age = parameters.get('age')
         logging.info(f"age = {age}")
     except Exception:
-        logging.info("error in 'age' parameter")
+        logging.error("error in 'age' parameter")
     try:
         weight = parameters.get('weight')
         logging.info(f"weight = {weight}")
     except Exception:
-        logging.info("error in 'weight' parameter")
+        logging.error("error in 'weight' parameter")
     try:
         height = parameters.get('height')
         logging.info(f"height = {height}")
     except Exception:
-        logging.info("error in 'height' parameter")
+        logging.error("error in 'height' parameter")
     try:
         activity_level = 'level_' + str(parameters.get('activity'))
         logging.info(f"activity_level = {activity_level}")
     except Exception:
-        logging.info("error in 'activity_level' parameter")
+        logging.error("error in 'activity_level' parameter")
     try:
         purpose = parameters.get('goal')
         if purpose.isdigit():
@@ -49,5 +49,5 @@ def parse_parameters(req):
         else:
             raise Exception
     except Exception:
-        logging.info("error in 'purpose' parameter")
+        logging.error("error in 'purpose' parameter")
     return session_id, age, height, weight, activity_level, purpose_str

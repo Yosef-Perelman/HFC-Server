@@ -25,7 +25,7 @@ def calculate_age(birth_date):
 
         return age
     except:
-        logging.info("Error in calculate age.")
+        logging.error("Error in calculate age.")
         return "error"
 
 
@@ -40,7 +40,7 @@ def get_gender(session_id, usersDB):
         document_snapshot = doc_ref.get()
         return document_snapshot.get('gender')
     except:
-        logging.info("Error in getting the gender. Maybe the session isn't fit to any user in the database.")
+        logging.error("Error in getting the gender. Maybe the session isn't fit to any user in the database.")
         return "error"
 
 
@@ -79,7 +79,7 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
     try:
         response = requests.request("GET", url, headers=headers, params=querystring)
     except requests.exceptions.ConnectionError as e:
-        logging.info(f"Error with the request from the api."
+        logging.error(f"Error with the request from the api."
                      f"the error is {e}"
                      f"The parameters of the request - age: {age}, gender: {gender}, weight: {weight}, height: {height},"
                      f"activity_level: {activity_level}.")

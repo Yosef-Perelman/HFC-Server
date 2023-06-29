@@ -341,7 +341,7 @@ def plan_meal(req, usersDB):
     healthLabels = parameters.get('Health')
     healthLabels = [string.lower() for string in healthLabels]
     for label in healthLabels:
-        if label not in data.meal_plan_health_tags:
+        if label not in data.health_tags:
             healthLabels.remove(label)
     forbiddenfoods = parameters.get('Food_Type')
     forbiddenfoods = [string.lower() for string in forbiddenfoods]

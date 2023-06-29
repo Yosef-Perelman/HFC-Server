@@ -32,6 +32,7 @@ class Recipe:
 
 
 def parse_recipes_from_DB(results):
+    logging.info("start parse recipes from DB func.")
     recipes = []
     for recipe in results:
         name = recipe["title"]
@@ -39,8 +40,6 @@ def parse_recipes_from_DB(results):
         url = recipe["url"]
         health = recipe["healthLabels"]
         diet = recipe["dietLabels"]
-        #health = recipe["healtlabels"]
-        #diet = recipe["dietlabels"]
         fat = recipe["fat"]
         carbs = recipe["carbs"]
         protein = recipe["protein"]
@@ -51,6 +50,7 @@ def parse_recipes_from_DB(results):
 
 
 def parse_recipes_from_api(hits):
+    logging.info("start parse recipes from api func")
     recipes = []
     for recipe in hits:
         name = recipe['recipe']['label']
@@ -75,6 +75,7 @@ def parse_recipes_from_api(hits):
 
 
 def get_liked_recipes(session_id, usersDB):
+    logging.info("start get liked recipes func.")
     users_ref = usersDB.collection('Users')
     # get the user name by the session_id
     query_ref = users_ref.where('sessionId', '==', session_id)
@@ -139,6 +140,7 @@ def create_recipe_vector(recipe, unique_ingredients, unique_healthLabels, unique
 
 
 def select_item_with_probabilities(items):
+    logging.info("start select item with probabilities func.")
     probabilities = [0.5, 0.3, 0.2]
     rand_num = random.random()
     cumulative_prob = 0
@@ -150,6 +152,7 @@ def select_item_with_probabilities(items):
 
 
 def choose_recipe(recipes, session_id, usersDB):
+    logging.info("start choose recipe func")
     unique_user_dietLabels, unique_user_healthLabels, unique_user_ingredients = get_liked_recipes(session_id, usersDB)
     unique_dietLabels = list(set(dietLabel for recipe in recipes for dietLabel in recipe.dietLabels))
     unique_healthLabels = list(set(healthLabel for recipe in recipes for healthLabel in recipe.healthLabels))
@@ -208,6 +211,7 @@ def api_request(meal_query, health_query, diet_query, dish_query):
 
 
 def recipe_order(req, usersDB):
+    logging.info("start recipe order func")
     session_id = req.get("session").split('/')[-1]
 
     # users_ref = usersDB.collection('Users')
@@ -216,7 +220,7 @@ def recipe_order(req, usersDB):
     # query_ref = users_ref.where('sessionId', '==', session_id)
     # doc = next(query_ref.stream())
     # token = doc.to_dict().get('token')
-    # text = "Searching for your perfect recipe. Please wait."
+    # text = "Please wait a moment while we search for a delicious recipe just for you. It won't take long!"
     # tokens = [token]
     # send.send_text("text", text, tokens)
 
@@ -224,46 +228,62 @@ def recipe_order(req, usersDB):
     parameters = result.get("parameters")
 
     meal = parameters.get("Meal")
+    logging.info(f"meal:'{meal}'")
     if meal not in dta.meals:
+        logging.warning("meal is not in 'data.meals'.")
         meal = None
     meal_query = ""
     if meal:
-        print(meal)
         meal_query = "&mealType=" + meal
+        logging.info(meal_query)
     health = parameters.get("Health")
+    logging.info(f"health:'{health}'")
     if health not in dta.health_tags:
+        logging.warning("health is not in 'data.health_tags'.")
         health = None
     health_query = ""
     if health:
-        print(health)
-        if health != 'DASH':
-            health = format_string(health)
+        health = format_string(health)
         if health == 'mediterranean':
             health = 'Mediterranean'
         health_query = "&health=" + health
+        logging.info(health_query)
     diet = parameters.get("Diet")
+    logging.info(f"diet:'{diet}'")
     if diet not in dta.diet_tags:
+        logging.warning("diet is not in 'data.diet'.")
         diet = None
     diet_query = ""
     if diet:
         diet = format_string(diet)
-        print(diet)
         diet_query = "&diet=" + diet
+        logging.info(diet_query)
     dish = parameters.get("Dish_Type")
+    logging.info(f"dish:'{dish}'")
     if dish not in dta.dish_types:
+        logging.warning("dish is not in 'data.dish_types'.")
         dish = None
     dish_query = ""
     if dish:
         dish.replace(' ', '%20')
-        print(dish)
         dish_query = "&dishType=" + dish
+        logging.info(dish_query)
+    if not meal and not health and not diet and not dish:
+        return "I'm sorry, but I need some specific details to find the perfect recipe for you." \
+               " Please include at least one parameter such as meal type, dish type, health tag," \
+               " or diet tag in your request. " \
+               "If you need help formulating the recipe request, you can enter the app's guide found in the main menu"
 
-    response_dict = api_request(meal_query, health_query, diet_query, dish_query)
+    try:
+        response_dict = api_request(meal_query, health_query, diet_query, dish_query)
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error with the request from the api. The error is {e}")
+        return "Sorry, there was a problem retrieving the recipe. Please try again."
 
     recipes = parse_recipes_from_api(response_dict['hits'])
     recipe = choose_recipe(recipes, session_id, usersDB)
 
-    print(recipe.name)
+    logging.info(recipe.name)
 
     image = image_loading.download_image(recipe.picture, recipe.name)
 

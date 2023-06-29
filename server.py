@@ -27,7 +27,7 @@ firebase_admin.initialize_app(cred, {'storageBucket': 'hfc-app-b33ed.appspot.com
 usersDB = firestore.client()
 
 # logging
-logging.basicConfig(filename="logs/server.log",
+logging.basicConfig(filename="server.log",
                     format="%(asctime)s %(levelname)s %(message)s",
                     datefmt="%Y-%m-%d %H:%M:%S",
                     level=logging.INFO)
@@ -39,7 +39,7 @@ logging.basicConfig(filename="logs/server.log",
 def webhook():
 
     req = request.get_json(force=True)
-    print(req)
+    logging.info(f"request: {req}")
 
     response = process_request(req)
     return {
@@ -66,6 +66,10 @@ def process_request(req):
     if intent == 'personal_details':
         logging.info("Enter to 'personal_details' intent")
         return personal_details(req, usersDB)
+
+    if intent == "test":
+        logging.info("Enter to 'test' intent")
+        return "server answer: test"
 
 
 if __name__ == '__main__':

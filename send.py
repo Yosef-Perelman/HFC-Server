@@ -3,11 +3,6 @@ from firebase_admin import credentials, messaging, firestore
 #from firebase_admin import messaging
 import logging
 
-# logging
-# logging.basicConfig(filename="logs/send.log",
-#                     format="%(asctime)s %(levelname)s %(message)s",
-#                     datefmt="%Y-%m-%d %H:%M:%S",
-#                     level=logging.INFO)
 
 # cred = credentials.Certificate('hfc-app-b33ed-firebase-adminsdk-oqged-96055b305b.json')
 # firebase_admin.initialize_app(cred, {'storageBucket': 'hfc-app-b33ed.appspot.com'})
@@ -34,7 +29,7 @@ def send_text(title, msg, registration_token):
         tokens=registration_token,
     )
     response = messaging.send_multicast(message)
-    print('Successfully sent message:', response)
+    logging.info('Successfully sent message:', response)
 
 
 def send_meal_plan(title, messagesNumber, currentMessage, registration_token, recipe):
@@ -48,7 +43,7 @@ def send_meal_plan(title, messagesNumber, currentMessage, registration_token, re
         tokens=registration_token,
     )
     response = messaging.send_multicast(message)
-    print('Successfully sent message:', response)
+    logging.info('Successfully sent message:', response)
 
 
 def send_recipe(title, msg, registration_token, recipe):
@@ -58,7 +53,7 @@ def send_recipe(title, msg, registration_token, recipe):
         tokens=registration_token,
     )
     response = messaging.send_multicast(message)
-    print('Successfully sent message:', response)
+    logging.info('Successfully sent message:')
 
 
 # def test_send(title, msg, registration_token, data=None):
