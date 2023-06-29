@@ -29,7 +29,7 @@ def send_text(title, msg, registration_token):
         tokens=registration_token,
     )
     response = messaging.send_multicast(message)
-    logging.info('Successfully sent message:', response)
+    logging.info('Successfully sent message')
 
 
 def send_meal_plan(title, messagesNumber, currentMessage, registration_token, recipe):
@@ -43,7 +43,7 @@ def send_meal_plan(title, messagesNumber, currentMessage, registration_token, re
         tokens=registration_token,
     )
     response = messaging.send_multicast(message)
-    logging.info('Successfully sent message:', response)
+    logging.info('Successfully sent message')
 
 
 def send_recipe(title, msg, registration_token, recipe):
@@ -53,7 +53,7 @@ def send_recipe(title, msg, registration_token, recipe):
         tokens=registration_token,
     )
     response = messaging.send_multicast(message)
-    logging.info('Successfully sent message:')
+    logging.info('Successfully sent message')
 
 
 # def test_send(title, msg, registration_token, data=None):

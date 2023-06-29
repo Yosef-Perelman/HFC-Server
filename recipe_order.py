@@ -8,11 +8,6 @@ import image_loading
 import send
 import logging
 
-# logging
-# logging.basicConfig(filename="logs/recipe_order.log",
-#                     format="%(asctime)s %(levelname)s %(message)s",
-#                     datefmt="%Y-%m-%d %H:%M:%S",
-#                     level=logging.INFO)
 
 SERVINGS = 5
 
@@ -164,6 +159,8 @@ def choose_recipe(recipes, session_id, usersDB):
     similarity_scores = []
     for recipe in recipes:
         recipe_vector = create_recipe_vector(recipe, unique_ingredients, unique_healthLabels, unique_dietLabels)
+        # todo: there some problem here: "RuntimeWarning: invalid value encountered in scalar divide
+        #   similarity_score = np.dot(user_preferences_vector, recipe_vector) / ("
         similarity_score = np.dot(user_preferences_vector, recipe_vector) / (
                 np.linalg.norm(user_preferences_vector) * np.linalg.norm(recipe_vector))
         similarity_scores.append(similarity_score)
@@ -198,7 +195,7 @@ def format_string(input_string):
 def api_request(meal_query, health_query, diet_query, dish_query):
     query_string = "https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&" \
                    "app_key=191597bb0eccc02907ba8e5efb98fc8b" + meal_query + health_query + diet_query + dish_query + "&random=true"
-    print(query_string)
+    logging.info(query_string)
 
     headers = {
         "Accept": "application/json",

@@ -1,29 +1,151 @@
-2023-06-29 10:09:22 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2023-06-29 12:18:55 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
-2023-06-29 10:09:22 INFO [33mPress CTRL+C to quit[0m
-2023-06-29 10:09:22 INFO  * Restarting with stat
-2023-06-29 10:09:25 WARNING  * Debugger is active!
-2023-06-29 10:09:25 INFO  * Debugger PIN: 207-034-001
-2023-06-29 10:09:48 INFO request: {'responseId': 'b6b1627b-ee4b-4d44-b3d5-0baf32572919-a33ab921', 'queryResult': {'queryText': 'i want vegetarian recipe', 'parameters': {'Health': 'Vegetarian', 'Meal': '', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'the server working on it.', 'fulfillmentMessages': [{'text': {'text': ['the server working on it.']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/4jqMfKlkOKiM/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Meal': '', 'Meal.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/4jqMfKlkOKiM/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Meal': '', 'Meal.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.7550938, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/4jqMfKlkOKiM'}
-2023-06-29 10:09:48 INFO Enter to 'recipe.request' intent
-2023-06-29 10:09:48 INFO start recipe order func
-2023-06-29 10:09:48 INFO meal:''
-2023-06-29 10:09:48 WARNING meal is not in 'data.meals'.
-2023-06-29 10:09:48 INFO health:'Vegetarian'
-2023-06-29 10:09:48 INFO &health=vegetarian
-2023-06-29 10:09:48 INFO diet:''
-2023-06-29 10:09:48 WARNING diet is not in 'data.diet'.
-2023-06-29 10:09:48 INFO dish:''
-2023-06-29 10:09:48 WARNING dish is not in 'data.dish_types'.
-2023-06-29 10:09:49 INFO start parse recipes from api func
-2023-06-29 10:09:49 INFO start choose recipe func
-2023-06-29 10:09:49 INFO start get liked recipes func.
-2023-06-29 10:09:52 INFO start parse recipes from DB func.
-2023-06-29 10:09:52 INFO start select item with probabilities func.
-2023-06-29 10:09:52 INFO Cannoli Ice Cream made with Fresh Ricotta
-2023-06-29 10:09:52 INFO start download image func
-2023-06-29 10:09:52 INFO the image didn't exist in the storage, trying to download it from the web...
-2023-06-29 10:09:55 INFO Image downloaded successfully!
-2023-06-29 10:09:57 INFO Trying to send recipe message.
-2023-06-29 10:09:57 INFO Successfully sent message:
-2023-06-29 10:09:57 INFO 127.0.0.1 - - [29/Jun/2023 10:09:57] "POST /webhook HTTP/1.1" 200 -
+2023-06-29 12:18:55 INFO [33mPress CTRL+C to quit[0m
+2023-06-29 12:18:55 INFO  * Restarting with stat
+2023-06-29 12:18:57 WARNING  * Debugger is active!
+2023-06-29 12:18:57 INFO  * Debugger PIN: 207-034-001
+2023-06-29 12:19:42 INFO request: {'responseId': '5a3a5749-6fde-4885-8e87-bee7fd390466-feba52e8', 'queryResult': {'queryText': '5', 'parameters': {'age': '1957-12-04T12:00:00+03:00', 'weight': '66', 'height': '175', 'activity': '1', 'goal': '5'}, 'allRequiredParamsPresent': True, 'fulfillmentText': "Something went wrong, please try again. \nWrite 'personal details' to start over.", 'fulfillmentMessages': [{'text': {'text': ["Something went wrong, please try again. \nWrite 'personal details' to start over."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/X6n2ALvesNmW/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'age': '1957-12-04T12:00:00+03:00', 'age.original': '12/4/1957', 'weight': '66', 'weight.original': '66', 'height': '175', 'height.original': '175', 'activity': '1', 'activity.original': '1', 'goal': '5', 'goal.original': '5'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/c6ca3e62-b4fb-485d-b816-763ea5452378', 'displayName': 'personal_details'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/X6n2ALvesNmW'}
+2023-06-29 12:19:42 INFO Enter to 'personal_details' intent
+2023-06-29 12:19:42 INFO start personal details func
+2023-06-29 12:19:42 INFO start parse parameters func
+2023-06-29 12:19:42 INFO age = 1957-12-04T12:00:00+03:00
+2023-06-29 12:19:42 INFO weight = 66
+2023-06-29 12:19:42 INFO height = 175
+2023-06-29 12:19:42 INFO activity_level = level_1
+2023-06-29 12:19:42 INFO purpose = Mild weight gain
+2023-06-29 12:19:42 INFO start set calorie daily func
+2023-06-29 12:19:42 INFO start get gender func
+2023-06-29 12:19:44 INFO The daily calories: 1970.5
+2023-06-29 12:19:45 INFO 127.0.0.1 - - [29/Jun/2023 12:19:45] "POST /webhook HTTP/1.1" 200 -
+2023-06-29 12:20:27 INFO request: {'responseId': '81ddf118-9fe2-45c9-bd98-f32e948a5398-a33ab921', 'queryResult': {'queryText': 'i want vegetarian recipe', 'parameters': {'Health': 'Vegetarian', 'Meal': '', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'the server working on it.', 'fulfillmentMessages': [{'text': {'text': ['the server working on it.']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/IlRd2R6VTdFC/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Meal': '', 'Meal.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/IlRd2R6VTdFC/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Meal': '', 'Meal.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.7550938, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/IlRd2R6VTdFC'}
+2023-06-29 12:20:27 INFO Enter to 'recipe.request' intent
+2023-06-29 12:20:27 INFO start recipe order func
+2023-06-29 12:20:27 INFO meal:''
+2023-06-29 12:20:27 WARNING meal is not in 'data.meals'.
+2023-06-29 12:20:27 INFO health:'Vegetarian'
+2023-06-29 12:20:27 INFO &health=vegetarian
+2023-06-29 12:20:27 INFO diet:''
+2023-06-29 12:20:27 WARNING diet is not in 'data.diet'.
+2023-06-29 12:20:27 INFO dish:''
+2023-06-29 12:20:27 WARNING dish is not in 'data.dish_types'.
+2023-06-29 12:20:27 INFO https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b&health=vegetarian&random=true
+2023-06-29 12:20:28 INFO start parse recipes from api func
+2023-06-29 12:20:28 INFO start choose recipe func
+2023-06-29 12:20:28 INFO start get liked recipes func.
+2023-06-29 12:20:29 INFO start parse recipes from DB func.
+2023-06-29 12:20:29 INFO start select item with probabilities func.
+2023-06-29 12:20:29 INFO Chewy Chocolate Chip Cookies | Your New Favorite Chocolate Chip Cookie Recipe! recipes
+2023-06-29 12:20:29 INFO start download image func
+2023-06-29 12:20:29 INFO the image didn't exist in the storage, trying to download it from the web...
+2023-06-29 12:20:32 INFO Image downloaded successfully!
+2023-06-29 12:20:33 INFO Trying to send recipe message.
+2023-06-29 12:20:34 INFO Successfully sent message:
+2023-06-29 12:20:34 INFO 127.0.0.1 - - [29/Jun/2023 12:20:34] "POST /webhook HTTP/1.1" 200 -
+2023-06-29 12:22:33 INFO request: {'responseId': 'cfda77e6-63d6-4a5e-a53b-4b44834f2a93-a33ab921', 'queryResult': {'queryText': 'i want another vegetarian recipe', 'parameters': {'Health': 'Vegetarian', 'Meal': '', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'the server working on it.', 'fulfillmentMessages': [{'text': {'text': ['the server working on it.']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/IlRd2R6VTdFC/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Meal': '', 'Meal.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/IlRd2R6VTdFC/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Meal': '', 'Meal.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.74863017, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/IlRd2R6VTdFC'}
+2023-06-29 12:22:33 INFO Enter to 'recipe.request' intent
+2023-06-29 12:22:33 INFO start recipe order func
+2023-06-29 12:22:33 INFO meal:''
+2023-06-29 12:22:33 WARNING meal is not in 'data.meals'.
+2023-06-29 12:22:33 INFO health:'Vegetarian'
+2023-06-29 12:22:33 INFO &health=vegetarian
+2023-06-29 12:22:33 INFO diet:''
+2023-06-29 12:22:33 WARNING diet is not in 'data.diet'.
+2023-06-29 12:22:33 INFO dish:''
+2023-06-29 12:22:33 WARNING dish is not in 'data.dish_types'.
+2023-06-29 12:22:33 INFO https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b&health=vegetarian&random=true
+2023-06-29 12:22:34 INFO start parse recipes from api func
+2023-06-29 12:22:34 INFO start choose recipe func
+2023-06-29 12:22:34 INFO start get liked recipes func.
+2023-06-29 12:22:35 INFO start parse recipes from DB func.
+2023-06-29 12:22:35 INFO start select item with probabilities func.
+2023-06-29 12:22:35 INFO 36-Hour Chocolate Chip Cookies
+2023-06-29 12:22:35 INFO start download image func
+2023-06-29 12:22:35 INFO the image didn't exist in the storage, trying to download it from the web...
+2023-06-29 12:22:37 INFO Image downloaded successfully!
+2023-06-29 12:22:38 INFO Trying to send recipe message.
+2023-06-29 12:22:38 INFO Successfully sent message:
+2023-06-29 12:22:38 INFO 127.0.0.1 - - [29/Jun/2023 12:22:38] "POST /webhook HTTP/1.1" 200 -
+2023-06-29 12:23:43 INFO request: {'responseId': 'f12f7ff8-48b5-4955-85cd-dc3d3ef4923d-a33ab921', 'queryResult': {'queryText': '3', 'parameters': {'Health': ['Vegetarian'], 'Food_Type': ['nut'], 'number': 3.0}, 'allRequiredParamsPresent': True, 'fulfillmentText': "I'm making the plan for you, it may take some time.", 'fulfillmentMessages': [{'text': {'text': ["I'm making the plan for you, it may take some time."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/IlRd2R6VTdFC/contexts/reciperequest-followup', 'parameters': {'Health': ['Vegetarian'], 'Health.original': ['vegetarian'], 'Meal': '', 'Meal.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': '', 'Food_Type': ['nut'], 'Food_Type.original': ['nuts'], 'number': 3.0, 'number.original': '3'}}, {'name': 'projects/hfc-app-378515/agent/sessions/IlRd2R6VTdFC/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Health': ['Vegetarian'], 'Health.original': ['vegetarian'], 'Food_Type': ['nut'], 'Food_Type.original': ['nuts'], 'number': 3.0, 'number.original': '3'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/69e07da3-968a-4bfd-86ee-8740c754c958', 'displayName': 'meal.planning'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/IlRd2R6VTdFC'}
+2023-06-29 12:23:43 INFO Enter to 'meal.planning' intent
+2023-06-29 12:23:43 INFO start plan meal func
+2023-06-29 12:23:44 INFO start constraint satisfaction func
+2023-06-29 12:23:44 INFO finish day 0, find masala omelette, cacio e pepe, tortilla de patatas,
+2023-06-29 12:23:44 INFO finish day 1, find huevos nevadas, avocado risotto, santa pocket,
+2023-06-29 12:23:44 INFO finish day 2, find cheesy breakfast pizza, sorrel frittata with mozzarella and parmesan, veggie lasagna,
+2023-06-29 12:23:53 INFO Trying to send text message. content:This is the result of meal plan for 3 days.
+the input was: health labels = ['vegetarian'], forbidden foods = ['nut'].
+
+2023-06-29 12:23:54 INFO Trying to send meal plan message. current message number: 1
+2023-06-29 12:23:54 INFO Trying to send meal plan message. current message number: 2
+2023-06-29 12:23:55 INFO Trying to send meal plan message. current message number: 3
+2023-06-29 12:23:55 INFO Trying to send meal plan message. current message number: 4
+2023-06-29 12:23:56 INFO Trying to send meal plan message. current message number: 5
+2023-06-29 12:23:56 INFO Trying to send meal plan message. current message number: 6
+2023-06-29 12:23:56 INFO Trying to send meal plan message. current message number: 7
+2023-06-29 12:23:57 INFO Trying to send meal plan message. current message number: 8
+2023-06-29 12:23:58 INFO Trying to send meal plan message. current message number: 9
+2023-06-29 12:23:59 INFO 127.0.0.1 - - [29/Jun/2023 12:23:59] "POST /webhook HTTP/1.1" 200 -
+2023-06-29 12:25:34 INFO  * Detected change in 'C:\\Users\\User\\PycharmProjects\\HFC-Server\\recipe_order.py', reloading
+2023-06-29 12:25:35 INFO  * Restarting with stat
+2023-06-29 12:25:36 WARNING  * Debugger is active!
+2023-06-29 12:25:36 INFO  * Debugger PIN: 207-034-001
+2023-06-29 12:31:11 INFO  * Detected change in 'C:\\Users\\User\\PycharmProjects\\HFC-Server\\send.py', reloading
+2023-06-29 12:31:11 INFO  * Restarting with stat
+2023-06-29 12:31:13 WARNING  * Debugger is active!
+2023-06-29 12:31:13 INFO  * Debugger PIN: 207-034-001
+2023-06-29 12:31:35 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-06-29 12:31:35 INFO [33mPress CTRL+C to quit[0m
+2023-06-29 12:31:35 INFO  * Restarting with stat
+2023-06-29 12:31:37 WARNING  * Debugger is active!
+2023-06-29 12:31:37 INFO  * Debugger PIN: 207-034-001
+2023-06-29 12:33:58 INFO request: {'responseId': '2ceca895-a8cb-451c-849e-c769a3f8f264-a33ab921', 'queryResult': {'queryText': 'nuts, apple, milk and eggs', 'parameters': {'Health': ['Vegetarian', 'Dairy-Free', 'Low Sugar'], 'number': 3.0, 'Food_Type': ['nut', 'apple', 'milk', 'egg']}, 'allRequiredParamsPresent': True, 'fulfillmentText': "I'm making the plan for you, it may take some time.", 'fulfillmentMessages': [{'text': {'text': ["I'm making the plan for you, it may take some time."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/IlRd2R6VTdFC/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Health': ['Vegetarian', 'Dairy-Free', 'Low Sugar'], 'Health.original': ['vegetarian', 'dairy free', 'low in sugar'], 'number': 3.0, 'number.original': '3', 'Food_Type': ['nut', 'apple', 'milk', 'egg'], 'Food_Type.original': ['nuts', 'apple', 'milk', 'eggs']}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/69e07da3-968a-4bfd-86ee-8740c754c958', 'displayName': 'meal.planning'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/IlRd2R6VTdFC'}
+2023-06-29 12:33:58 INFO Enter to 'meal.planning' intent
+2023-06-29 12:33:58 INFO start plan meal func
+2023-06-29 12:34:01 INFO start constraint satisfaction func
+2023-06-29 12:34:02 INFO Trying to send text message. content:This is the result of meal plan for 3 days.
+the input was: health labels = ['vegetarian', 'dairy-free', 'low sugar'], forbidden foods = ['nut', 'apple', 'milk', 'egg'].
+
+2023-06-29 12:34:02 INFO Successfully sent message
+2023-06-29 12:34:02 INFO 127.0.0.1 - - [29/Jun/2023 12:34:02] "POST /webhook HTTP/1.1" 200 -
+2023-06-29 12:42:18 INFO request: {'responseId': '34427cc6-829b-4b4a-b388-7a3ca9b32695-feba52e8', 'queryResult': {'queryText': '1', 'parameters': {'food_type': ['apple'], 'quantity': 1.0, 'nutriens': '', 'Unit': ''}, 'allRequiredParamsPresent': True, 'fulfillmentMessages': [{'text': {'text': ['']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/sKqyWJH2ldgA/contexts/foodgetinfo-followup', 'lifespanCount': 2, 'parameters': {'food_type': ['apple'], 'food_type.original': ['apple'], 'quantity': 1.0, 'quantity.original': '1', 'nutriens': '', 'nutriens.original': '', 'Unit': '', 'Unit.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/sKqyWJH2ldgA/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'food_type': ['apple'], 'food_type.original': ['apple'], 'nutriens': '', 'nutriens.original': '', 'quantity': 1.0, 'quantity.original': '1', 'Unit': '', 'Unit.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/e73af73f-c0cc-41e7-96ac-4ef7f70fae10', 'displayName': 'food.get.info'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/sKqyWJH2ldgA'}
+2023-06-29 12:42:18 INFO Enter to 'food.get.info' intent
+2023-06-29 12:42:18 INFO 127.0.0.1 - - [29/Jun/2023 12:42:18] "[35m[1mPOST /webhook HTTP/1.1[0m" 500 -
+2023-06-29 12:49:46 INFO request: {'responseId': '1dc609d8-86f0-4679-9fa8-96bb3b7d19ca-feba52e8', 'queryResult': {'queryText': '1', 'parameters': {'food_type': 'apple', 'quantity': 1.0, 'nutriens': '', 'Unit': ''}, 'allRequiredParamsPresent': True, 'fulfillmentMessages': [{'text': {'text': ['']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/sKqyWJH2ldgA/contexts/foodgetinfo-followup', 'lifespanCount': 2, 'parameters': {'food_type': 'apple', 'food_type.original': 'apple', 'quantity': 1.0, 'quantity.original': '1', 'nutriens': '', 'nutriens.original': '', 'Unit': '', 'Unit.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/sKqyWJH2ldgA/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'food_type': 'apple', 'food_type.original': 'apple', 'nutriens': '', 'nutriens.original': '', 'quantity': 1.0, 'quantity.original': '1', 'Unit': '', 'Unit.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/e73af73f-c0cc-41e7-96ac-4ef7f70fae10', 'displayName': 'food.get.info'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/sKqyWJH2ldgA'}
+2023-06-29 12:49:46 INFO Enter to 'food.get.info' intent
+2023-06-29 12:49:46 INFO 127.0.0.1 - - [29/Jun/2023 12:49:46] "POST /webhook HTTP/1.1" 200 -
+2023-06-29 12:51:05 INFO request: {'responseId': 'da1ffc56-bcd7-4282-833e-bae34dc17014-feba52e8', 'queryResult': {'queryText': '2 plates of rice', 'parameters': {'food_type': 'rice', 'quantity': 2.0, 'Unit': 'plates', 'nutriens': ''}, 'allRequiredParamsPresent': True, 'fulfillmentMessages': [{'text': {'text': ['']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/sKqyWJH2ldgA/contexts/foodgetinfo-followup', 'lifespanCount': 2, 'parameters': {'food_type': 'rice', 'food_type.original': 'rice', 'quantity': 2.0, 'quantity.original': '2', 'nutriens': '', 'nutriens.original': '', 'Unit': 'plates', 'Unit.original': 'plates'}}, {'name': 'projects/hfc-app-378515/agent/sessions/sKqyWJH2ldgA/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'food_type': 'rice', 'food_type.original': 'rice', 'quantity': 2.0, 'quantity.original': '2', 'Unit': 'plates', 'Unit.original': 'plates', 'nutriens': '', 'nutriens.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/e73af73f-c0cc-41e7-96ac-4ef7f70fae10', 'displayName': 'food.get.info'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/sKqyWJH2ldgA'}
+2023-06-29 12:51:05 INFO Enter to 'food.get.info' intent
+2023-06-29 12:51:06 INFO 127.0.0.1 - - [29/Jun/2023 12:51:06] "POST /webhook HTTP/1.1" 200 -
+2023-06-29 13:31:20 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-06-29 13:31:20 INFO [33mPress CTRL+C to quit[0m
+2023-06-29 13:31:20 INFO  * Restarting with stat
+2023-06-29 13:31:22 WARNING  * Debugger is active!
+2023-06-29 13:31:22 INFO  * Debugger PIN: 207-034-001
+2023-06-29 13:32:41 INFO request: {'responseId': '0e5e5aba-8356-4f67-a6ff-ceb023de6f7f-feba52e8', 'queryResult': {'queryText': 'nuts, apple', 'parameters': {'Health': ['Dairy-Free', 'Low Sugar'], 'number': 3.0, 'Food_Type': ['nut', 'apple']}, 'allRequiredParamsPresent': True, 'fulfillmentText': "I'm making the plan for you, it may take some time.", 'fulfillmentMessages': [{'text': {'text': ["I'm making the plan for you, it may take some time."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/Sk4HkdghJFEo/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Health': ['Dairy-Free', 'Low Sugar'], 'Health.original': ['dairy free', 'low in sugar'], 'number': 3.0, 'number.original': '3', 'Food_Type': ['nut', 'apple'], 'Food_Type.original': ['nuts', 'apple']}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/69e07da3-968a-4bfd-86ee-8740c754c958', 'displayName': 'meal.planning'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/Sk4HkdghJFEo'}
+2023-06-29 13:32:41 INFO Enter to 'meal.planning' intent
+2023-06-29 13:32:41 INFO start plan meal func
+2023-06-29 13:32:44 INFO start constraint satisfaction func
+2023-06-29 13:34:47 WARNING the 60 seconds over, the search stopped
+2023-06-29 13:37:34 INFO Trying to send text message. content:This is the result of meal plan for 3 days.
+the input was: health labels = ['dairy-free', 'low sugar'], forbidden foods = ['nut', 'apple'].
+
+2023-06-29 13:37:34 INFO Successfully sent message
+2023-06-29 13:39:15 INFO 127.0.0.1 - - [29/Jun/2023 13:39:15] "POST /webhook HTTP/1.1" 200 -
+2023-06-29 13:49:41 INFO  * Detected change in 'C:\\Users\\User\\PycharmProjects\\HFC-Server\\meal_planer.py', reloading
+2023-06-29 13:49:41 INFO  * Restarting with stat
+2023-06-29 13:49:45 WARNING  * Debugger is active!
+2023-06-29 13:49:45 INFO  * Debugger PIN: 207-034-001
+2023-06-29 13:51:19 INFO  * Detected change in 'C:\\Users\\User\\PycharmProjects\\HFC-Server\\meal_planer.py', reloading
+2023-06-29 13:51:19 INFO  * Restarting with stat
+2023-06-29 13:51:22 WARNING  * Debugger is active!
+2023-06-29 13:51:22 INFO  * Debugger PIN: 207-034-001
+2023-06-29 13:53:01 INFO  * Detected change in 'C:\\Users\\User\\PycharmProjects\\HFC-Server\\meal_planer.py', reloading
+2023-06-29 13:53:01 INFO  * Restarting with stat
+2023-06-29 13:53:04 WARNING  * Debugger is active!
+2023-06-29 13:53:04 INFO  * Debugger PIN: 207-034-001
+2023-06-29 13:56:45 INFO  * Detected change in 'C:\\Users\\User\\PycharmProjects\\HFC-Server\\meal_planer.py', reloading
+2023-06-29 13:56:45 INFO  * Restarting with stat
+2023-06-29 13:56:48 WARNING  * Debugger is active!
+2023-06-29 13:56:48 INFO  * Debugger PIN: 207-034-001

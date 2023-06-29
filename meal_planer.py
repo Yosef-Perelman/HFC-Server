@@ -130,6 +130,7 @@ def sc(user_profile, recipe, current_assign):
 
 def constraint_satisfaction(user, number_of_days, usersDB, session_id):
 #def constraint_satisfaction(user, number_of_days):
+    logging.info("start constraint satisfaction func")
 
     final_solution = []
     already_chosen_names = []
@@ -157,6 +158,7 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
 
         end_time = time.time()
         if end_time - start_time > 60:
+            logging.warning("the 60 seconds over, the search stopped")
             break
 
         if finish:
@@ -239,7 +241,7 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
                                     if upper_bound < 2:
                                         ass.recipe = recipe
                                         names = [meal.recipe.name for meal in current_assignment]
-                                        #print(f"finish day {i}, find {names[0]}, {names[1]}, {names[2]},")
+                                        logging.info(f"finish day {i}, find {names[0]}, {names[1]}, {names[2]},")
                                         already_chosen_names.extend(names)
                                         final_solution.extend(current_assignment)
                                         dinner_index = 0
@@ -265,57 +267,68 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
     cards = []
     text = f"This is the result of meal plan for {number_of_days} days.\nthe input was: " \
            f"health labels = {user.health}, forbidden foods = {user.forbidden_ingredients}.\n"
-    print("****************")
-    print(text)
-    day_calories = 0
-    for index, value in enumerate(final_solution):
-
-        cards.append(create_card(value.recipe))
-        recipe_check = usersDB.collection('Recipes').where('name', '==', value.recipe.name).get()
-        if len(recipe_check) == 0:
-            data = {
-                'title': value.recipe.name,
-                'image': value.recipe.picture,
-                'url': value.recipe.full_recipe_link,
-                'calories': value.recipe.calories,
-                'healthLabels': value.recipe.healthLabels,
-                'dietLabels': value.recipe.dietLabels,
-                'ingredients': value.recipe.ingredients,
-                'fat': value.recipe.fat,
-                'protein': value.recipe.protein,
-                'carbs': value.recipe.carbs
-            }
-            usersDB.collection('Recipes').add(data)
-
-        if index % 3 == 0:
-            if index != 0:
-                print("calories of the day:" + str(day_calories))
-                print("************\n")
-            day_calories = 0
-            print("day number" + str(int(index / 3) + 1) + ":")
-        print("recipe name: " + value.recipe.name)
-        print("recipe health labels:")
-        print(value.recipe.healthLabels)
-        print("recipe ingredients:")
-        print(value.recipe.ingredients)
-        day_calories += value.recipe.calories
-    print("calories of the day:" + str(day_calories))
-    print("************\n")
 
     users_ref = usersDB.collection('Users')
     # get the user name by the session_id
     query_ref = users_ref.where('sessionId', '==', session_id)
     doc = next(query_ref.stream())
     token = doc.to_dict().get('token')
-
     tokens = [token]
-    send.send_text("text", text, tokens)
-    length = len(cards)
-    for i in range(length):
-        send.send_meal_plan("meal_plan", str(length), str(i + 1), tokens, cards[i])
+
+    if final_solution:
+        print("****************")
+        print(text)
+        day_calories = 0
+        for index, value in enumerate(final_solution):
+
+            cards.append(create_card(value.recipe))
+            recipe_check = usersDB.collection('Recipes').where('name', '==', value.recipe.name).get()
+            if len(recipe_check) == 0:
+                data = {
+                    'title': value.recipe.name,
+                    'image': value.recipe.picture,
+                    'url': value.recipe.full_recipe_link,
+                    'calories': value.recipe.calories,
+                    'healthLabels': value.recipe.healthLabels,
+                    'dietLabels': value.recipe.dietLabels,
+                    'ingredients': value.recipe.ingredients,
+                    'fat': value.recipe.fat,
+                    'protein': value.recipe.protein,
+                    'carbs': value.recipe.carbs
+                }
+                usersDB.collection('Recipes').add(data)
+
+            if index % 3 == 0:
+                if index != 0:
+                    print("calories of the day:" + str(day_calories))
+                    print("************\n")
+                day_calories = 0
+                print("day number" + str(int(index / 3) + 1) + ":")
+            print("recipe name: " + value.recipe.name)
+            print("recipe health labels:")
+            print(value.recipe.healthLabels)
+            print("recipe ingredients:")
+            print(value.recipe.ingredients)
+            day_calories += value.recipe.calories
+        print("calories of the day:" + str(day_calories))
+        print("************\n")
+
+        send.send_text("text", text, tokens)
+        length = len(cards)
+        for i in range(length):
+            send.send_meal_plan("meal_plan", str(length), str(i + 1), tokens, cards[i])
+
+    else:
+        send.send_text("text", text, tokens)
+        send.send_text("no meal plan", "I apologize, but we couldn't find a suitable meal plan based on your preferences."
+                       " Please try adjusting your preferences or consider exploring individual recipes instead."
+                       " Need help formulating your request? Check out our guide in the main menu for instructions.",
+                       tokens)
+
 
 
 def plan_meal(req, usersDB):
+    logging.info("start plan meal func")
     session_id = req.get("session").split('/')[-1]
 
     users_ref = usersDB.collection('Users')
@@ -339,10 +352,11 @@ def plan_meal(req, usersDB):
     result = req.get("queryResult")
     parameters = result.get("parameters")
     healthLabels = parameters.get('Health')
-    healthLabels = [string.lower() for string in healthLabels]
     for label in healthLabels:
         if label not in data.health_tags:
+            logging.warning(f"the label {label} isn't in data.health_tags")
             healthLabels.remove(label)
+    healthLabels = [string.lower() for string in healthLabels]
     forbiddenfoods = parameters.get('Food_Type')
     forbiddenfoods = [string.lower() for string in forbiddenfoods]
     number_of_days = int(parameters.get('number'))
