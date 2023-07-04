@@ -23,5 +23,5 @@ def sendNotifications(usersDB):
 
     # send notification:
     mes = daily_sentences_origin.iloc[num]["text"] # save text for after!
-    send_notification("DAILY TOPIC - "+daily_sentences_origin.iloc[num]["head"],"Good Morning! The daily tip is waiting for you on the chat page", "", tokens)
-
+    send_notification("DAILY TIP - " + daily_sentences_origin.iloc[num]["head"],
+                      "Good morning! Find the full tip in the app's chat. Open now for a positive start to your day!", "", tokens)
