@@ -22,6 +22,6 @@ def sendNotifications(usersDB):
     daily_sentences_origin = pd.read_csv('DB/daily_sentences/tipsforhealthylife.csv')
 
     # send notification:
-    mes = daily_sentences_origin.iloc[num]["text"] #save text for after!
+    mes = daily_sentences_origin.iloc[num]["text"] # save text for after!
     send_notification("DAILY TOPIC - "+daily_sentences_origin.iloc[num]["head"],"Good Morning! The daily tip is waiting for you on the chat page", "", tokens)
 

@@ -2,6 +2,7 @@
 # *** imports ***
 
 from flask import Flask, request
+from flask_apscheduler import APScheduler
 import firebase_admin
 from firebase_admin import credentials, firestore, db
 import logging
@@ -19,11 +20,11 @@ import os
 from apscheduler.schedulers.background import BackgroundScheduler
 
 
-
 # *** setup ***
 
 # flask
 app = Flask(__name__)
+sched = APScheduler()
 
 # date
 date = datetime.now().strftime("%m%d%Y")
@@ -77,23 +78,15 @@ def process_request(req):
         logging.info("Enter to 'test' intent")
         return "server answer: test"
 
+
 def morning_notification():
     print('The time is: %s' % datetime.now())
     # send notification:
     sendNotifications(usersDB)
 
+
 if __name__ == '__main__':
+    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 8, minute = 0)
+    sched.start()
+    app.run(port=5000, debug=True, use_reloader = False)
 
-    # scheduler notification:
-    scheduler = BackgroundScheduler()
-    scheduler.add_job(morning_notification, 'interval', start_date='2023-07-04 14:00:00', minutes=1)
-    scheduler.start()
-    print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
-
-    try:
-        # This is here to simulate application activity (which keeps the main thread alive).
-        app.run(port=5000, debug=True)
-          #  time.sleep(2)
-    except (KeyboardInterrupt, SystemExit):
-        # Not strictly necessary if daemonic mode is enabled but should be done if possible
-        scheduler.shutdown()
