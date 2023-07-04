@@ -148,6 +148,10 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
     lunch_recipes_origin = pd.read_csv('DB/filtered with images/lunch.csv')
     dinner_recipes_origin = pd.read_csv('DB/filtered with images/dinner.csv')
 
+    #breakfast_recipes_origin = pd.read_csv('DB/filtered/filtered_breakfast.csv')
+    #lunch_recipes_origin = pd.read_csv('DB/filtered/filtered_lunch.csv')
+    #dinner_recipes_origin = pd.read_csv('DB/filtered/filtered_dinner.csv')
+
     breakfast_recipes = breakfast_recipes_origin.sample(frac=1)
     lunch_recipes = lunch_recipes_origin.sample(frac=1)
     dinner_recipes = dinner_recipes_origin.sample(frac=1)

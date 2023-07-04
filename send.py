@@ -31,6 +31,17 @@ def send_text(title, msg, registration_token):
     response = messaging.send_multicast(message)
     logging.info('Successfully sent message')
 
+def send_notification(title,shortMes ,message, token):
+    message = messaging.MulticastMessage(
+        data= {"request":"daily sentences","text": message},
+        notification=messaging.Notification(
+            title=title,
+            body=shortMes
+        ),
+        tokens=token
+    )
+    response = messaging.send_multicast(message)
+
 
 def send_meal_plan(title, messagesNumber, currentMessage, registration_token, recipe):
     logging.info(f"Trying to send meal plan message. current message number: {currentMessage}")

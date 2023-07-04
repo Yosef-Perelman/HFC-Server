@@ -3,14 +3,21 @@
 
 from flask import Flask, request
 import firebase_admin
-from firebase_admin import credentials, firestore
-from datetime import datetime
+from firebase_admin import credentials, firestore, db
 import logging
 
 from meal_planer import plan_meal
+from notifications import sendNotifications
 from personal_details import personal_details
 from recipe_order import recipe_order
 from nutrient_info import food_get_info
+
+from datetime import datetime
+import time
+import os
+
+from apscheduler.schedulers.background import BackgroundScheduler
+
 
 
 # *** setup ***
@@ -37,7 +44,6 @@ logging.basicConfig(filename="server.log",
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-
     req = request.get_json(force=True)
     logging.info(f"request: {req}")
 
@@ -71,6 +77,23 @@ def process_request(req):
         logging.info("Enter to 'test' intent")
         return "server answer: test"
 
+def morning_notification():
+    print('The time is: %s' % datetime.now())
+    # send notification:
+    sendNotifications(usersDB)
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+
+    # scheduler notification:
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(morning_notification, 'interval', start_date='2023-07-04 14:00:00', minutes=1)
+    scheduler.start()
+    print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
+
+    try:
+        # This is here to simulate application activity (which keeps the main thread alive).
+        app.run(port=5000, debug=True)
+          #  time.sleep(2)
+    except (KeyboardInterrupt, SystemExit):
+        # Not strictly necessary if daemonic mode is enabled but should be done if possible
+        scheduler.shutdown()
