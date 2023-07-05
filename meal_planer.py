@@ -6,13 +6,8 @@ import pandas as pd
 import data
 import send
 import logging
-from fill_details_check import fill_details_check
-
-# logging
-# logging.basicConfig(filename="logs/meal_planer.log",
-#                     format="%(asctime)s %(levelname)s %(message)s",
-#                     datefmt="%Y-%m-%d %H:%M:%S",
-#                     level=logging.INFO)
+from firebase_connection import fill_details_check, get_doc, get_daily_calories, get_recipe, get_token, \
+    get_false_rated_recipes
 
 
 class UserProfile:
@@ -59,19 +54,6 @@ def create_card(recipe):
     return json.dumps(card)
 
 
-def get_false_rated_recipes(user_name, usersDB):
-
-    ratings_ref = usersDB.collection('Rate').where('userId', '==', user_name).where('like', '==', False)
-    rated_recipes = []
-    for rating in ratings_ref.stream():
-        recipe_id = rating.get('recipeId')
-        recipe_doc = usersDB.collection('Recipes').document(recipe_id).get()
-        recipe_data = recipe_doc.to_dict()
-        rated_recipes.append(recipe_data.get('title'))
-
-    return rated_recipes
-
-
 def create_recipe(row):
     diet = ast.literal_eval(row[3])
     health = ast.literal_eval(row[4])
@@ -79,10 +61,9 @@ def create_recipe(row):
     return Recipe(row[0], row[1], row[2], diet, health, row[5], row[6], row[7], row[8], ingredients)
 
 
-def hc(user_profile, meal, recipe, already_chosen):
-
+def hc(user_profile, meal, recipe, already_chosen=None):
     recipe_calories = float(recipe.calories)
-    user_calories = (user_profile.recommended_calories)
+    user_calories = user_profile.recommended_calories
     if meal.type == 'breakfast':
         if recipe_calories > (user_calories / 3):
             return False
@@ -93,8 +74,9 @@ def hc(user_profile, meal, recipe, already_chosen):
     if recipe.name in user_profile.dislike_recipes:
         return False
 
-    if recipe.name in already_chosen:
-        return False
+    if already_chosen:
+        if recipe.name in already_chosen:
+            return False
 
     if user_profile.health:
         recipe_healthLabels = [string.lower() for string in recipe.healthLabels]
@@ -111,7 +93,6 @@ def hc(user_profile, meal, recipe, already_chosen):
 
 
 def count_unique_and_duplicates(list1, list2, list3):
-
     combined_list = list1 + list2 + list3
     unique_set = set(combined_list)
     unique_list = list(unique_set)
@@ -129,171 +110,10 @@ def sc(user_profile, recipe, current_assign):
     return deviation + variation
 
 
-def constraint_satisfaction(user, number_of_days, usersDB, session_id, test = False):
-#def constraint_satisfaction(user, number_of_days):
-    logging.info("start constraint satisfaction func")
-
-    final_solution = []
-    already_chosen_names = []
-    finish = False  # finish = var that inform that the search over
-
-    # breakfast_recipes_origin = pd.read_csv('DB/mini_breakfast.csv')
-    # lunch_recipes_origin = pd.read_csv('DB/mini_lunch.csv')
-    # dinner_recipes_origin = pd.read_csv('DB/mini_dinner.csv')
-
-    # breakfast_recipes_origin = pd.read_csv('DB/test/breakfast_test.csv')
-    # lunch_recipes_origin = pd.read_csv('DB/test/lunch_test.csv')
-    # dinner_recipes_origin = pd.read_csv('DB/test/dinner_test.csv')
-
-    breakfast_recipes_origin = pd.read_csv('DB/filtered with images/breakfast.csv')
-    lunch_recipes_origin = pd.read_csv('DB/filtered with images/lunch.csv')
-    dinner_recipes_origin = pd.read_csv('DB/filtered with images/dinner.csv')
-
-    #breakfast_recipes_origin = pd.read_csv('DB/filtered/filtered_breakfast.csv')
-    #lunch_recipes_origin = pd.read_csv('DB/filtered/filtered_lunch.csv')
-    #dinner_recipes_origin = pd.read_csv('DB/filtered/filtered_dinner.csv')
-
-    breakfast_recipes = breakfast_recipes_origin.sample(frac=1)
-    lunch_recipes = lunch_recipes_origin.sample(frac=1)
-    dinner_recipes = dinner_recipes_origin.sample(frac=1)
-
-    breakfast_recipes = breakfast_recipes.reset_index(drop=True)
-    lunch_recipes = lunch_recipes.reset_index(drop=True)
-    dinner_recipes = dinner_recipes.reset_index(drop=True)
-
-    start_time = time.time()
-
-    for i in range(number_of_days):
-
-        # end_time = time.time()
-        # logging.info(f"checking the time condition. time = {end_time - start_time}")
-        # if end_time - start_time > 60:
-        #     logging.warning("the 60 seconds over, the search stopped")
-        #     break
-
-        if finish:
-            break
-
-        #print("start day: " + str(i + 1))
-        current_assignment = [Meal(0, 'breakfast'), Meal(1, 'lunch'), Meal(2, 'dinner')]
-
-        upper_bound = 100
-        breakfast_index = 0
-        lunch_index = 0
-        dinner_index = 0
-
-        end = False # var that inform that the search for the current day is over
-        flag = False # var that inform that the search for the current day need to jump to the end
-
-        while not end:
-
-            end_time = time.time()
-            logging.info(f"checking the time condition. time = {end_time - start_time}")
-            if end_time - start_time > 60:
-                logging.warning("the 60 seconds over, the search stopped")
-                finish = True
-                break
-
-            # logging.info("starting new loop in the while loop")
-            for ass in current_assignment:
-                # logging.info("starting new level in the current_assignment loop")
-
-                if flag:
-                    flag = False
-                    break
-
-                if ass.type == 'breakfast':
-                    while True:
-                        #print(f"breakfast index: {breakfast_index}")
-                        if breakfast_index < len(breakfast_recipes):
-                            recipe = create_recipe(breakfast_recipes.iloc[breakfast_index])
-                            if hc(user, ass, recipe, already_chosen_names):
-                                ass.recipe = recipe
-                                breakfast_index += 1
-                                break
-                            else:
-                                breakfast_recipes.drop(index=breakfast_index, inplace=True)
-                                #breakfast_index += 1
-                                breakfast_recipes.reset_index(drop=True, inplace=True)
-                        else:
-                            #print("finish the breakfast index")
-                            flag = True
-                            end = True
-                            if current_assignment[2].recipe is None:
-                                finish = True
-                            else:
-                                names = [meal.recipe.name for meal in current_assignment]
-                                #print(f"finish day {i}, find {names[0]}, {names[1]}, {names[2]},")
-                                already_chosen_names.extend(names)
-                                final_solution.extend(current_assignment)
-                            break
-                    continue
-
-                if ass.type == 'lunch':
-                    while True:
-                        #print(f"lunch index: {lunch_index}")
-                        if lunch_index < len(lunch_recipes):
-                            recipe = create_recipe(lunch_recipes.iloc[lunch_index])
-                            if hc(user, ass, recipe, already_chosen_names):
-                                ass.recipe = recipe
-                                lunch_index += 1
-                                break
-                            else:
-                                lunch_recipes.drop(index=lunch_index, inplace=True)
-                                #lunch_index += 1
-                                lunch_recipes.reset_index(drop=True, inplace=True)
-                        else:
-                            #print("finish the lunch index")
-                            lunch_index = 0
-                            flag = True
-                            break
-                    continue
-
-                if ass.type == 'dinner':
-                    while True:
-                        #print(f"dinner index: {dinner_index}")
-                        if dinner_index < len(dinner_recipes):
-                            recipe = create_recipe(dinner_recipes.iloc[dinner_index])
-                            if hc(user, ass, recipe, already_chosen_names):
-                                lower_bound = sc(user, recipe, current_assignment)
-                                if lower_bound < upper_bound:
-                                    upper_bound = lower_bound
-                                    if upper_bound < 2:
-                                        ass.recipe = recipe
-                                        names = [meal.recipe.name for meal in current_assignment]
-                                        logging.info(f"finish day {i}, find {names[0]}, {names[1]}, {names[2]},")
-                                        already_chosen_names.extend(names)
-                                        final_solution.extend(current_assignment)
-                                        dinner_index = 0
-                                        lunch_index = 0
-                                        breakfast_index = 0
-                                        end = True
-                                        break
-                                    else:
-                                        ass.recipe = recipe
-                                        dinner_index += 1
-                                else:
-                                    dinner_index += 1
-                            else:
-                                dinner_recipes.drop(index=dinner_index, inplace=True)
-                                #dinner_index += 1
-                                dinner_recipes.reset_index(drop=True, inplace=True)
-                        else:
-                            #print("finish the dinner index")
-                            dinner_index = 0
-                            breakfast_index -= 1
-                            break
-
+def results(user, number_of_days, test, doc, final_solution, usersDB):
     cards = []
     text = f"This is the result of meal plan for {number_of_days} days.\nthe input was: " \
            f"health labels = {user.health}, forbidden foods = {user.forbidden_ingredients}."
-
-    if not test:
-        users_ref = usersDB.collection('Users')
-        query_ref = users_ref.where('sessionId', '==', session_id)
-        doc = next(query_ref.stream())
-        token = doc.to_dict().get('token')
-        tokens = [token]
 
     if final_solution:
         logging.info("****************")
@@ -302,7 +122,7 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id, test = Fa
         for index, value in enumerate(final_solution):
 
             cards.append(create_card(value.recipe))
-            recipe_check = usersDB.collection('Recipes').where('name', '==', value.recipe.name).get()
+            recipe_check = get_recipe(usersDB, value.recipe.name)
             if len(recipe_check) == 0:
                 data = {
                     'title': value.recipe.name,
@@ -334,6 +154,7 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id, test = Fa
         logging.info("************\n")
 
         if not test:
+            tokens = get_token(doc)
             # todo: add checking for how many days their results and if it fit the request
             send.send_text("text", text, tokens)
             length = len(cards)
@@ -342,6 +163,7 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id, test = Fa
 
     else:
         if not test:
+            tokens = get_token(doc)
             send.send_text("text", text, tokens)
             # send.send_text("no meal plan", "I apologize, but we couldn't find a suitable meal plan based on your preferences."
             #                " Please try adjusting your preferences or consider exploring individual recipes instead."
@@ -352,6 +174,147 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id, test = Fa
                            " Please try adjusting your preferences or consider exploring individual recipes instead."
                            " Need help formulating your request? Check out our guide in the main menu for instructions.",
                            tokens)
+
+
+def constraint_satisfaction(user, number_of_days, usersDB=None, doc=None, test=False):
+    logging.info("start constraint satisfaction func")
+
+    final_solution = []
+    already_chosen_names = []
+    finish = False
+
+    breakfast_recipes_origin = pd.read_csv('DB/filtered with images/breakfast.csv')
+    lunch_recipes_origin = pd.read_csv('DB/filtered with images/lunch.csv')
+    dinner_recipes_origin = pd.read_csv('DB/filtered with images/dinner.csv')
+
+    breakfast_recipes = breakfast_recipes_origin.sample(frac=1)
+    lunch_recipes = lunch_recipes_origin.sample(frac=1)
+    dinner_recipes = dinner_recipes_origin.sample(frac=1)
+
+    breakfast_recipes = breakfast_recipes.reset_index(drop=True)
+    lunch_recipes = lunch_recipes.reset_index(drop=True)
+    dinner_recipes = dinner_recipes.reset_index(drop=True)
+
+    start_time = time.time()
+
+    for i in range(number_of_days):
+
+        if finish:
+            break
+
+        current_assignment = [Meal(0, 'breakfast'), Meal(1, 'lunch'), Meal(2, 'dinner')]
+
+        upper_bound = 100
+        breakfast_index = 0
+        lunch_index = 0
+        dinner_index = 0
+
+        end = False  # var that inform that the search for the current day is over
+        flag = False  # var that inform that the search for the current day need to jump to the end
+
+        while not end:
+
+            end_time = time.time()
+            logging.info(f"checking the time condition. time = {end_time - start_time}")
+            if end_time - start_time > 60:
+                logging.warning("the 60 seconds over, the search stopped")
+                finish = True
+                break
+
+            # logging.info("starting new loop in the while loop")
+            for ass in current_assignment:
+                # logging.info("starting new level in the current_assignment loop")
+
+                if flag:
+                    flag = False
+                    break
+
+                if ass.type == 'breakfast':
+                    while True:
+                        # print(f"breakfast index: {breakfast_index}")
+                        if breakfast_index < len(breakfast_recipes):
+                            recipe = create_recipe(breakfast_recipes.iloc[breakfast_index])
+                            if hc(user, ass, recipe, already_chosen_names):
+                                ass.recipe = recipe
+                                breakfast_index += 1
+                                break
+                            else:
+                                breakfast_recipes.drop(index=breakfast_index, inplace=True)
+                                # breakfast_index += 1
+                                breakfast_recipes.reset_index(drop=True, inplace=True)
+                        else:
+                            # print("finish the breakfast index")
+                            flag = True
+                            end = True
+                            if current_assignment[2].recipe is None:
+                                finish = True
+                            else:
+                                names = [meal.recipe.name for meal in current_assignment]
+                                # print(f"finish day {i}, find {names[0]}, {names[1]}, {names[2]},")
+                                already_chosen_names.extend(names)
+                                final_solution.extend(current_assignment)
+                            break
+                    continue
+
+                if ass.type == 'lunch':
+                    while True:
+                        # print(f"lunch index: {lunch_index}")
+                        if lunch_index < len(lunch_recipes):
+                            recipe = create_recipe(lunch_recipes.iloc[lunch_index])
+                            if hc(user, ass, recipe, already_chosen_names):
+                                ass.recipe = recipe
+                                lunch_index += 1
+                                break
+                            else:
+                                lunch_recipes.drop(index=lunch_index, inplace=True)
+                                # lunch_index += 1
+                                lunch_recipes.reset_index(drop=True, inplace=True)
+                        else:
+                            # print("finish the lunch index")
+                            lunch_index = 0
+                            flag = True
+                            break
+                    continue
+
+                if ass.type == 'dinner':
+                    while True:
+                        # print(f"dinner index: {dinner_index}")
+                        if dinner_index < len(dinner_recipes):
+                            recipe = create_recipe(dinner_recipes.iloc[dinner_index])
+                            if hc(user, ass, recipe, already_chosen_names):
+                                lower_bound = sc(user, recipe, current_assignment)
+                                if lower_bound < upper_bound:
+                                    upper_bound = lower_bound
+                                    if upper_bound < 2:
+                                        ass.recipe = recipe
+                                        names = [meal.recipe.name for meal in current_assignment]
+                                        logging.info(f"finish day {i}, find {names[0]}, {names[1]}, {names[2]},")
+                                        already_chosen_names.extend(names)
+                                        final_solution.extend(current_assignment)
+                                        dinner_index = 0
+                                        lunch_index = 0
+                                        breakfast_index = 0
+                                        end = True
+                                        break
+                                    else:
+                                        ass.recipe = recipe
+                                        dinner_index += 1
+                                else:
+                                    dinner_index += 1
+                            else:
+                                dinner_recipes.drop(index=dinner_index, inplace=True)
+                                # dinner_index += 1
+                                dinner_recipes.reset_index(drop=True, inplace=True)
+                        else:
+                            # print("finish the dinner index")
+                            dinner_index = 0
+                            breakfast_index -= 1
+                            break
+
+    if not test:
+        results(user, number_of_days, test, doc, final_solution, usersDB)
+    else:
+        return final_solution
 
 
 def parse_parameters(parameters):
@@ -379,32 +342,29 @@ def plan_meal(req, usersDB):
                "You can do it by writing 'personal details'."
     logging.info("Passed fill details check")
 
-    users_ref = usersDB.collection('Users')
-    query_ref = users_ref.where('sessionId', '==', session_id)
-    doc = next(query_ref.stream())
-    dislike_recipes = get_false_rated_recipes(doc.id, usersDB)
+    doc = get_doc(session_id, usersDB)
 
-    # token = doc.to_dict().get('token')
+    # tokens = get_token(doc)
     # text = "Generating your meal plan. This may take some time. Please wait."
-    # tokens = [token]
     # send.send_text("text", text, tokens)
 
-    doc_ref = users_ref.document(doc.id)
-    document_snapshot = doc_ref.get()
-    daily_calories = document_snapshot.get('daily_calories')
-    print(f"daily calories: {daily_calories}")
+    dislike_recipes = get_false_rated_recipes(doc.id, usersDB)
+
+    daily_calories = get_daily_calories(usersDB, doc)
+    logging.info(f"daily calories: {daily_calories}")
 
     result = req.get("queryResult")
     parameters = result.get("parameters")
     healthLabels, forbiddenfoods, number_of_days = parse_parameters(parameters)
 
     user = UserProfile(healthLabels, forbiddenfoods, daily_calories, dislike_recipes)
+
     start_time = time.time()
-    print("start to make the meal plan")
-    constraint_satisfaction(user, number_of_days, usersDB, session_id)
+    logging.info("start to make the meal plan")
+
+    constraint_satisfaction(user, number_of_days, usersDB, doc)
+
     end_time = time.time()
-    print("Total time:", end_time - start_time, "seconds")
+    logging.info("Total time:", end_time - start_time, "seconds")
 
     return "finish"
-
-

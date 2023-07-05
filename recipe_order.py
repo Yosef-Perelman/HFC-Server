@@ -8,7 +8,7 @@ import image_loading
 import send
 import logging
 
-from fill_details_check import fill_details_check
+from firebase_connection import fill_details_check
 
 SERVINGS = 5
 
