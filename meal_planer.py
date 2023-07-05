@@ -354,6 +354,21 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id, test = Fa
                            tokens)
 
 
+def parse_parameters(parameters):
+    healthLabels = parameters.get('Health')
+    for label in healthLabels:
+        if label not in data.health_tags:
+            logging.warning(f"the label {label} isn't in data.health_tags")
+            healthLabels.remove(label)
+    healthLabels = [string.lower() for string in healthLabels]
+    forbiddenfoods = parameters.get('Food_Type')
+    forbiddenfoods = [string.lower() for string in forbiddenfoods]
+    if forbiddenfoods[0] == "none":
+        forbiddenfoods.clear()
+    number_of_days = int(parameters.get('number'))
+    return healthLabels, forbiddenfoods, number_of_days
+
+
 def plan_meal(req, usersDB):
     logging.info("start plan meal func")
     session_id = req.get("session").split('/')[-1]
@@ -381,17 +396,7 @@ def plan_meal(req, usersDB):
 
     result = req.get("queryResult")
     parameters = result.get("parameters")
-    healthLabels = parameters.get('Health')
-    for label in healthLabels:
-        if label not in data.health_tags:
-            logging.warning(f"the label {label} isn't in data.health_tags")
-            healthLabels.remove(label)
-    healthLabels = [string.lower() for string in healthLabels]
-    forbiddenfoods = parameters.get('Food_Type')
-    forbiddenfoods = [string.lower() for string in forbiddenfoods]
-    if forbiddenfoods[0] == "none":
-        forbiddenfoods.clear()
-    number_of_days = int(parameters.get('number'))
+    healthLabels, forbiddenfoods, number_of_days = parse_parameters(parameters)
 
     user = UserProfile(healthLabels, forbiddenfoods, daily_calories, dislike_recipes)
     start_time = time.time()
