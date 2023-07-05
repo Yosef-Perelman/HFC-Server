@@ -6,6 +6,7 @@ import pandas as pd
 import data
 import send
 import logging
+from fill_details_check import fill_details_check
 
 # logging
 # logging.basicConfig(filename="logs/meal_planer.log",
@@ -128,7 +129,7 @@ def sc(user_profile, recipe, current_assign):
     return deviation + variation
 
 
-def constraint_satisfaction(user, number_of_days, usersDB, session_id):
+def constraint_satisfaction(user, number_of_days, usersDB, session_id, test = False):
 #def constraint_satisfaction(user, number_of_days):
     logging.info("start constraint satisfaction func")
 
@@ -287,12 +288,12 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
     text = f"This is the result of meal plan for {number_of_days} days.\nthe input was: " \
            f"health labels = {user.health}, forbidden foods = {user.forbidden_ingredients}."
 
-    users_ref = usersDB.collection('Users')
-    # get the user name by the session_id
-    query_ref = users_ref.where('sessionId', '==', session_id)
-    doc = next(query_ref.stream())
-    token = doc.to_dict().get('token')
-    tokens = [token]
+    if not test:
+        users_ref = usersDB.collection('Users')
+        query_ref = users_ref.where('sessionId', '==', session_id)
+        doc = next(query_ref.stream())
+        token = doc.to_dict().get('token')
+        tokens = [token]
 
     if final_solution:
         logging.info("****************")
@@ -332,35 +333,40 @@ def constraint_satisfaction(user, number_of_days, usersDB, session_id):
         logging.info("calories of the day:" + str(day_calories))
         logging.info("************\n")
 
-        # todo: add checking for how many days their results and if it fit the request
-        send.send_text("text", text, tokens)
-        length = len(cards)
-        for i in range(length):
-            send.send_meal_plan("meal_plan", str(length), str(i + 1), tokens, cards[i])
+        if not test:
+            # todo: add checking for how many days their results and if it fit the request
+            send.send_text("text", text, tokens)
+            length = len(cards)
+            for i in range(length):
+                send.send_meal_plan("meal_plan", str(length), str(i + 1), tokens, cards[i])
 
     else:
-        send.send_text("text", text, tokens)
-        # send.send_text("no meal plan", "I apologize, but we couldn't find a suitable meal plan based on your preferences."
-        #                " Please try adjusting your preferences or consider exploring individual recipes instead."
-        #                " Need help formulating your request? Check out our guide in the main menu for instructions.",
-        #                tokens)
-        send.send_text("text",
-                       "I apologize, but we couldn't find a suitable meal plan based on your preferences."
-                       " Please try adjusting your preferences or consider exploring individual recipes instead."
-                       " Need help formulating your request? Check out our guide in the main menu for instructions.",
-                       tokens)
+        if not test:
+            send.send_text("text", text, tokens)
+            # send.send_text("no meal plan", "I apologize, but we couldn't find a suitable meal plan based on your preferences."
+            #                " Please try adjusting your preferences or consider exploring individual recipes instead."
+            #                " Need help formulating your request? Check out our guide in the main menu for instructions.",
+            #                tokens)
+            send.send_text("text",
+                           "I apologize, but we couldn't find a suitable meal plan based on your preferences."
+                           " Please try adjusting your preferences or consider exploring individual recipes instead."
+                           " Need help formulating your request? Check out our guide in the main menu for instructions.",
+                           tokens)
 
 
 def plan_meal(req, usersDB):
     logging.info("start plan meal func")
     session_id = req.get("session").split('/')[-1]
 
+    if not fill_details_check(session_id, usersDB):
+        logging.info("Failed in fill details check")
+        return "You didn't filled your personal details. Please enter to the chat-bot and do it." \
+               "You can do it by writing 'personal details'."
+    logging.info("Passed fill details check")
+
     users_ref = usersDB.collection('Users')
-    #todo check if he fill details
-    # Create a query against the collection
     query_ref = users_ref.where('sessionId', '==', session_id)
     doc = next(query_ref.stream())
-    # dislike_recipes is all the recipes that the client marked as not liked
     dislike_recipes = get_false_rated_recipes(doc.id, usersDB)
 
     # token = doc.to_dict().get('token')

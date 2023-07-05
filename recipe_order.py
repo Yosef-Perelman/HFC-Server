@@ -8,6 +8,7 @@ import image_loading
 import send
 import logging
 
+from fill_details_check import fill_details_check
 
 SERVINGS = 5
 
@@ -211,8 +212,13 @@ def recipe_order(req, usersDB):
     logging.info("start recipe order func")
     session_id = req.get("session").split('/')[-1]
 
+    if not fill_details_check(session_id, usersDB):
+        logging.info("Failed in fill details check")
+        return "You didn't filled your personal details. Please enter to the chat-bot and do it." \
+               "You can do it by writing 'personal details'."
+    logging.info("Passed fill details check")
+
     # users_ref = usersDB.collection('Users')
-    # # todo check if he fill details
     # # Create a query against the collection
     # query_ref = users_ref.where('sessionId', '==', session_id)
     # doc = next(query_ref.stream())

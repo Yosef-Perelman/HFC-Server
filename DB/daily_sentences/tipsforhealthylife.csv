@@ -1,13 +1,13 @@
 ﻿text,head,number
 Keeping track of your body weight on a daily or weekly basis will help you see what you’re losing and/or what you’re gaining.,Measure and Watch Your Weight,1
 "Do not forget to eat breakfast and choose a nutritious meal with more protein and fiber and less fat, sugar, and calories.",Limit Unhealthy Foods and Eat Healthy Meals,2
-Drink water regularly to stay healthy.,"Drink Water and Stay Hydrated, and Limit Sugared Beverages",3
-,Exercise Regularly and Be Physically Active,4
+Drink water regularly to stay healthy.,Drink Water!,3
+Exercise Regularly and Be Physically Active.Physical activity is one of the keys to a healthy lifestyle.,Exercise Regularly,4
 "Exercise can’t immunize you from your sedentary time. Even people who exercise regularly could be at increased risk for diabetes and heart disease and stroke if they spend lots of time sitting behind computers. Practically speaking, you could consider taking breaks from sedentary time, such as walking around the office/room a couple of times in a day.",Reduce Sitting and Screen Time,5
 There is a very strong connection between sleep quality and quantity and your immune system. You can keep your immune system functioning properly by getting seven to eight hours of sleep each night.,Get Enough Good Sleep,6
 Alcohol should always be consumed in moderation.,Go Easy on Alcohol and Stay Sober,7
-,Find Ways to Manage Your Emotions,8
-,"Use an App to Keep Track of Your Movement, Sleep, and Heart Rate",9
+Find Ways to Manage Your Emotions. Correct handling of our emotions is a basic need and not a luxury.,Find Ways to Manage Your Emotions,8
+Use an App to Keep Track of Your Movement. It is important to notice that you are in motion enough.,Keep Track of Your Movement,9
 "Eat a combination of different foods, including fruit, vegetables, legumes, nuts and whole grains. Adults should eat at least five portions (400g) of fruit and vegetables per day. You can improve your intake of fruits and vegetables by always including veggies in your meal; eating fresh fruit and vegetables as snacks; eating a variety of fruits and vegetables; and eating them in season. By eating healthy, you will reduce your risk of malnutrition and noncommunicable diseases (NCDs) such as diabetes, heart disease, stroke and cancer.",Eat a healthy diet,10
 "Filipinos consume twice the recommended amount of sodium, putting them at risk of high blood pressure, which in turn increases the risk of heart disease and stroke. Most people get their sodium through salt. Reduce your salt intake to 5g per day, equivalent to about one teaspoon. It’s easier to do this by limiting the amount of salt, soy sauce, fish sauce and other high-sodium condiments when preparing meals; removing salt, seasonings and condiments from your meal table; avoiding salty snacks; and choosing low-sodium products.",Consume less salt and sugar,11
 "Fats consumed should be less than 30% of your total energy intake. This will help prevent unhealthy weight gain and NCDs. There are different types of fats, but unsaturated fats are preferable over saturated fats and trans-fats. WHO recommends reducing saturated fats to less than 10% of total energy intake; reducing trans-fats to less than 1% of total energy intake; and replacing both saturated fats and trans-fats to unsaturated fats.",Reduce intake of harmful fats,12
@@ -22,7 +22,7 @@ The lack of physical activity will increase your health risks in many ways, such
 Examples include: snack cakes, fast food, frozen meals, canned foods, chips.
 Ultra-processed foods are highly palatable, meaning they are easily overeaten, and activate reward-related regions in the brain, which can lead to excess calorie consumption and weight gain. Studies show that diets high in ultra-processed food can contribute to obesity, type 2 diabetes, heart disease, and other chronic conditions.
 In addition to low quality ingredients like inflammatory fats, added sugar, and refined grains, they’re usually low in fiber, protein, and micronutrients. Thus, they provide mostly empty calories.",Avoid ultra-processed foods,18
-"Depression is a common illness worldwide with over 260 million people affected. Depression can manifest in different ways, but it might make you feel hopeless or worthless, or you might think about negative and disturbing thoughts a lot or have an overwhelming sense of pain. If you’re going through this, remember that you are not alone. Talk to someone you trust such as a family member, friend, colleague or mental health professional about how you feel.",Talk to someone you trust if you're feeling down,19
+"Depression is a common illness worldwide with over 260 million people affected. Depression can manifest in different ways, but it might make you feel hopeless or worthless, or you might think about negative and disturbing thoughts a lot or have an overwhelming sense of pain. If you’re going through this, remember that you are not alone. Talk to someone you trust such as a family member, friend, colleague or mental health professional about how you feel.",Share experiences and feelings,19
 "Some people avoid nuts because they are high in fat. However, nuts and seeds are incredibly nutritious. They are packed with protein, fiber, and a variety of vitamins and minerals.
 Nuts may help you lose weight and reduce the risk of developing type 2 diabetes and heart disease.
 Additionally, one large observational study noted that a low intake of nuts and seeds was potentially linked to an increased risk of death from heart disease, stroke, or type 2 diabetes.",Eat nuts and seeds,20
@@ -57,7 +57,7 @@ It’s particularly effective at reducing belly fat, the harmful type of fat tha
 According to the Physical Activity Guidelines for Americans, we should strive for at least 150 minutes of moderate intensity activity each week",Get moving,31
 "Smoking, harmful use of drugs, and alcohol abuse can all seriously negatively affect your health.
 If you do any of these actions, consider cutting back or quitting to help reduce your risk for chronic diseases.
-There are resources available online — and likely in your local community, as well — to help with this. Talk with your doctor to learn more about accessing resources.","Don’t smoke or use drugs, and only drink in moderation",32
+There are resources available online — and likely in your local community, as well — to help with this. Talk with your doctor to learn more about accessing resources.",Don’t smoke or use drugs,32
 "Extra virgin olive oil is one of the healthiest vegetable oils you can use. It’s loaded with heart-healthy monounsaturated fats and powerful antioxidants that have anti-inflammatory properties.
 Extra virgin olive oil may benefit heart health, as people who consume it have a lower risk for dying from heart attacks and strokes according to some evidence.",Use extra virgin olive oil,33
 "Added sugar is extremely prevalent in modern food and drinks. A high intake is linked to obesity, type 2 diabetes, and heart disease.
@@ -121,12 +121,12 @@ You don’t have to follow a diet plan, just need to be mindful of what you eat.
 There are easy steps that you can take to eat better, such as replacing white rice and sugar, with brown ones, regular pasta, and bread for the wholemeal ones.
 
 You can also opt for fresh juices, and limit the frequency of sugary drinks. Don’t add oil when cooking vegetables: boil, steam, or grill food instead of frying them.",Be mindful of what you eat,45
-" If your food has a variety of colours, you’re on the right track. As simple as that.",How can you tell if you are eating a healthy diet?,46
-,Exercising and eating healthily are the keys to a healthy lifestyle,47
+" If your food has a variety of colours, you’re on the right track. As simple as that.",Did you are eating a healthy diet?,46
+Exercising and eating healthily are the keys to a healthy lifestyle,Keys to a healthy lifestyle,47
 "Sleeping is the key to good health and wellness.
 
 While sleeping our body is recovering from the day, repairing cells, restoring energy, and releasing proteins and hormones like Cortisol, Melatonin, DHEA, and GH (Growth Hormone).",Get enough rest,48
-"It depends on your age group, overall health, daily activities, and sleep patterns. The National Sleep Foundation guidelines recommend between 7 – 9h of sleep per night for adults.",How many hours of sleep we should get daily?,49
+"It depends on your age group, overall health, daily activities, and sleep patterns. The National Sleep Foundation guidelines recommend between 7 – 9h of sleep per night for adults.",hours of sleep,49
 "Achieving a work-family life balance can be a challenge for most working adults.
 
 If you’re constantly working, you might not be able to give your spouse, children, or friends the time they need. Work-life imbalance can lead to exhaustion, fatigue, and stress and consequently increase the risk of various health hazards.
