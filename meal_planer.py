@@ -318,18 +318,25 @@ def constraint_satisfaction(user, number_of_days, usersDB=None, doc=None, test=F
 
 
 def parse_parameters(parameters):
-    healthLabels = parameters.get('Health')
-    for label in healthLabels:
-        if label not in data.health_tags:
-            logging.warning(f"the label {label} isn't in data.health_tags")
-            healthLabels.remove(label)
-    healthLabels = [string.lower() for string in healthLabels]
-    forbiddenfoods = parameters.get('Food_Type')
-    forbiddenfoods = [string.lower() for string in forbiddenfoods]
-    if forbiddenfoods[0] == "none":
-        forbiddenfoods.clear()
-    number_of_days = int(parameters.get('number'))
-    return healthLabels, forbiddenfoods, number_of_days
+    try:
+        healthLabels = parameters.get('Health')
+        filtered_healthLabels = []
+        for label in healthLabels:
+            if label not in data.health_tags:
+                if label != 'none':
+                    logging.warning(f"the label {label} isn't in data.health_tags")
+            else:
+                filtered_healthLabels.append(label)
+        healthLabels = filtered_healthLabels
+        healthLabels = [string.lower() for string in healthLabels]
+        forbiddenfoods = parameters.get('Food_Type')
+        forbiddenfoods = [string.lower() for string in forbiddenfoods]
+        if forbiddenfoods[0] == "none":
+            forbiddenfoods.clear()
+        number_of_days = int(parameters.get('number'))
+    except Exception:
+        return False, None, None, None
+    return True, healthLabels, forbiddenfoods, number_of_days
 
 
 def plan_meal(req, usersDB):
@@ -344,10 +351,6 @@ def plan_meal(req, usersDB):
 
     doc = get_doc(session_id, usersDB)
 
-    # tokens = get_token(doc)
-    # text = "Generating your meal plan. This may take some time. Please wait."
-    # send.send_text("text", text, tokens)
-
     dislike_recipes = get_false_rated_recipes(doc.id, usersDB)
 
     daily_calories = get_daily_calories(usersDB, doc)
@@ -355,16 +358,21 @@ def plan_meal(req, usersDB):
 
     result = req.get("queryResult")
     parameters = result.get("parameters")
-    healthLabels, forbiddenfoods, number_of_days = parse_parameters(parameters)
+    check, healthLabels, forbiddenfoods, number_of_days = parse_parameters(parameters)
+    if not check:
+        return "Error in the parameters you insert, please try again."
 
     user = UserProfile(healthLabels, forbiddenfoods, daily_calories, dislike_recipes)
 
     start_time = time.time()
     logging.info("start to make the meal plan")
 
+    # tokens = get_token(doc)
+    # text = "Generating your meal plan. This may take some time. Please wait."
+    # send.send_text("text", text, tokens)
     constraint_satisfaction(user, number_of_days, usersDB, doc)
 
     end_time = time.time()
-    logging.info("Total time:", end_time - start_time, "seconds")
+    logging.info(f"Total time: {end_time - start_time} seconds")
 
     return "finish"

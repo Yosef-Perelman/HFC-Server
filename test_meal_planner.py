@@ -58,3 +58,22 @@
 #
 # if __name__ == '__main__':
 #     test_communication()
+
+import json
+import pytest
+import data
+from meal_planer import parse_parameters
+
+
+def test_parse_parameters():
+    parameters = {'Health': ['none'], 'Food_Type': ['none'], 'number': 5.0}
+    assert parse_parameters(parameters) == (True, [], [], 5)
+
+    parameters = {'Health': ['none'], 'Food_Type': ['none'], 'number': 'hi'}
+    assert parse_parameters(parameters) == (False, None, None, None)
+
+    parameters = {'Health': ['none'], 'Food_Type': ['none'], 'number': 5}
+    assert parse_parameters(parameters) == (True, [], [], 5)
+
+    parameters = {'Health': ['none', 'test'], 'Food_Type': ['none'], 'number': 5.0}
+    assert parse_parameters(parameters) == (True, [], [], 5)

@@ -42,5 +42,4 @@ def get_false_rated_recipes(user_name, usersDB):
         recipe_doc = usersDB.collection('Recipes').document(recipe_id).get()
         recipe_data = recipe_doc.to_dict()
         rated_recipes.append(recipe_data.get('title'))
-
     return rated_recipes
