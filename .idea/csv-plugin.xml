@@ -17,7 +17,42 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\db.csv">
+        <entry key="\DB\dinner3.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\DB\filtered with images\breakfast.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\DB\filtered with images\dinner.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\DB\filtered with images\lunch.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\DB\filtered\filtered_breakfast.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\DB\lunch3.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

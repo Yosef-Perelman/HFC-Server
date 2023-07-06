@@ -1,6 +1,7 @@
 import json
-
 import requests
+import logging
+
 
 fill_text = '%20'
 
@@ -31,6 +32,7 @@ def food_get_info(req):
         "Accept-Language": "en"
     }
 
+    # todo: try and catch
     # return list of: name, picture, ingredients, prep time, calories per serving, link to the full recipe
     response = requests.request("GET", url, headers=headers)
     response_dict = json.loads(response.text)

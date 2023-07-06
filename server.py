@@ -1,40 +1,52 @@
+
 # *** imports ***
-import json
 
-import requests
 from flask import Flask, request
+from flask_apscheduler import APScheduler
 import firebase_admin
-from firebase_admin import credentials, firestore
-from datetime import datetime
+from firebase_admin import credentials, firestore, db
+import logging
 
-from add_exercise import add_exercise_record
-from add_food_record import add_food_record
-from constraint_satisfaction import from_bot
-from nutrient_info import food_get_info
-from personal_details import personal_details_update, more_personal_details_update
+from meal_planer import plan_meal
+from notifications import sendNotifications
+from personal_details import personal_details
 from recipe_order import recipe_order
-from createDB import create_recipe_object, req
+from nutrient_info import food_get_info
+
+from datetime import datetime
+import time
+import os
+
+from apscheduler.schedulers.background import BackgroundScheduler
+
 
 # *** setup ***
 
 # flask
 app = Flask(__name__)
+sched = APScheduler()
 
 # date
 date = datetime.now().strftime("%m%d%Y")
 
 # firebase
 cred = credentials.Certificate('hfc-app-b33ed-firebase-adminsdk-oqged-96055b305b.json')
-firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app(cred, {'storageBucket': 'hfc-app-b33ed.appspot.com'})
 usersDB = firestore.client()
+
+# logging
+logging.basicConfig(filename="server.log",
+                    format="%(asctime)s %(levelname)s %(message)s",
+                    datefmt="%Y-%m-%d %H:%M:%S",
+                    level=logging.INFO)
 
 # *** code ***
 
+
 @app.route('/webhook', methods=['POST'])
 def webhook():
-
     req = request.get_json(force=True)
-    print(req)
+    logging.info(f"request: {req}")
 
     response = process_request(req)
     return {
@@ -42,33 +54,39 @@ def webhook():
     }
 
 
-# processing the request from dialogflow
 def process_request(req):
     result = req.get("queryResult")
     intent = result.get("intent").get('displayName')
 
-    if intent == 'add.food.record':
-        return add_food_record(req)
-
     if intent == 'recipe.request':
-        return recipe_order(req)
+        logging.info("Enter to 'recipe.request' intent")
+        return recipe_order(req, usersDB)
 
     if intent == 'food.get.info':
+        logging.info("Enter to 'food.get.info' intent")
         return food_get_info(req)
 
-    profile_update = "profile - age - height - weight - activity_level - purpose"
-    if intent == profile_update:
-        return personal_details_update(req, usersDB)
-
-    if intent == 'forbidden_foods - yes' or intent == 'forbidden_foods - no':
-        return more_personal_details_update(req, usersDB)
-
-    if intent == 'add.exercise.record':
-        return add_exercise_record(req)
-
     if intent == 'meal.planning':
-        return from_bot(req, usersDB)
+        logging.info("Enter to 'meal.planning' intent")
+        return plan_meal(req, usersDB)
+
+    if intent == 'personal_details':
+        logging.info("Enter to 'personal_details' intent")
+        return personal_details(req, usersDB)
+
+    if intent == "test":
+        logging.info("Enter to 'test' intent")
+        return "server answer: test"
+
+
+def morning_notification():
+    print('The time is: %s' % datetime.now())
+    # send notification:
+    sendNotifications(usersDB)
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 8, minute = 0)
+    sched.start()
+    app.run(port=5000, debug=True, use_reloader = False)
+
