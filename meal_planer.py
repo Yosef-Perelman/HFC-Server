@@ -156,23 +156,24 @@ def results(user, number_of_days, test, doc, final_solution, usersDB):
         if not test:
             tokens = get_token(doc)
             # todo: add checking for how many days their results and if it fit the request
-            send.send_text("text", text, tokens)
+            send.send_text("Meal_plan_details_1", text, tokens)
             length = len(cards)
             for i in range(length):
                 send.send_meal_plan("meal_plan", str(length), str(i + 1), tokens, cards[i])
+            text = "Please note that this meal plan is a recommendation and intended to provide you with ideas and" \
+                   " inspiration. Feel free to customize it according to your preferences and dietary needs." \
+                   " You can mix and match the days, adjust the ingredients, and even substitute recipes." \
+                   " The goal is to make it work for you and your lifestyle. Enjoy experimenting and creating" \
+                   " your personalized meal plan!"
+            send.send_text("Meal_plan_details_1", text, tokens)
 
     else:
         if not test:
+            text = "I apologize, but we couldn't find a suitable meal plan based on your preferences. " \
+                   "Please try adjusting your preferences or consider exploring individual recipes instead. " \
+                   "Need help formulating your request? Check out our app's guide in the main menu for instructions."
             tokens = get_token(doc)
-            send.send_text("text", text, tokens)
-            # send.send_text("no meal plan", "I apologize, but we couldn't find a suitable meal plan based on your preferences."
-            #                " Please try adjusting your preferences or consider exploring individual recipes instead."
-            #                " Need help formulating your request? Check out our guide in the main menu for instructions.",
-            #                tokens)
-            send.send_text("text",
-                           "I apologize, but we couldn't find a suitable meal plan based on your preferences."
-                           " Please try adjusting your preferences or consider exploring individual recipes instead."
-                           " Need help formulating your request? Check out our guide in the main menu for instructions.",
+            send.send_text("meal_plan_failed", text,
                            tokens)
 
 
@@ -215,7 +216,7 @@ def constraint_satisfaction(user, number_of_days, usersDB=None, doc=None, test=F
         while not end:
 
             end_time = time.time()
-            logging.info(f"checking the time condition. time = {end_time - start_time}")
+            #logging.info(f"checking the time condition. time = {end_time - start_time}")
             if end_time - start_time > 60:
                 logging.warning("the 60 seconds over, the search stopped")
                 finish = True
@@ -367,9 +368,10 @@ def plan_meal(req, usersDB):
     start_time = time.time()
     logging.info("start to make the meal plan")
 
-    # tokens = get_token(doc)
-    # text = "Generating your meal plan. This may take some time. Please wait."
-    # send.send_text("text", text, tokens)
+    tokens = get_token(doc)
+    text = "Generating your meal plan. This may take some time. Please wait."
+    send.send_text("start_meal_plan", text, tokens)
+
     constraint_satisfaction(user, number_of_days, usersDB, doc)
 
     end_time = time.time()

@@ -92,7 +92,15 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
         return "Something is wrong with the api connection, Please try again." \
                " Make sure all the details you entered are in the correct format." \
                " Write 'personal details' to start over."
-    return "Very good! Your details updated, and your recommended daily calories consumption has set."
+    #return "Very good! Your details updated, and your recommended daily calories consumption has set."
+    return "Thank you on filling out your personal details! Now, let's get started and explore what you can do:\n" \
+           "Search Recipe: Find a variety of recipes tailored to your preferences and dietary needs.\n" \
+           "Ask for a Meal Plan: Get personalized meal plans based on your dietary requirements, preferences, and goals.\n" \
+           "Get Nutritional Information: Access nutritional information for various foods.\n" \
+           "Otherway, you can return to the home page and starting manage your Nutritional Diary:" \
+           " Keep track of your daily nutritional intake easily. Your recommended daily calories consumption already there!\n" \
+           "If you need help, you are welcome to visit the app's guide found in the main menu.\n" \
+           "Start enjoying these features and have a great time using our app!"
 
 
 def personal_details(req, usersDB):

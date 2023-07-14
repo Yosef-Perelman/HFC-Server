@@ -23,7 +23,7 @@ import logging
 
 
 def send_text(title, msg, registration_token):
-    logging.info(f"Trying to send text message. content:{msg}")
+    logging.info(f"Trying to send text message. content: {msg}")
     message = messaging.MulticastMessage(
         data= {"request":title,"text": msg},
         tokens=registration_token,
@@ -31,12 +31,25 @@ def send_text(title, msg, registration_token):
     response = messaging.send_multicast(message)
     logging.info('Successfully sent message')
 
+
 def send_notification(title,shortMes ,message, token):
     message = messaging.MulticastMessage(
         data= {"request":"daily sentences","text": message},
         notification=messaging.Notification(
             title=title,
             body=shortMes
+        ),
+        tokens=token
+    )
+    response = messaging.send_multicast(message)
+
+
+def send_morning_notification(title, short_mes, message, token):
+    message = messaging.MulticastMessage(
+        data= {"request":"note","text": message},
+        notification=messaging.Notification(
+            title=title,
+            body=short_mes
         ),
         tokens=token
     )

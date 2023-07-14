@@ -1,0 +1,40 @@
+2023-07-14 12:25:50 INFO request: {'responseId': '7ea16ff4-35f5-4af9-b32a-a1c47f1cdba7-0767fbb0', 'queryResult': {'queryText': '1', 'parameters': {'age': '1987-01-27T12:00:00+03:00', 'weight': '70', 'height': '170', 'activity': '1', 'goal': '1'}, 'allRequiredParamsPresent': True, 'fulfillmentText': "Something went wrong, please try again. \nWrite 'personal details' to start over.", 'fulfillmentMessages': [{'text': {'text': ["Something went wrong, please try again. \nWrite 'personal details' to start over."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/epXYyRStjSXk/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'age': '1987-01-27T12:00:00+03:00', 'age.original': '27/1/1987', 'weight': '70', 'weight.original': '70', 'height': '170', 'height.original': '170', 'activity': '1', 'activity.original': '1', 'goal': '1', 'goal.original': '1'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/c6ca3e62-b4fb-485d-b816-763ea5452378', 'displayName': 'personal_details'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/epXYyRStjSXk'}
+2023-07-14 12:25:50 INFO Enter to 'personal_details' intent
+2023-07-14 12:25:50 INFO start personal details func
+2023-07-14 12:25:50 INFO start parse parameters func
+2023-07-14 12:25:50 INFO age = 1987-01-27T12:00:00+03:00
+2023-07-14 12:25:50 INFO weight = 70
+2023-07-14 12:25:50 INFO height = 170
+2023-07-14 12:25:50 INFO activity_level = level_1
+2023-07-14 12:25:50 INFO purpose = maintain weight
+2023-07-14 12:25:50 INFO start set calorie daily func
+2023-07-14 12:25:50 INFO start get gender func
+2023-07-14 12:25:53 INFO The daily calories: 1905
+2023-07-14 12:25:54 INFO 127.0.0.1 - - [14/Jul/2023 12:25:54] "POST /webhook HTTP/1.1" 200 -
+2023-07-14 12:26:48 INFO request: {'responseId': '54725d68-0e4a-4f7d-955e-c1a0ebd9e3b4-0767fbb0', 'queryResult': {'queryText': 'i want breakfast', 'parameters': {'Meal': 'Breakfast', 'Health': '', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'the server working on it.', 'fulfillmentMessages': [{'text': {'text': ['the server working on it.']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/epXYyRStjSXk/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': '', 'Health.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/epXYyRStjSXk/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': '', 'Health.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.48181748, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/epXYyRStjSXk'}
+2023-07-14 12:26:48 INFO Enter to 'recipe.request' intent
+2023-07-14 12:26:48 INFO start recipe order func
+2023-07-14 12:26:48 INFO Passed fill details check
+2023-07-14 12:26:48 INFO meal:'Breakfast'
+2023-07-14 12:26:48 INFO &mealType=Breakfast
+2023-07-14 12:26:48 INFO health:''
+2023-07-14 12:26:48 WARNING health is not in 'data.health_tags'.
+2023-07-14 12:26:48 INFO diet:''
+2023-07-14 12:26:48 WARNING diet is not in 'data.diet'.
+2023-07-14 12:26:48 INFO dish:''
+2023-07-14 12:26:48 WARNING dish is not in 'data.dish_types'.
+2023-07-14 12:26:49 INFO Trying to send text message. content: Please wait a moment while we search for a delicious recipe just for you. It won't take long!
+2023-07-14 12:26:49 INFO Successfully sent message
+2023-07-14 12:26:49 INFO https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b&mealType=Breakfast&random=true
+2023-07-14 12:26:50 INFO start parse recipes from api func
+2023-07-14 12:26:50 INFO start choose recipe func
+2023-07-14 12:26:50 INFO start get liked recipes func.
+2023-07-14 12:26:51 INFO start parse recipes from DB func.
+2023-07-14 12:26:51 INFO start select item with probabilities func.
+2023-07-14 12:26:51 INFO Special V-Day Donuts
+2023-07-14 12:26:51 INFO start download image func
+2023-07-14 12:26:51 INFO the image didn't exist in the storage, trying to download it from the web...
+2023-07-14 12:26:54 INFO Image downloaded successfully!
+2023-07-14 12:26:55 INFO Trying to send recipe message.
+2023-07-14 12:26:55 INFO Successfully sent message
+2023-07-14 12:26:55 INFO 127.0.0.1 - - [14/Jul/2023 12:26:55] "POST /webhook HTTP/1.1" 200 -

@@ -86,7 +86,7 @@ def morning_notification():
 
 
 if __name__ == '__main__':
-    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 8, minute = 0)
+    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 13, minute = 34)
     sched.start()
     app.run(port=5000, debug=True, use_reloader = False)
 

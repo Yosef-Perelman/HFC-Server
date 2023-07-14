@@ -218,15 +218,6 @@ def recipe_order(req, usersDB):
                "You can do it by writing 'personal details'."
     logging.info("Passed fill details check")
 
-    # users_ref = usersDB.collection('Users')
-    # # Create a query against the collection
-    # query_ref = users_ref.where('sessionId', '==', session_id)
-    # doc = next(query_ref.stream())
-    # token = doc.to_dict().get('token')
-    # text = "Please wait a moment while we search for a delicious recipe just for you. It won't take long!"
-    # tokens = [token]
-    # send.send_text("text", text, tokens)
-
     result = req.get("queryResult")
     parameters = result.get("parameters")
 
@@ -277,6 +268,14 @@ def recipe_order(req, usersDB):
                " or diet tag in your request. " \
                "If you need help formulating the recipe request, you can enter the app's guide found in the main menu"
 
+    users_ref = usersDB.collection('Users')
+    query_ref = users_ref.where('sessionId', '==', session_id)
+    doc = next(query_ref.stream())
+    token = doc.to_dict().get('token')
+    text = "Please wait a moment while we search for a delicious recipe just for you. It won't take long!"
+    tokens = [token]
+    send.send_text("start_recipe_search", text, tokens)
+
     try:
         response_dict = api_request(meal_query, health_query, diet_query, dish_query)
     except requests.exceptions.RequestException as e:
@@ -285,6 +284,14 @@ def recipe_order(req, usersDB):
 
     recipes = parse_recipes_from_api(response_dict['hits'])
     recipe = choose_recipe(recipes, session_id, usersDB)
+
+    # todo: test it!
+    if recipe is None:
+        text = "I apologize, but we couldn't find a suitable recipe based on your preferences. " \
+               "Please try adjusting your preferences." \
+               "Need help formulating your request? Check out our app's guide in the main menu for instructions."
+        send.send_text("recipe_failed", text, tokens)
+        return None
 
     logging.info(recipe.name)
 
