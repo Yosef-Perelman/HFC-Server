@@ -1,3 +1,4 @@
+import logging
 import random
 import pandas as pd
 
@@ -23,5 +24,7 @@ def sendNotifications(usersDB):
 
     # send notification:
     mes = daily_sentences_origin.iloc[num]["text"] # save text for after!
+    logging.info(f"the message is: {mes}")
     send_notification("DAILY TIP - " + daily_sentences_origin.iloc[num]["head"],
-                      "Good morning! Find the full tip in the app's chat. Open now for a positive start to your day!", "", tokens)
+                      "Good morning! Find the full tip in the app's chat. Open now for a positive start to your day!",
+                      mes, tokens)

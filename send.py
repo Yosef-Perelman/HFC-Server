@@ -32,12 +32,12 @@ def send_text(title, msg, registration_token):
     logging.info('Successfully sent message')
 
 
-def send_notification(title,shortMes ,message, token):
+def send_notification(title, short_mes, message, token):
     message = messaging.MulticastMessage(
         data= {"request":"daily sentences","text": message},
         notification=messaging.Notification(
             title=title,
-            body=shortMes
+            body=short_mes
         ),
         tokens=token
     )
