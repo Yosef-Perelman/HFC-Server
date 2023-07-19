@@ -257,8 +257,12 @@ def recipe_order(req, usersDB):
     if dish not in dta.dish_types:
         logging.warning("dish is not in 'data.dish_types'.")
         dish = None
-    dish_query = ""
     if dish:
+        dish.replace(' ', '%20')
+        dish_query = "&dishType=" + dish
+        logging.info(dish_query)
+    else:
+        dish = "main course"
         dish.replace(' ', '%20')
         dish_query = "&dishType=" + dish
         logging.info(dish_query)
