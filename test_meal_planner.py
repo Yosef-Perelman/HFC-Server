@@ -103,11 +103,12 @@ def test_hard_constraints():
     breakfast_recipes_origin = pd.read_csv('DB/filtered with images/breakfast.csv')
     breakfast_recipes = breakfast_recipes_origin.sample(frac=1)
     breakfast_recipes = breakfast_recipes.reset_index(drop=True)
+    # todo: make it not random
     index = random.randint(0, 100)
     recipe = create_recipe(breakfast_recipes.iloc[index])
     assert hc(user, meal, recipe, []) == True
 
-
+# todo: make it in test format
 def test_constraint_satisfaction():
 
     file_path = 'meal_plan_algo_results1.txt'

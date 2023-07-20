@@ -8,7 +8,7 @@ from firebase_admin import credentials, firestore, db
 import logging
 
 from meal_planer import plan_meal
-from notifications import sendNotifications
+from notifications import send_notifications
 from personal_details import personal_details
 from recipe_order import recipe_order
 from nutrient_info import food_get_info
@@ -82,7 +82,7 @@ def process_request(req):
 def morning_notification():
     print('The time is: %s' % datetime.now())
     # send notification:
-    sendNotifications(usersDB)
+    send_notifications(usersDB)
 
 
 if __name__ == '__main__':

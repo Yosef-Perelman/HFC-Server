@@ -1,49 +1,261 @@
-2023-07-14 12:25:50 INFO request: {'responseId': '7ea16ff4-35f5-4af9-b32a-a1c47f1cdba7-0767fbb0', 'queryResult': {'queryText': '1', 'parameters': {'age': '1987-01-27T12:00:00+03:00', 'weight': '70', 'height': '170', 'activity': '1', 'goal': '1'}, 'allRequiredParamsPresent': True, 'fulfillmentText': "Something went wrong, please try again. \nWrite 'personal details' to start over.", 'fulfillmentMessages': [{'text': {'text': ["Something went wrong, please try again. \nWrite 'personal details' to start over."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/epXYyRStjSXk/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'age': '1987-01-27T12:00:00+03:00', 'age.original': '27/1/1987', 'weight': '70', 'weight.original': '70', 'height': '170', 'height.original': '170', 'activity': '1', 'activity.original': '1', 'goal': '1', 'goal.original': '1'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/c6ca3e62-b4fb-485d-b816-763ea5452378', 'displayName': 'personal_details'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/epXYyRStjSXk'}
-2023-07-14 12:25:50 INFO Enter to 'personal_details' intent
-2023-07-14 12:25:50 INFO start personal details func
-2023-07-14 12:25:50 INFO start parse parameters func
-2023-07-14 12:25:50 INFO age = 1987-01-27T12:00:00+03:00
-2023-07-14 12:25:50 INFO weight = 70
-2023-07-14 12:25:50 INFO height = 170
-2023-07-14 12:25:50 INFO activity_level = level_1
-2023-07-14 12:25:50 INFO purpose = maintain weight
-2023-07-14 12:25:50 INFO start set calorie daily func
-2023-07-14 12:25:50 INFO start get gender func
-2023-07-14 12:25:53 INFO The daily calories: 1905
-2023-07-14 12:25:54 INFO 127.0.0.1 - - [14/Jul/2023 12:25:54] "POST /webhook HTTP/1.1" 200 -
-2023-07-14 12:26:48 INFO request: {'responseId': '54725d68-0e4a-4f7d-955e-c1a0ebd9e3b4-0767fbb0', 'queryResult': {'queryText': 'i want breakfast', 'parameters': {'Meal': 'Breakfast', 'Health': '', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'fulfillmentText': 'the server working on it.', 'fulfillmentMessages': [{'text': {'text': ['the server working on it.']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/epXYyRStjSXk/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': '', 'Health.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/epXYyRStjSXk/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': '', 'Health.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.48181748, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/epXYyRStjSXk'}
-2023-07-14 12:26:48 INFO Enter to 'recipe.request' intent
-2023-07-14 12:26:48 INFO start recipe order func
-2023-07-14 12:26:48 INFO Passed fill details check
-2023-07-14 12:26:48 INFO meal:'Breakfast'
-2023-07-14 12:26:48 INFO &mealType=Breakfast
-2023-07-14 12:26:48 INFO health:''
-2023-07-14 12:26:48 WARNING health is not in 'data.health_tags'.
-2023-07-14 12:26:48 INFO diet:''
-2023-07-14 12:26:48 WARNING diet is not in 'data.diet'.
-2023-07-14 12:26:48 INFO dish:''
-2023-07-14 12:26:48 WARNING dish is not in 'data.dish_types'.
-2023-07-14 12:26:49 INFO Trying to send text message. content: Please wait a moment while we search for a delicious recipe just for you. It won't take long!
-2023-07-14 12:26:49 INFO Successfully sent message
-2023-07-14 12:26:49 INFO https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b&mealType=Breakfast&random=true
-2023-07-14 12:26:50 INFO start parse recipes from api func
-2023-07-14 12:26:50 INFO start choose recipe func
-2023-07-14 12:26:50 INFO start get liked recipes func.
-2023-07-14 12:26:51 INFO start parse recipes from DB func.
-2023-07-14 12:26:51 INFO start select item with probabilities func.
-2023-07-14 12:26:51 INFO Special V-Day Donuts
-2023-07-14 12:26:51 INFO start download image func
-2023-07-14 12:26:51 INFO the image didn't exist in the storage, trying to download it from the web...
-2023-07-14 12:26:54 INFO Image downloaded successfully!
-2023-07-14 12:26:55 INFO Trying to send recipe message.
-2023-07-14 12:26:55 INFO Successfully sent message
-2023-07-14 12:26:55 INFO 127.0.0.1 - - [14/Jul/2023 12:26:55] "POST /webhook HTTP/1.1" 200 -
-2023-07-14 13:11:19 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2023-07-14 13:11:19 INFO Added job "morning_not" to job store "default"
-2023-07-14 13:11:19 INFO Scheduler started
-2023-07-14 13:11:19 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2023-07-19 18:50:00 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-19 18:50:00 INFO Added job "morning_not" to job store "default"
+2023-07-19 18:50:00 INFO Scheduler started
+2023-07-19 18:50:00 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
-2023-07-14 13:11:19 INFO [33mPress CTRL+C to quit[0m
-2023-07-14 13:12:00 INFO Running job "morning_not (trigger: cron[day_of_week='mon-sun', hour='13', minute='12'], next run at: 2023-07-14 13:12:00 IDT)" (scheduled at 2023-07-14 13:12:00+03:00)
-2023-07-14 13:12:06 INFO the message is: Physical activity is defined as any bodily movement produced by skeletal muscles that requires energy expenditure. This includes exercise and activities undertaken while working, playing, carrying out household chores, travelling, and engaging in recreational pursuits. The amount of physical activity you need depends on your age group but adults aged 18-64 years should do at least 150 minutes of moderate-intensity physical activity throughout the week. Increase moderate-intensity physical activity to 300 minutes per week for additional health benefits.
-2023-07-14 13:12:06 INFO Job "morning_not (trigger: cron[day_of_week='mon-sun', hour='13', minute='12'], next run at: 2023-07-15 13:12:00 IDT)" executed successfully
+2023-07-19 18:50:00 INFO [33mPress CTRL+C to quit[0m
+2023-07-19 18:50:23 INFO request: {'responseId': '8a2dd189-87e5-46bd-a193-865396522ee6-1b0ea404', 'queryResult': {'queryText': 'i want breakfast', 'parameters': {'Meal': 'Breakfast', 'Health': '', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/E4awxc4qf5CI/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': '', 'Health.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/E4awxc4qf5CI/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': '', 'Health.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.48540166, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/E4awxc4qf5CI'}
+2023-07-19 18:50:23 INFO Enter to 'recipe.request' intent
+2023-07-19 18:50:23 INFO start recipe order func
+2023-07-19 18:50:27 INFO Passed fill details check
+2023-07-19 18:50:27 INFO meal:'Breakfast'
+2023-07-19 18:50:27 INFO &mealType=Breakfast
+2023-07-19 18:50:27 INFO health:''
+2023-07-19 18:50:27 WARNING health is not in 'data.health_tags'.
+2023-07-19 18:50:27 INFO diet:''
+2023-07-19 18:50:27 WARNING diet is not in 'data.diet'.
+2023-07-19 18:50:27 INFO dish:''
+2023-07-19 18:50:27 WARNING dish is not in 'data.dish_types'.
+2023-07-19 18:50:27 INFO &dishType=main course
+2023-07-19 18:50:28 INFO Trying to send text message. content: Please wait a moment while we search for a delicious recipe just for you. It won't take long!
+2023-07-19 18:50:30 INFO Successfully sent message
+2023-07-19 18:50:30 INFO https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b&mealType=Breakfast&dishType=main course&random=true
+2023-07-19 18:50:32 INFO start parse recipes from api func
+2023-07-19 18:50:32 INFO start choose recipe func
+2023-07-19 18:50:32 INFO start get liked recipes func.
+2023-07-19 18:50:34 INFO start parse recipes from DB func.
+2023-07-19 18:50:34 INFO start select item with probabilities func.
+2023-07-19 18:50:34 INFO Chinese Basil Omelet Recipe
+2023-07-19 18:50:34 INFO start download image func
+2023-07-19 18:50:35 INFO the image didn't exist in the storage, trying to download it from the web...
+2023-07-19 18:50:40 INFO Image downloaded successfully!
+2023-07-19 18:50:42 INFO Trying to send recipe message.
+2023-07-19 18:50:43 INFO Successfully sent message
+2023-07-19 18:50:43 INFO 127.0.0.1 - - [19/Jul/2023 18:50:43] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:02:42 INFO request: {'responseId': '829b7cca-0509-4340-b4c3-ae5c6255bb78-1b0ea404', 'queryResult': {'queryText': '1', 'parameters': {'age': '2000-12-12T12:00:00+02:00', 'weight': '68', 'height': '169', 'activity': '2', 'goal': '1'}, 'allRequiredParamsPresent': True, 'fulfillmentText': "Something went wrong, please try again. \nWrite 'personal details' to start over.", 'fulfillmentMessages': [{'text': {'text': ["Something went wrong, please try again. \nWrite 'personal details' to start over."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/AZiKo7j8fpFG/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'age': '2000-12-12T12:00:00+02:00', 'age.original': '12.12.2000', 'weight': '68', 'weight.original': '68', 'height': '169', 'height.original': '169', 'activity': '2', 'activity.original': '2', 'goal': '1', 'goal.original': '1'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/c6ca3e62-b4fb-485d-b816-763ea5452378', 'displayName': 'personal_details'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/AZiKo7j8fpFG'}
+2023-07-19 19:02:42 INFO Enter to 'personal_details' intent
+2023-07-19 19:02:42 INFO start personal details func
+2023-07-19 19:02:42 INFO start parse parameters func
+2023-07-19 19:02:42 INFO age = 2000-12-12T12:00:00+02:00
+2023-07-19 19:02:42 INFO weight = 68
+2023-07-19 19:02:42 INFO height = 169
+2023-07-19 19:02:42 INFO activity_level = level_2
+2023-07-19 19:02:42 INFO purpose = maintain weight
+2023-07-19 19:02:42 INFO start set calorie daily func
+2023-07-19 19:02:42 INFO start get gender func
+2023-07-19 19:02:45 INFO The daily calories: 2283.75
+2023-07-19 19:02:46 INFO 127.0.0.1 - - [19/Jul/2023 19:02:46] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:04:24 INFO request: {'responseId': 'f76a2531-11a6-4d77-8714-c28d4c3aa723-1b0ea404', 'queryResult': {'queryText': '1', 'parameters': {'age': '2000-12-12T12:00:00+02:00', 'weight': '68', 'height': '169', 'activity': '2', 'goal': '1'}, 'allRequiredParamsPresent': True, 'fulfillmentText': "Something went wrong, please try again. \nWrite 'personal details' to start over.", 'fulfillmentMessages': [{'text': {'text': ["Something went wrong, please try again. \nWrite 'personal details' to start over."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/AZiKo7j8fpFG/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'age': '2000-12-12T12:00:00+02:00', 'age.original': '12/12/2000', 'weight': '68', 'weight.original': '68', 'height': '169', 'height.original': '169', 'activity': '2', 'activity.original': '2', 'goal': '1', 'goal.original': '1'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/c6ca3e62-b4fb-485d-b816-763ea5452378', 'displayName': 'personal_details'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/AZiKo7j8fpFG'}
+2023-07-19 19:04:24 INFO Enter to 'personal_details' intent
+2023-07-19 19:04:24 INFO start personal details func
+2023-07-19 19:04:24 INFO start parse parameters func
+2023-07-19 19:04:24 INFO age = 2000-12-12T12:00:00+02:00
+2023-07-19 19:04:24 INFO weight = 68
+2023-07-19 19:04:24 INFO height = 169
+2023-07-19 19:04:24 INFO activity_level = level_2
+2023-07-19 19:04:24 INFO purpose = maintain weight
+2023-07-19 19:04:24 INFO start set calorie daily func
+2023-07-19 19:04:24 INFO start get gender func
+2023-07-19 19:04:28 INFO The daily calories: 2283.75
+2023-07-19 19:04:29 INFO 127.0.0.1 - - [19/Jul/2023 19:04:29] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:07:47 INFO request: {'responseId': '983c9967-792c-4163-aa2b-eb491bb4faf5-1b0ea404', 'queryResult': {'queryText': '1', 'parameters': {'age': '2000-12-04T12:00:00+02:00', 'weight': '70', 'height': '168', 'activity': '3', 'goal': '1'}, 'allRequiredParamsPresent': True, 'fulfillmentText': "Something went wrong, please try again. \nWrite 'personal details' to start over.", 'fulfillmentMessages': [{'text': {'text': ["Something went wrong, please try again. \nWrite 'personal details' to start over."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/AZiKo7j8fpFG/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'age': '2000-12-04T12:00:00+02:00', 'age.original': '12/4/2000', 'weight': '70', 'weight.original': '70', 'height': '168', 'height.original': '168', 'activity': '3', 'activity.original': '3', 'goal': '1', 'goal.original': '1'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/c6ca3e62-b4fb-485d-b816-763ea5452378', 'displayName': 'personal_details'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/AZiKo7j8fpFG'}
+2023-07-19 19:07:47 INFO Enter to 'personal_details' intent
+2023-07-19 19:07:47 INFO start personal details func
+2023-07-19 19:07:47 INFO start parse parameters func
+2023-07-19 19:07:47 INFO age = 2000-12-04T12:00:00+02:00
+2023-07-19 19:07:47 INFO weight = 70
+2023-07-19 19:07:47 INFO height = 168
+2023-07-19 19:07:47 INFO activity_level = level_3
+2023-07-19 19:07:47 INFO purpose = maintain weight
+2023-07-19 19:07:47 INFO start set calorie daily func
+2023-07-19 19:07:47 INFO start get gender func
+2023-07-19 19:07:49 INFO The daily calories: 2401.7
+2023-07-19 19:07:50 INFO 127.0.0.1 - - [19/Jul/2023 19:07:50] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:09:17 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-19 19:09:17 INFO Added job "morning_not" to job store "default"
+2023-07-19 19:09:17 INFO Scheduler started
+2023-07-19 19:09:17 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-07-19 19:09:17 INFO [33mPress CTRL+C to quit[0m
+2023-07-19 19:11:03 INFO request: {'responseId': 'eb813ac8-ce26-45f9-8c34-7a38b6618c19-1b0ea404', 'queryResult': {'queryText': '1', 'parameters': {'age': '1990-12-12T12:00:00+02:00', 'weight': '70', 'height': '170', 'activity': '3', 'goal': '1'}, 'allRequiredParamsPresent': True, 'fulfillmentText': "Something went wrong, please try again. \nWrite 'personal details' to start over.", 'fulfillmentMessages': [{'text': {'text': ["Something went wrong, please try again. \nWrite 'personal details' to start over."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/AZiKo7j8fpFG/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'age': '1990-12-12T12:00:00+02:00', 'age.original': '12/12/1990', 'weight': '70', 'weight.original': '70', 'height': '170', 'height.original': '170', 'activity': '3', 'activity.original': '3', 'goal': '1', 'goal.original': '1'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/c6ca3e62-b4fb-485d-b816-763ea5452378', 'displayName': 'personal_details'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/AZiKo7j8fpFG'}
+2023-07-19 19:11:03 INFO Enter to 'personal_details' intent
+2023-07-19 19:11:03 INFO start personal details func
+2023-07-19 19:11:03 INFO start parse parameters func
+2023-07-19 19:11:03 INFO age = 1990-12-12T12:00:00+02:00
+2023-07-19 19:11:03 INFO weight = 70
+2023-07-19 19:11:03 INFO height = 170
+2023-07-19 19:11:03 INFO activity_level = level_3
+2023-07-19 19:11:03 INFO purpose = maintain weight
+2023-07-19 19:11:03 INFO start set calorie daily func
+2023-07-19 19:11:03 INFO start get gender func
+2023-07-19 19:11:07 INFO The daily calories: 2346.95
+2023-07-19 19:11:08 INFO 127.0.0.1 - - [19/Jul/2023 19:11:08] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:14:33 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-19 19:14:33 INFO Added job "morning_not" to job store "default"
+2023-07-19 19:14:33 INFO Scheduler started
+2023-07-19 19:14:33 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-07-19 19:14:33 INFO [33mPress CTRL+C to quit[0m
+2023-07-19 19:15:02 INFO request: {'responseId': '76e7e36f-5a87-4136-a8fe-15d7649d5d8d-1b0ea404', 'queryResult': {'queryText': '1', 'parameters': {'age': '1987-12-12T12:00:00+03:00', 'weight': '70', 'height': '170', 'activity': '3', 'goal': '1'}, 'allRequiredParamsPresent': True, 'fulfillmentText': "Something went wrong, please try again. \nWrite 'personal details' to start over.", 'fulfillmentMessages': [{'text': {'text': ["Something went wrong, please try again. \nWrite 'personal details' to start over."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/AZiKo7j8fpFG/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'age': '1987-12-12T12:00:00+03:00', 'age.original': '12/12/1987', 'weight': '70', 'weight.original': '70', 'height': '170', 'height.original': '170', 'activity': '3', 'activity.original': '3', 'goal': '1', 'goal.original': '1'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/c6ca3e62-b4fb-485d-b816-763ea5452378', 'displayName': 'personal_details'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/AZiKo7j8fpFG'}
+2023-07-19 19:15:02 INFO Enter to 'personal_details' intent
+2023-07-19 19:15:02 INFO start personal details func
+2023-07-19 19:15:02 INFO start parse parameters func
+2023-07-19 19:15:02 INFO age = 1987-12-12T12:00:00+03:00
+2023-07-19 19:15:02 INFO weight = 70
+2023-07-19 19:15:02 INFO height = 170
+2023-07-19 19:15:02 INFO activity_level = level_3
+2023-07-19 19:15:02 INFO purpose = maintain weight
+2023-07-19 19:15:02 INFO start set calorie daily func
+2023-07-19 19:15:02 INFO start get gender func
+2023-07-19 19:15:06 INFO The daily calories: 2325.0499999999997
+2023-07-19 19:15:07 INFO the time of personal details func is 5.6719725131988525
+2023-07-19 19:15:07 INFO 127.0.0.1 - - [19/Jul/2023 19:15:07] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:15:53 INFO request: {'responseId': 'c9143f09-3614-48ed-820c-7962b197f80c-1b0ea404', 'queryResult': {'queryText': '1', 'parameters': {'age': '1989-12-12T12:00:00+02:00', 'weight': '70', 'height': '170', 'activity': '3', 'goal': '1'}, 'allRequiredParamsPresent': True, 'fulfillmentText': "Something went wrong, please try again. \nWrite 'personal details' to start over.", 'fulfillmentMessages': [{'text': {'text': ["Something went wrong, please try again. \nWrite 'personal details' to start over."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/AZiKo7j8fpFG/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'age': '1989-12-12T12:00:00+02:00', 'age.original': '12/12/1989', 'weight': '70', 'weight.original': '70', 'height': '170', 'height.original': '170', 'activity': '3', 'activity.original': '3', 'goal': '1', 'goal.original': '1'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/c6ca3e62-b4fb-485d-b816-763ea5452378', 'displayName': 'personal_details'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/AZiKo7j8fpFG'}
+2023-07-19 19:15:53 INFO Enter to 'personal_details' intent
+2023-07-19 19:15:53 INFO start personal details func
+2023-07-19 19:15:53 INFO start parse parameters func
+2023-07-19 19:15:53 INFO age = 1989-12-12T12:00:00+02:00
+2023-07-19 19:15:53 INFO weight = 70
+2023-07-19 19:15:53 INFO height = 170
+2023-07-19 19:15:53 INFO activity_level = level_3
+2023-07-19 19:15:53 INFO purpose = maintain weight
+2023-07-19 19:15:53 INFO start set calorie daily func
+2023-07-19 19:15:53 INFO start get gender func
+2023-07-19 19:15:55 INFO The daily calories: 2339.65
+2023-07-19 19:15:56 INFO the time of personal details func is 3.1836369037628174
+2023-07-19 19:15:56 INFO 127.0.0.1 - - [19/Jul/2023 19:15:56] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:17:30 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-19 19:17:30 INFO Added job "morning_not" to job store "default"
+2023-07-19 19:17:30 INFO Scheduler started
+2023-07-19 19:17:30 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-07-19 19:17:30 INFO [33mPress CTRL+C to quit[0m
+2023-07-19 19:18:56 INFO request: {'responseId': 'f4b22e7f-d5ba-4df9-af20-94a5c457771c-1b0ea404', 'queryResult': {'queryText': 'i want breakfast', 'parameters': {'Meal': 'Breakfast', 'Health': '', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': '', 'Health.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': '', 'Health.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.48540166, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi'}
+2023-07-19 19:18:56 INFO Enter to 'recipe.request' intent
+2023-07-19 19:18:56 INFO start recipe order func
+2023-07-19 19:18:59 INFO Passed fill details check
+2023-07-19 19:18:59 INFO meal:'Breakfast'
+2023-07-19 19:18:59 INFO &mealType=Breakfast
+2023-07-19 19:18:59 INFO health:''
+2023-07-19 19:18:59 WARNING health is not in 'data.health_tags'.
+2023-07-19 19:18:59 INFO diet:''
+2023-07-19 19:18:59 WARNING diet is not in 'data.diet'.
+2023-07-19 19:18:59 INFO dish:''
+2023-07-19 19:18:59 WARNING dish is not in 'data.dish_types'.
+2023-07-19 19:18:59 INFO &dishType=main course
+2023-07-19 19:19:00 INFO Trying to send text message. content: Please wait a moment while we search for a delicious recipe just for you. It won't take long!
+2023-07-19 19:19:01 INFO Successfully sent message
+2023-07-19 19:19:01 INFO https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b&mealType=Breakfast&dishType=main course&random=true
+2023-07-19 19:19:04 INFO start parse recipes from api func
+2023-07-19 19:19:04 INFO start choose recipe func
+2023-07-19 19:19:04 INFO start get liked recipes func.
+2023-07-19 19:19:05 INFO start parse recipes from DB func.
+2023-07-19 19:19:05 INFO start select item with probabilities func.
+2023-07-19 19:19:05 INFO Breakfast Quesadilla
+2023-07-19 19:19:05 INFO start download image func
+2023-07-19 19:19:07 INFO the image didn't exist in the storage, trying to download it from the web...
+2023-07-19 19:19:11 INFO Image downloaded successfully!
+2023-07-19 19:19:13 INFO Trying to send recipe message.
+2023-07-19 19:19:14 INFO Successfully sent message
+2023-07-19 19:19:14 INFO 127.0.0.1 - - [19/Jul/2023 19:19:14] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:20:20 INFO request: {'responseId': 'ed87c436-f875-4933-835d-c2507366af4e-1b0ea404', 'queryResult': {'queryText': 'i want brekfast, without diary, dessert', 'parameters': {'Meal': 'Breakfast', 'Health': 'Dairy-Free', 'Dish_Type': 'desserts', 'Diet': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'brekfast', 'Health': 'Dairy-Free', 'Health.original': 'diary', 'Diet': '', 'Diet.original': '', 'Dish_Type': 'desserts', 'Dish_Type.original': 'dessert'}}, {'name': 'projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Meal': 'Breakfast', 'Meal.original': 'brekfast', 'Health': 'Dairy-Free', 'Health.original': 'diary', 'Dish_Type': 'desserts', 'Dish_Type.original': 'dessert', 'Diet': '', 'Diet.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.7425342, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi'}
+2023-07-19 19:20:20 INFO Enter to 'recipe.request' intent
+2023-07-19 19:20:20 INFO start recipe order func
+2023-07-19 19:20:22 INFO Passed fill details check
+2023-07-19 19:20:22 INFO meal:'Breakfast'
+2023-07-19 19:20:22 INFO &mealType=Breakfast
+2023-07-19 19:20:22 INFO health:'Dairy-Free'
+2023-07-19 19:20:22 INFO &health=dairy-free
+2023-07-19 19:20:22 INFO diet:''
+2023-07-19 19:20:22 WARNING diet is not in 'data.diet'.
+2023-07-19 19:20:22 INFO dish:'desserts'
+2023-07-19 19:20:22 INFO &dishType=desserts
+2023-07-19 19:20:22 INFO Trying to send text message. content: Please wait a moment while we search for a delicious recipe just for you. It won't take long!
+2023-07-19 19:20:23 INFO Successfully sent message
+2023-07-19 19:20:23 INFO https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b&mealType=Breakfast&health=dairy-free&dishType=desserts&random=true
+2023-07-19 19:20:26 INFO start parse recipes from api func
+2023-07-19 19:20:26 INFO start choose recipe func
+2023-07-19 19:20:26 INFO start get liked recipes func.
+2023-07-19 19:20:27 INFO start parse recipes from DB func.
+2023-07-19 19:20:27 INFO start select item with probabilities func.
+2023-07-19 19:20:27 INFO Cinnamon-Sugar Crisps ("Bunuelos")
+2023-07-19 19:20:27 INFO start download image func
+2023-07-19 19:20:28 INFO the image didn't exist in the storage, trying to download it from the web...
+2023-07-19 19:20:31 INFO Image downloaded successfully!
+2023-07-19 19:20:32 INFO Trying to send recipe message.
+2023-07-19 19:20:33 INFO Successfully sent message
+2023-07-19 19:20:33 INFO 127.0.0.1 - - [19/Jul/2023 19:20:33] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:24:00 INFO request: {'responseId': 'b9bbfb96-5dc8-44f6-b45e-f34e923c48cf-1b0ea404', 'queryResult': {'queryText': '1', 'parameters': {'Health': ['Vegetarian'], 'Food_Type': ['none'], 'number': 1.0, 'date-period': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi/contexts/reciperequest-followup', 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'brekfast', 'Health': ['Vegetarian'], 'Health.original': ['vegetarian'], 'Diet': '', 'Diet.original': '', 'Dish_Type': 'desserts', 'Dish_Type.original': 'dessert', 'Food_Type': ['none'], 'Food_Type.original': ['none'], 'number': 1.0, 'number.original': '1', 'date-period': '', 'date-period.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Health': ['Vegetarian'], 'Health.original': ['vegetarian'], 'Food_Type': ['none'], 'Food_Type.original': ['none'], 'number': 1.0, 'number.original': '1', 'date-period': '', 'date-period.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/69e07da3-968a-4bfd-86ee-8740c754c958', 'displayName': 'meal.planning'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi'}
+2023-07-19 19:24:00 INFO Enter to 'meal.planning' intent
+2023-07-19 19:24:00 INFO start plan meal func
+2023-07-19 19:24:01 INFO Passed fill details check
+2023-07-19 19:24:03 INFO daily calories: 2339.65
+2023-07-19 19:24:03 INFO start to make the meal plan
+2023-07-19 19:24:03 INFO Trying to send text message. content: Generating your meal plan. This may take some time. Please wait.
+2023-07-19 19:24:04 INFO Successfully sent message
+2023-07-19 19:24:04 INFO start constraint satisfaction func
+2023-07-19 19:24:07 INFO finish day 0, find lemon blueberry and coconut sweet breakfast grits, grilled veggie pizza, baked french toast casserole,
+2023-07-19 19:24:07 INFO ****************
+2023-07-19 19:24:07 INFO This is the result of meal plan for 1 days.
+the input was: health labels = ['vegetarian'], forbidden foods = [].
+2023-07-19 19:24:08 INFO day number1:
+2023-07-19 19:24:08 INFO recipe name: lemon blueberry and coconut sweet breakfast grits
+2023-07-19 19:24:08 INFO recipe health labels:
+2023-07-19 19:24:08 INFO ['Vegetarian', 'Pescatarian', 'Gluten-Free', 'Wheat-Free', 'Egg-Free', 'Peanut-Free', 'Soy-Free', 'Fish-Free', 'Shellfish-Free', 'Pork-Free', 'Red-Meat-Free', 'Crustacean-Free', 'Celery-Free', 'Mustard-Free', 'Sesame-Free', 'Lupine-Free', 'Mollusk-Free', 'Alcohol-Free', 'Kosher']
+2023-07-19 19:24:08 INFO recipe ingredients:
+2023-07-19 19:24:08 INFO ['Coconut Milk', 'Coconut Water', 'Corn Grits', 'Sugar', 'Salt', 'Lemon Zest', 'Butter', 'Vanilla Extract', 'Fresh Blueberries', 'Almonds', 'Coconut', 'Agave']
+2023-07-19 19:24:09 INFO recipe name: grilled veggie pizza
+2023-07-19 19:24:09 INFO recipe health labels:
+2023-07-19 19:24:09 INFO ['Sugar-Conscious', 'Vegetarian', 'Pescatarian', 'Mediterranean', 'Egg-Free', 'Peanut-Free', 'Tree-Nut-Free', 'Soy-Free', 'Fish-Free', 'Shellfish-Free', 'Pork-Free', 'Red-Meat-Free', 'Crustacean-Free', 'Celery-Free', 'Mustard-Free', 'Sesame-Free', 'Lupine-Free', 'Mollusk-Free', 'Alcohol-Free', 'Sulfite-Free', 'Kosher']
+2023-07-19 19:24:09 INFO recipe ingredients:
+2023-07-19 19:24:09 INFO ['mushroom', 'red onion', 'summer squash', 'olive oil', 'salt', 'Pepper', 'whole wheat pizza dough', 'plum tomatoes', 'mozzarella', 'fresh basil']
+2023-07-19 19:24:10 INFO recipe name: baked french toast casserole
+2023-07-19 19:24:10 INFO recipe health labels:
+2023-07-19 19:24:10 INFO ['Vegetarian', 'Pescatarian', 'Peanut-Free', 'Soy-Free', 'Fish-Free', 'Shellfish-Free', 'Pork-Free', 'Red-Meat-Free', 'Crustacean-Free', 'Celery-Free', 'Mustard-Free', 'Sesame-Free', 'Lupine-Free', 'Mollusk-Free', 'Kosher']
+2023-07-19 19:24:10 INFO recipe ingredients:
+2023-07-19 19:24:10 INFO ['French bread', 'Butter', 'eggs', 'half-and-half', 'milk', 'sugar', 'vanilla extract', 'ground cinnamon', 'ground nutmeg', 'salt', 'butter', 'light brown sugar', 'pecans', 'light corn syrup', 'ground cinnamon', 'ground nutmeg', 'raspberry preserves', 'water', 'raspberry liqueur']
+2023-07-19 19:24:10 INFO calories of the day:2153.028921300871
+2023-07-19 19:24:10 INFO ************
+
+2023-07-19 19:24:10 INFO Trying to send text message. content: This is the result of meal plan for 1 days.
+the input was: health labels = ['vegetarian'], forbidden foods = [].
+2023-07-19 19:24:10 INFO Successfully sent message
+2023-07-19 19:24:10 INFO Trying to send meal plan message. current message number: 1
+2023-07-19 19:24:11 INFO Successfully sent message
+2023-07-19 19:24:11 INFO Trying to send meal plan message. current message number: 2
+2023-07-19 19:24:12 INFO Successfully sent message
+2023-07-19 19:24:12 INFO Trying to send meal plan message. current message number: 3
+2023-07-19 19:24:12 INFO Successfully sent message
+2023-07-19 19:24:12 INFO Trying to send text message. content: Please note that this meal plan is a recommendation and intended to provide you with ideas and inspiration. Feel free to customize it according to your preferences and dietary needs. You can mix and match the days, adjust the ingredients, and even substitute recipes. The goal is to make it work for you and your lifestyle. Enjoy experimenting and creating your personalized meal plan!
+2023-07-19 19:24:13 INFO Successfully sent message
+2023-07-19 19:24:13 INFO Total time: 9.934103012084961 seconds
+2023-07-19 19:24:13 INFO 127.0.0.1 - - [19/Jul/2023 19:24:13] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:26:31 INFO request: {'responseId': 'd0aef8d1-6feb-412b-9bbb-8d81c6850213-1b0ea404', 'queryResult': {'queryText': 'cucumber', 'parameters': {'quantity': 1.0, 'Unit': 'cucumber', 'food_type': 'cucumber', 'nutriens': ''}, 'allRequiredParamsPresent': True, 'fulfillmentMessages': [{'text': {'text': ['']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi/contexts/foodgetinfo-followup', 'lifespanCount': 2, 'parameters': {'quantity': 1.0, 'quantity.original': '1', 'Unit': 'cucumber', 'Unit.original': 'cucumber', 'food_type': 'cucumber', 'food_type.original': 'cucumber', 'nutriens': '', 'nutriens.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'quantity': 1.0, 'quantity.original': '1', 'Unit': 'cucumber', 'Unit.original': 'cucumber', 'nutriens': '', 'nutriens.original': '', 'food_type': 'cucumber', 'food_type.original': 'cucumber'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/e73af73f-c0cc-41e7-96ac-4ef7f70fae10', 'displayName': 'food.get.info'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi'}
+2023-07-19 19:26:31 INFO Enter to 'food.get.info' intent
+2023-07-19 19:26:33 INFO 127.0.0.1 - - [19/Jul/2023 19:26:33] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:35:06 INFO request: {'responseId': '0868d225-5b7d-4ec9-aef0-41f0642b954a-1b0ea404', 'queryResult': {'queryText': '1', 'parameters': {'age': '1990-12-12T12:00:00+02:00', 'weight': '87', 'height': '167', 'activity': '2', 'goal': '1'}, 'allRequiredParamsPresent': True, 'fulfillmentText': "Something went wrong, please try again. \nWrite 'personal details' to start over.", 'fulfillmentMessages': [{'text': {'text': ["Something went wrong, please try again. \nWrite 'personal details' to start over."]}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/VkJNOQyIj7Ui/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'age': '1990-12-12T12:00:00+02:00', 'age.original': '12/12/1990', 'weight': '87', 'weight.original': '87', 'height': '167', 'height.original': '167', 'activity': '2', 'activity.original': '2', 'goal': '1', 'goal.original': '1'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/c6ca3e62-b4fb-485d-b816-763ea5452378', 'displayName': 'personal_details'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/VkJNOQyIj7Ui'}
+2023-07-19 19:35:06 INFO Enter to 'personal_details' intent
+2023-07-19 19:35:06 INFO start personal details func
+2023-07-19 19:35:06 INFO start parse parameters func
+2023-07-19 19:35:06 INFO age = 1990-12-12T12:00:00+02:00
+2023-07-19 19:35:06 INFO weight = 87
+2023-07-19 19:35:06 INFO height = 167
+2023-07-19 19:35:06 INFO activity_level = level_2
+2023-07-19 19:35:06 INFO purpose = maintain weight
+2023-07-19 19:35:06 INFO start set calorie daily func
+2023-07-19 19:35:06 INFO start get gender func
+2023-07-19 19:35:10 INFO The daily calories: 2462.25
+2023-07-19 19:35:11 INFO the time of personal details func is 4.675347566604614
+2023-07-19 19:35:11 INFO 127.0.0.1 - - [19/Jul/2023 19:35:11] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:36:57 INFO request: {'responseId': 'c666fb07-b49e-460f-b34c-503f025667a3-1b0ea404', 'queryResult': {'queryText': '1 cucumber', 'parameters': {'food_type': 'cucumber', 'quantity': 1.0, 'nutriens': '', 'Unit': ''}, 'allRequiredParamsPresent': True, 'fulfillmentMessages': [{'text': {'text': ['']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC/contexts/foodgetinfo-followup', 'lifespanCount': 2, 'parameters': {'food_type': 'cucumber', 'food_type.original': 'cucumber', 'quantity': 1.0, 'quantity.original': '1', 'nutriens': '', 'nutriens.original': '', 'Unit': '', 'Unit.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'food_type': 'cucumber', 'food_type.original': 'cucumber', 'quantity': 1.0, 'quantity.original': '1', 'nutriens': '', 'nutriens.original': '', 'Unit': '', 'Unit.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/e73af73f-c0cc-41e7-96ac-4ef7f70fae10', 'displayName': 'food.get.info'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC'}
+2023-07-19 19:36:57 INFO Enter to 'food.get.info' intent
+2023-07-19 19:36:58 INFO 127.0.0.1 - - [19/Jul/2023 19:36:58] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:37:07 INFO request: {'responseId': 'c5e54fc4-57e6-43c4-85a3-d1a4e7bfa682-1b0ea404', 'queryResult': {'queryText': '1 tomato', 'parameters': {'food_type': 'tomato', 'quantity': 1.0, 'nutriens': '', 'Unit': ''}, 'allRequiredParamsPresent': True, 'fulfillmentMessages': [{'text': {'text': ['']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC/contexts/foodgetinfo-followup', 'lifespanCount': 2, 'parameters': {'food_type': 'tomato', 'food_type.original': 'tomato', 'quantity': 1.0, 'quantity.original': '1', 'nutriens': '', 'nutriens.original': '', 'Unit': '', 'Unit.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'food_type': 'tomato', 'food_type.original': 'tomato', 'quantity': 1.0, 'quantity.original': '1', 'nutriens': '', 'nutriens.original': '', 'Unit': '', 'Unit.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/e73af73f-c0cc-41e7-96ac-4ef7f70fae10', 'displayName': 'food.get.info'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC'}
+2023-07-19 19:37:07 INFO Enter to 'food.get.info' intent
+2023-07-19 19:37:08 INFO 127.0.0.1 - - [19/Jul/2023 19:37:08] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:37:18 INFO request: {'responseId': '11279e66-08be-4d56-b045-363996afe93d-1b0ea404', 'queryResult': {'queryText': '1 large tomato', 'parameters': {'food_type': 'tomato', 'quantity': 1.0, 'Unit': 'large', 'nutriens': ''}, 'allRequiredParamsPresent': True, 'fulfillmentMessages': [{'text': {'text': ['']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC/contexts/foodgetinfo-followup', 'lifespanCount': 2, 'parameters': {'food_type': 'tomato', 'food_type.original': 'tomato', 'quantity': 1.0, 'quantity.original': '1', 'nutriens': '', 'nutriens.original': '', 'Unit': 'large', 'Unit.original': 'large'}}, {'name': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'food_type': 'tomato', 'food_type.original': 'tomato', 'quantity': 1.0, 'quantity.original': '1', 'Unit': 'large', 'Unit.original': 'large', 'nutriens': '', 'nutriens.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/e73af73f-c0cc-41e7-96ac-4ef7f70fae10', 'displayName': 'food.get.info'}, 'intentDetectionConfidence': 0.731709, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC'}
+2023-07-19 19:37:18 INFO Enter to 'food.get.info' intent
+2023-07-19 19:37:20 INFO 127.0.0.1 - - [19/Jul/2023 19:37:20] "POST /webhook HTTP/1.1" 200 -
+2023-07-19 19:38:06 INFO request: {'responseId': '39d953bb-f674-4d45-a56e-28f3984e2de2-1b0ea404', 'queryResult': {'queryText': '2 plates of rice', 'parameters': {'food_type': 'rice', 'quantity': 2.0, 'Unit': 'plates', 'nutriens': ''}, 'allRequiredParamsPresent': True, 'fulfillmentMessages': [{'text': {'text': ['']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC/contexts/foodgetinfo-followup', 'lifespanCount': 2, 'parameters': {'food_type': 'rice', 'food_type.original': 'rice', 'quantity': 2.0, 'quantity.original': '2', 'nutriens': '', 'nutriens.original': '', 'Unit': 'plates', 'Unit.original': 'plates'}}, {'name': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC/contexts/__system_counters__', 'lifespanCount': 1, 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'food_type': 'rice', 'food_type.original': 'rice', 'quantity': 2.0, 'quantity.original': '2', 'Unit': 'plates', 'Unit.original': 'plates', 'nutriens': '', 'nutriens.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/e73af73f-c0cc-41e7-96ac-4ef7f70fae10', 'displayName': 'food.get.info'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC'}
+2023-07-19 19:38:06 INFO Enter to 'food.get.info' intent
+2023-07-19 19:38:07 INFO 127.0.0.1 - - [19/Jul/2023 19:38:07] "POST /webhook HTTP/1.1" 200 -

@@ -1,12 +1,10 @@
 import logging
 import random
 import pandas as pd
-
-
 from send import send_notification
 
 
-def sendNotifications(usersDB):
+def send_notifications(usersDB):
     # get all users tokens:
     docs = usersDB.collection("Users").stream()
     users_ref = usersDB.collection('Users')

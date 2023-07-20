@@ -1,17 +1,30 @@
 import logging
 
 
+def age_validation(age):
+    try:
+        from datetime import datetime
+        datetime.strptime(age, '%Y-%m-%dT%H:%M:%S%z')
+        return True
+    except ValueError:
+        return False
+
+
 def parse_parameters(req):
     logging.info("start parse parameters func")
-    result = req.get("queryResult")
-    session_id = req.get("session").split('/')[-1]
-    parameters = result.get("parameters")
-
+    try:
+        result = req.get("queryResult")
+        session_id = req.get("session").split('/')[-1]
+        parameters = result.get("parameters")
+    except Exception:
+        raise Exception
 
     try:
         age = parameters.get('age')
-        # todo: add validation tests to the date
-        logging.info(f"age = {age}")
+        if age_validation(age):
+            logging.info(f"age = {age}")
+        else:
+            raise Exception
     except Exception:
         logging.error("error in 'age' parameter")
     try:

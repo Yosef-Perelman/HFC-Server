@@ -1,4 +1,3 @@
-
 def fill_details_check(session_id, usersDB):
     users_ref = usersDB.collection('Users')
     query_ref = users_ref.where('sessionId', '==', session_id)
