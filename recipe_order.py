@@ -8,7 +8,7 @@ import image_loading
 import send
 import logging
 
-from firebase_connection import fill_details_check
+from firebase_connection import fill_details_check, get_doc, get_token
 
 SERVINGS = 5
 
@@ -208,15 +208,16 @@ def api_request(meal_query, health_query, diet_query, dish_query):
     return response_dict
 
 
-def recipe_order(req, usersDB):
+def recipe_order(req, usersDB, test=False):
     logging.info("start recipe order func")
     session_id = req.get("session").split('/')[-1]
 
-    if not fill_details_check(session_id, usersDB):
-        logging.info("Failed in fill details check")
-        return "You didn't filled your personal details. Please enter to the chat-bot and do it." \
-               "You can do it by writing 'personal details'."
-    logging.info("Passed fill details check")
+    if not test:
+        if not fill_details_check(session_id, usersDB):
+            logging.info("Failed in fill details check")
+            return "You didn't filled your personal details. Please enter to the chat-bot and do it." \
+                   "You can do it by writing 'personal details'."
+        logging.info("Passed fill details check")
 
     result = req.get("queryResult")
     parameters = result.get("parameters")
@@ -261,24 +262,25 @@ def recipe_order(req, usersDB):
         dish.replace(' ', '%20')
         dish_query = "&dishType=" + dish
         logging.info(dish_query)
-    else:
-        dish = "main course"
-        dish.replace(' ', '%20')
-        dish_query = "&dishType=" + dish
-        logging.info(dish_query)
     if not meal and not health and not diet and not dish:
         return "I'm sorry, but I need some specific details to find the perfect recipe for you." \
                " Please include at least one parameter such as meal type, dish type, health tag," \
                " or diet tag in your request. " \
                "If you need help formulating the recipe request, you can enter the app's guide found in the main menu"
+    # todo: test it
+    else:
+        dish = "main course"
+        dish.replace(' ', '%20')
+        dish_query = "&dishType=" + dish
+        logging.info(dish_query)
 
-    users_ref = usersDB.collection('Users')
-    query_ref = users_ref.where('sessionId', '==', session_id)
-    doc = next(query_ref.stream())
-    token = doc.to_dict().get('token')
-    text = "Please wait a moment while we search for a delicious recipe just for you. It won't take long!"
-    tokens = [token]
-    send.send_text("start_recipe_search", text, tokens)
+
+    if not test:
+        doc = get_doc(session_id, usersDB)
+        token = get_token(doc)
+        text = "Please wait a moment while we search for a delicious recipe just for you. It won't take long!"
+        tokens = token
+        send.send_text("start_recipe_search", text, tokens)
 
     try:
         response_dict = api_request(meal_query, health_query, diet_query, dish_query)
@@ -294,38 +296,46 @@ def recipe_order(req, usersDB):
         text = "I apologize, but we couldn't find a suitable recipe based on your preferences. " \
                "Please try adjusting your preferences." \
                "Need help formulating your request? Check out our app's guide in the main menu for instructions."
-        send.send_text("recipe_failed", text, tokens)
-        return None
+        if not test:
+            send.send_text("recipe_failed", text, tokens)
+            return None
+        else:
+            return text
 
     logging.info(recipe.name)
 
-    image = image_loading.download_image(recipe.picture, recipe.name)
+    if not test:
+        try:
+            image = image_loading.download_image(recipe.picture, recipe.name)
+        except Exception:
+            image = "https://storage.googleapis.com/hfc-app-b33ed.appspot.com/recipes_images/cheesiest%20macaroni%20and%20cheese.jpg"
 
-    recipe_check = usersDB.collection('Recipes').where('name', '==', recipe.name).get()
-    if len(recipe_check) == 0:
-        data = {
-            'title': recipe.name,
-            'image': image,
-            'url': recipe.full_recipe_link,
-            'calories': recipe.calories,
-            'healthLabels': recipe.healthLabels,
-            'dietLabels': recipe.dietLabels,
-            'ingredients': recipe.ingredients,
-            'fat': recipe.fat,
-            'protein': recipe.protein,
-            'carbs': recipe.carbs
-        }
-        usersDB.collection('Recipes').add(data)
+        # Upload the recipe to the cloud
+        recipe_check = usersDB.collection('Recipes').where('name', '==', recipe.name).get()
+        if len(recipe_check) == 0:
+            data = {
+                'title': recipe.name,
+                'image': image,
+                'url': recipe.full_recipe_link,
+                'calories': recipe.calories,
+                'healthLabels': recipe.healthLabels,
+                'dietLabels': recipe.dietLabels,
+                'ingredients': recipe.ingredients,
+                'fat': recipe.fat,
+                'protein': recipe.protein,
+                'carbs': recipe.carbs
+            }
+            usersDB.collection('Recipes').add(data)
 
-    users_ref = usersDB.collection('Users')
-    # get the user name by the session_id
-    query_ref = users_ref.where('sessionId', '==', session_id)
-    doc = next(query_ref.stream())
-    token = doc.to_dict().get('token')
+    # users_ref = usersDB.collection('Users')
+    # # get the user name by the session_id
+    # query_ref = users_ref.where('sessionId', '==', session_id)
+    # doc = next(query_ref.stream())
+    # token = doc.to_dict().get('token')
+    # tokens = [token]
 
-    tokens = [token]
-    card = create_card(recipe, image)
-    send.send_recipe("recipe", "Are you satisfied with this recipe?", tokens, card)
+        card = create_card(recipe, image)
+        send.send_recipe("recipe", "Are you satisfied with this recipe?", tokens, card)
 
     return None
 

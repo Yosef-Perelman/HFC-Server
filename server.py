@@ -8,7 +8,7 @@ from firebase_admin import credentials, firestore, db
 import logging
 
 from meal_planer import plan_meal
-from notifications import send_notifications
+from notifications import send_evening_notification, send_morning_notification
 from personal_details import personal_details
 from recipe_order import recipe_order
 from nutrient_info import food_get_info
@@ -80,13 +80,22 @@ def process_request(req):
 
 
 def morning_notification():
-    print('The time is: %s' % datetime.now())
+    logging.info('Sending morn note. The time is: %s' % datetime.now())
     # send notification:
-    send_notifications(usersDB)
+    send_morning_notification(usersDB)
+
+
+def evening_notification():
+    logging.info('Sending eve note. The time is: %s' % datetime.now())
+    # send notification:
+    send_evening_notification(usersDB)
 
 
 if __name__ == '__main__':
-    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 13, minute = 12)
+    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 13,
+                  minute = 18)
+    sched.add_job(id='evening_not', func=evening_notification, trigger='cron', day_of_week='mon-sun', hour=13,
+                  minute=57)
     sched.start()
     app.run(port=5000, debug=True, use_reloader = False)
 

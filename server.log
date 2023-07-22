@@ -259,3 +259,222 @@ the input was: health labels = ['vegetarian'], forbidden foods = [].
 2023-07-19 19:38:06 INFO request: {'responseId': '39d953bb-f674-4d45-a56e-28f3984e2de2-1b0ea404', 'queryResult': {'queryText': '2 plates of rice', 'parameters': {'food_type': 'rice', 'quantity': 2.0, 'Unit': 'plates', 'nutriens': ''}, 'allRequiredParamsPresent': True, 'fulfillmentMessages': [{'text': {'text': ['']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC/contexts/foodgetinfo-followup', 'lifespanCount': 2, 'parameters': {'food_type': 'rice', 'food_type.original': 'rice', 'quantity': 2.0, 'quantity.original': '2', 'nutriens': '', 'nutriens.original': '', 'Unit': 'plates', 'Unit.original': 'plates'}}, {'name': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC/contexts/__system_counters__', 'lifespanCount': 1, 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'food_type': 'rice', 'food_type.original': 'rice', 'quantity': 2.0, 'quantity.original': '2', 'Unit': 'plates', 'Unit.original': 'plates', 'nutriens': '', 'nutriens.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/e73af73f-c0cc-41e7-96ac-4ef7f70fae10', 'displayName': 'food.get.info'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/3EwHAQYtUFwC'}
 2023-07-19 19:38:06 INFO Enter to 'food.get.info' intent
 2023-07-19 19:38:07 INFO 127.0.0.1 - - [19/Jul/2023 19:38:07] "POST /webhook HTTP/1.1" 200 -
+2023-07-21 12:31:07 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-21 12:31:07 INFO Added job "morning_not" to job store "default"
+2023-07-21 12:31:07 INFO Scheduler started
+2023-07-21 12:31:07 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-07-21 12:31:07 INFO [33mPress CTRL+C to quit[0m
+2023-07-21 12:35:37 INFO request: {'responseId': 'f7d540c4-f256-4479-b6dc-ba4f612ad48f-1b0ea404', 'queryResult': {'queryText': 'free diary breakfast', 'parameters': {'Meal': 'Breakfast', 'Health': 'Dairy-Free', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': 'Dairy-Free', 'Health.original': 'free diary', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': 'Dairy-Free', 'Health.original': 'free diary', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.68948585, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW'}
+2023-07-21 12:35:37 INFO Enter to 'recipe.request' intent
+2023-07-21 12:35:37 INFO start recipe order func
+2023-07-21 12:35:39 INFO Passed fill details check
+2023-07-21 12:35:39 INFO meal:'Breakfast'
+2023-07-21 12:35:39 INFO &mealType=Breakfast
+2023-07-21 12:35:39 INFO health:'Dairy-Free'
+2023-07-21 12:35:39 INFO &health=dairy-free
+2023-07-21 12:35:39 INFO diet:''
+2023-07-21 12:35:39 WARNING diet is not in 'data.diet'.
+2023-07-21 12:35:39 INFO dish:''
+2023-07-21 12:35:39 WARNING dish is not in 'data.dish_types'.
+2023-07-21 12:35:39 INFO &dishType=main course
+2023-07-21 12:35:40 INFO Trying to send text message. content: Please wait a moment while we search for a delicious recipe just for you. It won't take long!
+2023-07-21 12:35:40 INFO 127.0.0.1 - - [21/Jul/2023 12:35:40] "[35m[1mPOST /webhook HTTP/1.1[0m" 500 -
+2023-07-21 12:39:26 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-21 12:39:26 INFO Added job "morning_not" to job store "default"
+2023-07-21 12:39:26 INFO Scheduler started
+2023-07-21 12:39:26 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-07-21 12:39:26 INFO [33mPress CTRL+C to quit[0m
+2023-07-21 12:39:41 INFO request: {'responseId': '61f6504e-dcec-4eef-9680-0347c61aaa13-1b0ea404', 'queryResult': {'queryText': 'free diary  breakfast', 'parameters': {'Meal': 'Breakfast', 'Health': 'Dairy-Free', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': 'Dairy-Free', 'Health.original': 'free diary', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': 'Dairy-Free', 'Health.original': 'free diary', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.68948585, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW'}
+2023-07-21 12:39:41 INFO Enter to 'recipe.request' intent
+2023-07-21 12:39:41 INFO start recipe order func
+2023-07-21 12:39:42 INFO Passed fill details check
+2023-07-21 12:39:42 INFO meal:'Breakfast'
+2023-07-21 12:39:42 INFO &mealType=Breakfast
+2023-07-21 12:39:42 INFO health:'Dairy-Free'
+2023-07-21 12:39:42 INFO &health=dairy-free
+2023-07-21 12:39:42 INFO diet:''
+2023-07-21 12:39:42 WARNING diet is not in 'data.diet'.
+2023-07-21 12:39:42 INFO dish:''
+2023-07-21 12:39:42 WARNING dish is not in 'data.dish_types'.
+2023-07-21 12:39:42 INFO &dishType=main course
+2023-07-21 12:39:43 INFO Trying to send text message. content: Please wait a moment while we search for a delicious recipe just for you. It won't take long!
+2023-07-21 12:39:44 INFO Successfully sent message
+2023-07-21 12:39:44 INFO https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b&mealType=Breakfast&health=dairy-free&dishType=main course&random=true
+2023-07-21 12:39:45 INFO start parse recipes from api func
+2023-07-21 12:39:45 INFO start choose recipe func
+2023-07-21 12:39:45 INFO start get liked recipes func.
+2023-07-21 12:39:46 INFO start parse recipes from DB func.
+2023-07-21 12:39:46 INFO start select item with probabilities func.
+2023-07-21 12:39:46 INFO Quinoa and Fruit Breakfast Bowls
+2023-07-21 12:39:46 INFO start download image func
+2023-07-21 12:39:47 INFO the image didn't exist in the storage, trying to download it from the web...
+2023-07-21 12:39:49 INFO Image downloaded successfully!
+2023-07-21 12:39:50 INFO Trying to send recipe message.
+2023-07-21 12:39:51 INFO Successfully sent message
+2023-07-21 12:39:51 INFO 127.0.0.1 - - [21/Jul/2023 12:39:51] "POST /webhook HTTP/1.1" 200 -
+2023-07-21 12:41:01 INFO request: {'responseId': '4ed0dc86-9078-40ba-9bc7-c59c18f016dd-1b0ea404', 'queryResult': {'queryText': 'free diary breakfast', 'parameters': {'Meal': 'Breakfast', 'Health': 'Dairy-Free', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': 'Dairy-Free', 'Health.original': 'free diary', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': 'Dairy-Free', 'Health.original': 'free diary', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.68948585, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW'}
+2023-07-21 12:41:01 INFO Enter to 'recipe.request' intent
+2023-07-21 12:41:01 INFO start recipe order func
+2023-07-21 12:41:02 INFO Passed fill details check
+2023-07-21 12:41:02 INFO meal:'Breakfast'
+2023-07-21 12:41:02 INFO &mealType=Breakfast
+2023-07-21 12:41:02 INFO health:'Dairy-Free'
+2023-07-21 12:41:02 INFO &health=dairy-free
+2023-07-21 12:41:02 INFO diet:''
+2023-07-21 12:41:02 WARNING diet is not in 'data.diet'.
+2023-07-21 12:41:02 INFO dish:''
+2023-07-21 12:41:02 WARNING dish is not in 'data.dish_types'.
+2023-07-21 12:41:02 INFO &dishType=main course
+2023-07-21 12:41:02 INFO Trying to send text message. content: Please wait a moment while we search for a delicious recipe just for you. It won't take long!
+2023-07-21 12:41:03 INFO Successfully sent message
+2023-07-21 12:41:03 INFO https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b&mealType=Breakfast&health=dairy-free&dishType=main course&random=true
+2023-07-21 12:41:04 INFO start parse recipes from api func
+2023-07-21 12:41:04 INFO start choose recipe func
+2023-07-21 12:41:04 INFO start get liked recipes func.
+2023-07-21 12:41:05 INFO start parse recipes from DB func.
+2023-07-21 12:41:05 INFO start select item with probabilities func.
+2023-07-21 12:41:05 INFO Breakfast Chilli Beans
+2023-07-21 12:41:05 INFO start download image func
+2023-07-21 12:41:05 INFO the image didn't exist in the storage, trying to download it from the web...
+2023-07-21 12:41:08 INFO Image downloaded successfully!
+2023-07-21 12:41:09 INFO Trying to send recipe message.
+2023-07-21 12:41:09 INFO Successfully sent message
+2023-07-21 12:41:09 INFO 127.0.0.1 - - [21/Jul/2023 12:41:09] "POST /webhook HTTP/1.1" 200 -
+2023-07-21 12:42:32 INFO request: {'responseId': '00525577-dd38-4be2-b723-ba35a7caee3d-1b0ea404', 'queryResult': {'queryText': '1 piece chocolate cake', 'parameters': {'food_type': 'chocolate', 'quantity': 1.0, 'nutriens': '', 'Unit': ''}, 'allRequiredParamsPresent': True, 'fulfillmentMessages': [{'text': {'text': ['']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW/contexts/foodgetinfo-followup', 'lifespanCount': 2, 'parameters': {'food_type': 'chocolate', 'food_type.original': 'chocolate', 'quantity': 1.0, 'quantity.original': '1', 'nutriens': '', 'nutriens.original': '', 'Unit': '', 'Unit.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW/contexts/reciperequest-followup', 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': 'Dairy-Free', 'Health.original': 'free diary', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': '', 'food_type': 'chocolate', 'food_type.original': 'chocolate', 'quantity': 1.0, 'quantity.original': '1', 'nutriens': '', 'nutriens.original': '', 'Unit': '', 'Unit.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'food_type': 'chocolate', 'food_type.original': 'chocolate', 'quantity': 1.0, 'quantity.original': '1', 'nutriens': '', 'nutriens.original': '', 'Unit': '', 'Unit.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/e73af73f-c0cc-41e7-96ac-4ef7f70fae10', 'displayName': 'food.get.info'}, 'intentDetectionConfidence': 0.745975, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW'}
+2023-07-21 12:42:32 INFO Enter to 'food.get.info' intent
+2023-07-21 12:42:32 INFO chocolate
+2023-07-21 12:42:32 INFO https://api.edamam.com/api/nutrition-data?app_id=5cb3740f&app_key=a9e3c561a5d66e6b507a809b9b28e07b&nutrition-type=cooking&ingr=1.0%20chocolate
+2023-07-21 12:42:33 INFO {'uri': 'http://www.edamam.com/ontologies/edamam.owl#recipe_aff0a75cc37a46e6beaf92c45eeebebf', 'calories': 48, 'totalCO2Emissions': 466.5, 'co2EmissionsClass': 'C', 'totalWeight': 10.0, 'dietLabels': ['LOW_SODIUM'], 'healthLabels': ['LOW_FAT_ABS', 'LOW_POTASSIUM', 'KIDNEY_FRIENDLY', 'KETO_FRIENDLY', 'VEGAN', 'VEGETARIAN', 'PESCATARIAN', 'PALEO', 'DAIRY_FREE', 'GLUTEN_FREE', 'WHEAT_FREE', 'EGG_FREE', 'MILK_FREE', 'PEANUT_FREE', 'TREE_NUT_FREE', 'SOY_FREE', 'FISH_FREE', 'SHELLFISH_FREE', 'PORK_FREE', 'RED_MEAT_FREE', 'CRUSTACEAN_FREE', 'CELERY_FREE', 'MUSTARD_FREE', 'SESAME_FREE', 'LUPINE_FREE', 'MOLLUSK_FREE', 'ALCOHOL_FREE', 'SULPHITE_FREE', 'KOSHER'], 'cautions': ['SULFITES'], 'totalNutrients': {'ENERC_KCAL': {'label': 'Energy', 'quantity': 48.0, 'unit': 'kcal'}, 'FAT': {'label': 'Total lipid (fat)', 'quantity': 3.0, 'unit': 'g'}, 'FASAT': {'label': 'Fatty acids, total saturated', 'quantity': 1.7800000000000002, 'unit': 'g'}, 'FAMS': {'label': 'Fatty acids, total monounsaturated', 'quantity': 0.9970000000000001, 'unit': 'g'}, 'FAPU': {'label': 'Fatty acids, total polyunsaturated', 'quantity': 0.0966, 'unit': 'g'}, 'CHOCDF': {'label': 'Carbohydrate, by difference', 'quantity': 6.390000000000001, 'unit': 'g'}, 'CHOCDF.net': {'label': 'Carbohydrates (net)', 'quantity': 5.800000000000001, 'unit': 'g'}, 'FIBTG': {'label': 'Fiber, total dietary', 'quantity': 0.5900000000000001, 'unit': 'g'}, 'SUGAR': {'label': 'Sugars, total including NLEA', 'quantity': 5.45, 'unit': 'g'}, 'SUGAR.added': {'label': 'Sugars, added', 'quantity': 5.45, 'unit': 'g'}, 'PROCNT': {'label': 'Protein', 'quantity': 0.42000000000000004, 'unit': 'g'}, 'CHOLE': {'label': 'Cholesterol', 'quantity': 0.0, 'unit': 'mg'}, 'NA': {'label': 'Sodium, Na', 'quantity': 1.1, 'unit': 'mg'}, 'CA': {'label': 'Calcium, Ca', 'quantity': 3.2, 'unit': 'mg'}, 'MG': {'label': 'Magnesium, Mg', 'quantity': 11.5, 'unit': 'mg'}, 'K': {'label': 'Potassium, K', 'quantity': 36.5, 'unit': 'mg'}, 'FE': {'label': 'Iron, Fe', 'quantity': 0.313, 'unit': 'mg'}, 'ZN': {'label': 'Zinc, Zn', 'quantity': 0.16200000000000003, 'unit': 'mg'}, 'P': {'label': 'Phosphorus, P', 'quantity': 13.200000000000001, 'unit': 'mg'}, 'VITA_RAE': {'label': 'Vitamin A, RAE', 'quantity': 0.0, 'unit': 'µg'}, 'VITC': {'label': 'Vitamin C, total ascorbic acid', 'quantity': 0.0, 'unit': 'mg'}, 'THIA': {'label': 'Thiamin', 'quantity': 0.0055000000000000005, 'unit': 'mg'}, 'RIBF': {'label': 'Riboflavin', 'quantity': 0.009, 'unit': 'mg'}, 'NIA': {'label': 'Niacin', 'quantity': 0.0427, 'unit': 'mg'}, 'VITB6A': {'label': 'Vitamin B-6', 'quantity': 0.0035000000000000005, 'unit': 'mg'}, 'FOLDFE': {'label': 'Folate, DFE', 'quantity': 1.3, 'unit': 'µg'}, 'FOLFD': {'label': 'Folate, food', 'quantity': 1.3, 'unit': 'µg'}, 'FOLAC': {'label': 'Folic acid', 'quantity': 0.0, 'unit': 'µg'}, 'VITB12': {'label': 'Vitamin B-12', 'quantity': 0.0, 'unit': 'µg'}, 'VITD': {'label': 'Vitamin D (D2 + D3)', 'quantity': 0.0, 'unit': 'µg'}, 'TOCPHA': {'label': 'Vitamin E (alpha-tocopherol)', 'quantity': 0.026000000000000002, 'unit': 'mg'}, 'VITK1': {'label': 'Vitamin K (phylloquinone)', 'quantity': 0.5599999999999999, 'unit': 'µg'}, 'WATER': {'label': 'Water', 'quantity': 0.06999999999999999, 'unit': 'g'}}, 'totalDaily': {'ENERC_KCAL': {'label': 'Energy', 'quantity': 2.4, 'unit': '%'}, 'FAT': {'label': 'Fat', 'quantity': 4.615384615384615, 'unit': '%'}, 'FASAT': {'label': 'Saturated', 'quantity': 8.900000000000002, 'unit': '%'}, 'CHOCDF': {'label': 'Carbs', 'quantity': 2.13, 'unit': '%'}, 'FIBTG': {'label': 'Fiber', 'quantity': 2.3600000000000003, 'unit': '%'}, 'PROCNT': {'label': 'Protein', 'quantity': 0.8400000000000002, 'unit': '%'}, 'CHOLE': {'label': 'Cholesterol', 'quantity': 0.0, 'unit': '%'}, 'NA': {'label': 'Sodium', 'quantity': 0.04583333333333334, 'unit': '%'}, 'CA': {'label': 'Calcium', 'quantity': 0.32, 'unit': '%'}, 'MG': {'label': 'Magnesium', 'quantity': 2.738095238095238, 'unit': '%'}, 'K': {'label': 'Potassium', 'quantity': 0.776595744680851, 'unit': '%'}, 'FE': {'label': 'Iron', 'quantity': 1.738888888888889, 'unit': '%'}, 'ZN': {'label': 'Zinc', 'quantity': 1.4727272727272729, 'unit': '%'}, 'P': {'label': 'Phosphorus', 'quantity': 1.8857142857142857, 'unit': '%'}, 'VITA_RAE': {'label': 'Vitamin A', 'quantity': 0.0, 'unit': '%'}, 'VITC': {'label': 'Vitamin C', 'quantity': 0.0, 'unit': '%'}, 'THIA': {'label': 'Thiamin (B1)', 'quantity': 0.45833333333333337, 'unit': '%'}, 'RIBF': {'label': 'Riboflavin (B2)', 'quantity': 0.6923076923076922, 'unit': '%'}, 'NIA': {'label': 'Niacin (B3)', 'quantity': 0.26687500000000003, 'unit': '%'}, 'VITB6A': {'label': 'Vitamin B6', 'quantity': 0.2692307692307693, 'unit': '%'}, 'FOLDFE': {'label': 'Folate equivalent (total)', 'quantity': 0.325, 'unit': '%'}, 'VITB12': {'label': 'Vitamin B12', 'quantity': 0.0, 'unit': '%'}, 'VITD': {'label': 'Vitamin D', 'quantity': 0.0, 'unit': '%'}, 'TOCPHA': {'label': 'Vitamin E', 'quantity': 0.17333333333333334, 'unit': '%'}, 'VITK1': {'label': 'Vitamin K', 'quantity': 0.4666666666666666, 'unit': '%'}}, 'ingredients': [{'text': '1.0 chocolate', 'parsed': [{'quantity': 1.0, 'measure': 'whole', 'foodMatch': 'chocolate', 'food': 'chocolate', 'foodId': 'food_beu5dozavhrqdpblca414a55qow3', 'weight': 10.0, 'retainedWeight': 10.0, 'nutrients': {'VITD': {'label': 'Vitamin D (D2 + D3), International Units', 'quantity': 0.0, 'unit': 'IU'}, 'ENERC_KCAL': {'label': 'Energy', 'quantity': 48.0, 'unit': 'kcal'}, 'FASAT': {'label': 'Fatty acids, total saturated', 'quantity': 1.78, 'unit': 'g'}, 'VITA_RAE': {'label': 'Vitamin A, RAE', 'quantity': 0.0, 'unit': 'µg'}, 'PROCNT': {'label': 'Protein', 'quantity': 0.42, 'unit': 'g'}, 'TOCPHA': {'label': 'Vitamin E (alpha-tocopherol)', 'quantity': 0.026000000000000002, 'unit': 'mg'}, 'CHOLE': {'label': 'Cholesterol', 'quantity': 0.0, 'unit': 'mg'}, 'CHOCDF': {'label': 'Carbohydrate, by difference', 'quantity': 6.39, 'unit': 'g'}, 'FAT': {'label': 'Total lipid (fat)', 'quantity': 3.0, 'unit': 'g'}, 'FIBTG': {'label': 'Fiber, total dietary', 'quantity': 0.59, 'unit': 'g'}, 'RIBF': {'label': 'Riboflavin', 'quantity': 0.009, 'unit': 'mg'}, 'THIA': {'label': 'Thiamin', 'quantity': 0.0055000000000000005, 'unit': 'mg'}, 'FAPU': {'label': 'Fatty acids, total polyunsaturated', 'quantity': 0.0966, 'unit': 'g'}, 'NIA': {'label': 'Niacin', 'quantity': 0.042699999999999995, 'unit': 'mg'}, 'VITC': {'label': 'Vitamin C, total ascorbic acid', 'quantity': 0.0, 'unit': 'mg'}, 'FAMS': {'label': 'Fatty acids, total monounsaturated', 'quantity': 0.997, 'unit': 'g'}, 'VITB6A': {'label': 'Vitamin B-6', 'quantity': 0.0035000000000000005, 'unit': 'mg'}, 'VITB12': {'label': 'Vitamin B-12', 'quantity': 0.0, 'unit': 'µg'}, 'SUGAR.added': {'label': 'Sugars, added', 'quantity': 5.45, 'unit': 'g'}, 'WATER': {'label': 'Water', 'quantity': 0.07, 'unit': 'g'}, 'K': {'label': 'Potassium, K', 'quantity': 36.5, 'unit': 'mg'}, 'P': {'label': 'Phosphorus, P', 'quantity': 13.2, 'unit': 'mg'}, 'NA': {'label': 'Sodium, Na', 'quantity': 1.1, 'unit': 'mg'}, 'ZN': {'label': 'Zinc, Zn', 'quantity': 0.16200000000000003, 'unit': 'mg'}, 'SUGAR': {'label': 'Sugars, total including NLEA', 'quantity': 5.45, 'unit': 'g'}, 'CA': {'label': 'Calcium, Ca', 'quantity': 3.2, 'unit': 'mg'}, 'MG': {'label': 'Magnesium, Mg', 'quantity': 11.5, 'unit': 'mg'}, 'FE': {'label': 'Iron, Fe', 'quantity': 0.31299999999999994, 'unit': 'mg'}, 'VITK1': {'label': 'Vitamin K (phylloquinone)', 'quantity': 0.56, 'unit': 'µg'}, 'FOLFD': {'label': 'Folate, food', 'quantity': 1.3, 'unit': 'µg'}, 'FOLAC': {'label': 'Folic acid', 'quantity': 0.0, 'unit': 'µg'}, 'FOLDFE': {'label': 'Folate, DFE', 'quantity': 1.3, 'unit': 'µg'}}, 'measureURI': 'http://www.edamam.com/ontologies/edamam.owl#Measure_unit', 'status': 'OK'}]}], 'totalNutrientsKCal': {'ENERC_KCAL': {'label': 'Energy', 'quantity': 48, 'unit': 'kcal'}, 'PROCNT_KCAL': {'label': 'Calories from protein', 'quantity': 1, 'unit': 'kcal'}, 'FAT_KCAL': {'label': 'Calories from fat', 'quantity': 24, 'unit': 'kcal'}, 'CHOCDF_KCAL': {'label': 'Calories from carbohydrates', 'quantity': 23, 'unit': 'kcal'}}}
+2023-07-21 12:42:33 INFO 127.0.0.1 - - [21/Jul/2023 12:42:33] "POST /webhook HTTP/1.1" 200 -
+2023-07-21 12:44:22 INFO request: {'responseId': 'f7c4a234-9a33-4be9-b27c-da85260b3410-1b0ea404', 'queryResult': {'queryText': 'breakfast orginal', 'parameters': {'Meal': 'Breakfast', 'Health': '', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': '', 'Health.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW/contexts/foodgetinfo-followup', 'lifespanCount': 1, 'parameters': {'food_type': 'chocolate', 'food_type.original': 'chocolate', 'quantity': 1.0, 'quantity.original': '1', 'nutriens': '', 'nutriens.original': '', 'Unit': '', 'Unit.original': '', 'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': '', 'Health.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': '', 'Health.original': '', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.52461296, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/KBsrMfdK63pW'}
+2023-07-21 12:44:22 INFO Enter to 'recipe.request' intent
+2023-07-21 12:44:22 INFO start recipe order func
+2023-07-21 12:44:24 INFO Passed fill details check
+2023-07-21 12:44:24 INFO meal:'Breakfast'
+2023-07-21 12:44:24 INFO &mealType=Breakfast
+2023-07-21 12:44:24 INFO health:''
+2023-07-21 12:44:24 WARNING health is not in 'data.health_tags'.
+2023-07-21 12:44:24 INFO diet:''
+2023-07-21 12:44:24 WARNING diet is not in 'data.diet'.
+2023-07-21 12:44:24 INFO dish:''
+2023-07-21 12:44:24 WARNING dish is not in 'data.dish_types'.
+2023-07-21 12:44:24 INFO &dishType=main course
+2023-07-21 12:44:24 INFO Trying to send text message. content: Please wait a moment while we search for a delicious recipe just for you. It won't take long!
+2023-07-21 12:44:25 INFO Successfully sent message
+2023-07-21 12:44:25 INFO https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b&mealType=Breakfast&dishType=main course&random=true
+2023-07-21 12:44:26 INFO start parse recipes from api func
+2023-07-21 12:44:26 INFO start choose recipe func
+2023-07-21 12:44:26 INFO start get liked recipes func.
+2023-07-21 12:44:27 INFO start parse recipes from DB func.
+2023-07-21 12:44:27 INFO start select item with probabilities func.
+2023-07-21 12:44:27 INFO Oven Roasted Breakfast Potatoes
+2023-07-21 12:44:27 INFO start download image func
+2023-07-21 12:44:28 INFO the image didn't exist in the storage, trying to download it from the web...
+2023-07-21 12:44:30 INFO Image downloaded successfully!
+2023-07-21 12:44:31 INFO Trying to send recipe message.
+2023-07-21 12:44:31 INFO Successfully sent message
+2023-07-21 12:44:31 INFO 127.0.0.1 - - [21/Jul/2023 12:44:31] "POST /webhook HTTP/1.1" 200 -
+2023-07-21 13:12:00 INFO Running job "morning_not (trigger: cron[day_of_week='mon-sun', hour='13', minute='12'], next run at: 2023-07-21 13:12:00 IDT)" (scheduled at 2023-07-21 13:12:00+03:00)
+2023-07-21 13:12:02 ERROR Job "morning_not (trigger: cron[day_of_week='mon-sun', hour='13', minute='12'], next run at: 2023-07-22 13:12:00 IDT)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\User\PycharmProjects\HFC-Server\venv\lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\Users\User\PycharmProjects\HFC-Server\server.py", line 85, in morning_notification
+    send_morning_notification(usersDB)
+  File "C:\Users\User\PycharmProjects\HFC-Server\notifications.py", line 15, in send_notifications
+    token = document_snapshot.get('token')
+  File "C:\Users\User\PycharmProjects\HFC-Server\venv\lib\site-packages\google\cloud\firestore_v1\base_document.py", line 487, in get
+    nested_data = field_path_module.get_nested_value(field_path, self._data)
+  File "C:\Users\User\PycharmProjects\HFC-Server\venv\lib\site-packages\google\cloud\firestore_v1\field_path.py", line 239, in get_nested_value
+    raise KeyError(msg)
+KeyError: "'token' is not contained in the data"
+2023-07-21 13:16:00 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-21 13:16:00 INFO Added job "morning_not" to job store "default"
+2023-07-21 13:16:00 INFO Scheduler started
+2023-07-21 13:16:00 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-07-21 13:16:00 INFO [33mPress CTRL+C to quit[0m
+2023-07-21 13:16:13 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-21 13:16:13 INFO Added job "morning_not" to job store "default"
+2023-07-21 13:16:13 INFO Scheduler started
+2023-07-21 13:16:13 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-07-21 13:16:13 INFO [33mPress CTRL+C to quit[0m
+2023-07-21 13:17:52 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-21 13:17:52 INFO Added job "morning_not" to job store "default"
+2023-07-21 13:17:52 INFO Scheduler started
+2023-07-21 13:17:52 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-07-21 13:17:52 INFO [33mPress CTRL+C to quit[0m
+2023-07-21 13:18:00 INFO Running job "morning_not (trigger: cron[day_of_week='mon-sun', hour='13', minute='18'], next run at: 2023-07-21 13:18:00 IDT)" (scheduled at 2023-07-21 13:18:00+03:00)
+2023-07-21 13:18:03 ERROR Job "morning_not (trigger: cron[day_of_week='mon-sun', hour='13', minute='18'], next run at: 2023-07-22 13:18:00 IDT)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\User\PycharmProjects\HFC-Server\venv\lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\Users\User\PycharmProjects\HFC-Server\server.py", line 85, in morning_notification
+    send_morning_notification(usersDB)
+  File "C:\Users\User\PycharmProjects\HFC-Server\notifications.py", line 15, in send_morning_notification
+    token = document_snapshot.get('token')
+  File "C:\Users\User\PycharmProjects\HFC-Server\venv\lib\site-packages\google\cloud\firestore_v1\base_document.py", line 487, in get
+    nested_data = field_path_module.get_nested_value(field_path, self._data)
+  File "C:\Users\User\PycharmProjects\HFC-Server\venv\lib\site-packages\google\cloud\firestore_v1\field_path.py", line 239, in get_nested_value
+    raise KeyError(msg)
+KeyError: "'token' is not contained in the data"
+2023-07-21 13:38:06 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-21 13:38:06 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-21 13:38:06 INFO Added job "morning_not" to job store "default"
+2023-07-21 13:38:06 INFO Added job "evening_not" to job store "default"
+2023-07-21 13:38:06 INFO Scheduler started
+2023-07-21 13:38:06 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-07-21 13:38:06 INFO [33mPress CTRL+C to quit[0m
+2023-07-21 13:38:33 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-21 13:38:33 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-21 13:38:33 INFO Added job "morning_not" to job store "default"
+2023-07-21 13:38:33 INFO Added job "evening_not" to job store "default"
+2023-07-21 13:38:33 INFO Scheduler started
+2023-07-21 13:38:33 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-07-21 13:38:33 INFO [33mPress CTRL+C to quit[0m
+2023-07-21 13:39:00 INFO Running job "evening_not (trigger: cron[day_of_week='mon-sun', hour='13', minute='39'], next run at: 2023-07-21 13:39:00 IDT)" (scheduled at 2023-07-21 13:39:00+03:00)
+2023-07-21 13:39:03 ERROR Job "evening_not (trigger: cron[day_of_week='mon-sun', hour='13', minute='39'], next run at: 2023-07-22 13:39:00 IDT)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\User\PycharmProjects\HFC-Server\venv\lib\site-packages\apscheduler\executors\base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "C:\Users\User\PycharmProjects\HFC-Server\server.py", line 91, in evening_notification
+    send_evening_notification(usersDB)
+  File "C:\Users\User\PycharmProjects\HFC-Server\notifications.py", line 38, in send_evening_notification
+    token = document_snapshot.get('token')
+  File "C:\Users\User\PycharmProjects\HFC-Server\venv\lib\site-packages\google\cloud\firestore_v1\base_document.py", line 487, in get
+    nested_data = field_path_module.get_nested_value(field_path, self._data)
+  File "C:\Users\User\PycharmProjects\HFC-Server\venv\lib\site-packages\google\cloud\firestore_v1\field_path.py", line 239, in get_nested_value
+    raise KeyError(msg)
+KeyError: "'token' is not contained in the data"
+2023-07-21 13:53:34 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-21 13:53:34 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-21 13:53:34 INFO Added job "morning_not" to job store "default"
+2023-07-21 13:53:34 INFO Added job "evening_not" to job store "default"
+2023-07-21 13:53:34 INFO Scheduler started
+2023-07-21 13:53:34 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-07-21 13:53:34 INFO [33mPress CTRL+C to quit[0m
+2023-07-21 13:54:00 INFO Running job "evening_not (trigger: cron[day_of_week='mon-sun', hour='13', minute='54'], next run at: 2023-07-21 13:54:00 IDT)" (scheduled at 2023-07-21 13:54:00+03:00)
+2023-07-21 13:54:00 INFO Sending eve note. The time is: 2023-07-21 13:54:00.016897
+2023-07-21 13:54:07 INFO the message is: Don't Forget to Update Your Nutrition Diary Today!
+2023-07-21 13:54:08 INFO Successfully sent message
+2023-07-21 13:54:08 INFO Job "evening_not (trigger: cron[day_of_week='mon-sun', hour='13', minute='54'], next run at: 2023-07-22 13:54:00 IDT)" executed successfully
+2023-07-21 13:56:11 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-21 13:56:11 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-21 13:56:11 INFO Added job "morning_not" to job store "default"
+2023-07-21 13:56:11 INFO Added job "evening_not" to job store "default"
+2023-07-21 13:56:11 INFO Scheduler started
+2023-07-21 13:56:11 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-07-21 13:56:11 INFO [33mPress CTRL+C to quit[0m
+2023-07-21 13:57:00 INFO Running job "evening_not (trigger: cron[day_of_week='mon-sun', hour='13', minute='57'], next run at: 2023-07-21 13:57:00 IDT)" (scheduled at 2023-07-21 13:57:00+03:00)
+2023-07-21 13:57:00 INFO Sending eve note. The time is: 2023-07-21 13:57:00.017143
+2023-07-21 13:57:07 INFO the message is: Don't Forget to Update Your Nutrition Diary Today!
+2023-07-21 13:57:07 INFO Successfully sent message
+2023-07-21 13:57:07 INFO Job "evening_not (trigger: cron[day_of_week='mon-sun', hour='13', minute='57'], next run at: 2023-07-22 13:57:00 IDT)" executed successfully

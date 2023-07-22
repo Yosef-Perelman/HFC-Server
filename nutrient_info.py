@@ -6,6 +6,11 @@ import logging
 fill_text = '%20'
 
 
+def short_num(num):
+    number = float(num)
+    return "{:.2f}".format(number)
+
+
 def food_get_info(req):
     result = req.get("queryResult")
     parameters = result.get("parameters")
@@ -38,9 +43,13 @@ def food_get_info(req):
     response_dict = json.loads(response.text)
     logging.info(response_dict)
 
+    calories = short_num(str(response_dict['totalNutrients']['ENERC_KCAL']['quantity']))
+    protein = short_num(str(response_dict['totalNutrients']['PROCNT']['quantity']))
+    fat = short_num(str(response_dict['totalNutrients']['FAT']['quantity']))
+    carbohydrates = short_num(str(response_dict['totalNutrients']['CHOCDF']['quantity']))
     #return response_dict['calories']
-    return "name: " + response_dict['ingredients'][0]['text'] \
-           + "\n\ncalories: " + str(response_dict['totalNutrients']['ENERC_KCAL']['quantity']) \
-           + "\nprotein: " + str(response_dict['totalNutrients']['PROCNT']['quantity']) \
-           + "\nfat: " + str(response_dict['totalNutrients']['FAT']['quantity']) \
-           + "\ncarbohydrates: " + str(response_dict['totalNutrients']['CHOCDF']['quantity'])
+    return "Name: " + response_dict['ingredients'][0]['text'] \
+           + "\n\nCalories: " + calories \
+           + "\nProtein: " + protein \
+           + "\nFat: " + fat \
+           + "\nCarbohydrates: " + carbohydrates

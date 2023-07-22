@@ -71,48 +71,71 @@
 # #         for hit in hits:
 # #             names.append(hit['recipe']['label'])
 # #         print(f"label = {tag}.\nresponse = {names}")
+
+from time import sleep
+
+import data
+from recipe_order import recipe_order
+import firebase_admin
+from firebase_admin import credentials, firestore
+
+
+cred = credentials.Certificate('hfc-app-b33ed-firebase-adminsdk-oqged-96055b305b.json')
+firebase_admin.initialize_app(cred, {'storageBucket': 'hfc-app-b33ed.appspot.com'})
+usersDB = firestore.client()
+
+
+# def test_successful_recipe_order():
 #
-#
-# def test():
-#
-#     usersDB = send.usersDB
-#     session_id = "29bea3b2-6703-6e65-e977-375cddd6b9ff"
-#     meal_query, health_query, diet_query, dish_query = create_params("breakfast", "vegetarian", None, None)
-#     response = ro.api_request(meal_query, health_query, diet_query, dish_query)
-#
-#     recipes = ro.parse_recipes_from_api(response['hits'])
-#     recipe = ro.choose_recipe(recipes, "29bea3b2-6703-6e65-e977-375cddd6b9ff", usersDB)
-#
-#     print(recipe.name)
-#
-#     image = image_loading.download_image(recipe.picture, recipe.name)
-#
-#     recipe_check = usersDB.collection('Recipes').where('name', '==', recipe.name).get()
-#     if len(recipe_check) == 0:
-#         dta = {
-#             'title': recipe.name,
-#             'image': recipe.picture,
-#             'url': recipe.full_recipe_link,
-#             'calories': recipe.calories,
-#             'healthLabels': recipe.healthLabels,
-#             'dietLabels': recipe.dietLabels,
-#             'ingredients': recipe.ingredients,
-#             'fat': recipe.fat,
-#             'protein': recipe.protein,
-#             'carbs': recipe.carbs
+#     # Important note: the API allow only 10 requests in a minute
+#     counter = 0
+#     for label in data.health_tags:
+#         if (counter % 9 == 0) & (counter != 0):
+#             sleep(60)
+#         health = label
+#         req = {
+#             "queryResult": {
+#                 'parameters': {'Meal': 'Breakfast', 'Health': health, 'Dish_Type': 'desserts', 'Diet': ''}
+#             },
+#             "session": "projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi"
 #         }
-#         usersDB.collection('Recipes').add(dta)
-#
-#     users_ref = usersDB.collection('Users')
-#     # get the user name by the session_id
-#     query_ref = users_ref.where('sessionId', '==', session_id)
-#     doc = next(query_ref.stream())
-#     token = doc.to_dict().get('token')
-#
-#     tokens = [token]
-#     card = ro.create_card(recipe, image)
-#     send.send_recipe("recipe", "Are you satisfied with this recipe?", tokens, card)
-#
-#
-# if __name__ == '__main__':
-#     test()
+#         assert recipe_order(req, usersDB, True) is None
+
+
+def test_missing_parameters():
+    req = {
+        "queryResult": {
+            'parameters': {'Meal': '', 'Health': '', 'Dish_Type': '', 'Diet': ''}
+        },
+        "session": "projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi"
+    }
+    error_msg = "I'm sorry, but I need some specific details to find the perfect recipe for you." \
+               " Please include at least one parameter such as meal type, dish type, health tag," \
+               " or diet tag in your request. " \
+               "If you need help formulating the recipe request, you can enter the app's guide found in the main menu"
+    assert recipe_order(req, usersDB, True) == error_msg
+
+
+def test_api_request_failure():
+    req = {
+        "queryResult": {
+            'parameters': {'Meal': 'Breakfast', 'Health': '404', 'Dish_Type': '', 'Diet': ''}
+        },
+        "session": "projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi"
+    }
+    assert recipe_order(req, usersDB, True) is None
+
+
+def test_successful_recipe_order_default_dish():
+    req = {
+        "queryResult": {
+            'parameters': {'Meal': 'Breakfast', 'Health': '', 'Dish_Type': '', 'Diet': ''}
+        },
+        "session": "projects/hfc-app-378515/agent/sessions/lUPyFyfNHdyi"
+    }
+    assert recipe_order(req, usersDB, True) is None
+
+
+# def test_missing_personal_details():
+#     # Write a test case with a request where fill_details_check returns False.
+#     # Ensure the expected error message is returned.
