@@ -110,7 +110,7 @@ def sc(user_profile, recipe, current_assign):
     return deviation + variation
 
 
-def results(user, number_of_days, test, doc, final_solution, usersDB):
+def results(user, number_of_days, test, doc, final_solution, usersDB, calories_limit_flag=False):
     cards = []
     text = f"This is the result of meal plan for {number_of_days} days.\nthe input was: " \
            f"health labels = {user.health}, forbidden foods = {user.forbidden_ingredients}."
@@ -156,10 +156,31 @@ def results(user, number_of_days, test, doc, final_solution, usersDB):
         if not test:
             tokens = get_token(doc)
             # todo: add checking for how many days their results and if it fit the request
-            send.send_text("Meal_plan_details_1", text, tokens)
+            # send.send_text("Meal_plan_details_1", text, tokens)
             length = len(cards)
             for i in range(length):
                 send.send_meal_plan("meal_plan", str(length), str(i + 1), tokens, cards[i])
+            if (length / 3) < number_of_days:
+                explantion_message = f"We've planned tasty dishes for {(length / 3)} days," \
+                                   f" but unfortunately, we couldn't find meals for all {number_of_days} days." \
+                                   " Feel free to adjust preferences for a complete meal schedule."
+                if calories_limit_flag:
+                    explantion_message = explantion_message + "\nAlso,  we noticed that your recommended daily calorie" \
+                                                              " intake is higher than 2650 calories. For now, we've set" \
+                                                              " the plan to 2650 calories a day.\nIf you feel you need" \
+                                                              " more calories, you can add extra portions from the meals" \
+                                                              " in the plan or incorporate other food resources to meet" \
+                                                              " your desired intake."
+                send.send_text("Meal_plan_details_1", explantion_message, tokens)
+            else:
+                if calories_limit_flag:
+                    explantion_message = "We noticed that your recommended daily calorie" \
+                                                              " intake is higher than 2650 calories. For now, we've set" \
+                                                              " the plan to 2650 calories a day.\nIf you feel you need" \
+                                                              " more calories, you can add extra portions from the meals" \
+                                                              " in the plan or incorporate other food resources to meet" \
+                                                              " your desired intake."
+                    send.send_text("Meal_plan_details_1", explantion_message, tokens)
             text = "Please note that this meal plan is a recommendation and intended to provide you with ideas and" \
                    " inspiration. Feel free to customize it according to your preferences and dietary needs." \
                    " You can mix and match the days, adjust the ingredients, and even substitute recipes." \
@@ -177,7 +198,7 @@ def results(user, number_of_days, test, doc, final_solution, usersDB):
                            tokens)
 
 
-def constraint_satisfaction(user, number_of_days, usersDB=None, doc=None, test=False):
+def constraint_satisfaction(user, number_of_days, usersDB=None, doc=None, test=False, calories_limit_flag=False):
     logging.info("start constraint satisfaction func")
 
     final_solution = []
@@ -313,7 +334,7 @@ def constraint_satisfaction(user, number_of_days, usersDB=None, doc=None, test=F
                             break
 
     if not test:
-        results(user, number_of_days, test, doc, final_solution, usersDB)
+        results(user, number_of_days, test, doc, final_solution, usersDB, calories_limit_flag)
     else:
         return final_solution
 
@@ -354,7 +375,12 @@ def plan_meal(req, usersDB):
 
     dislike_recipes = get_false_rated_recipes(doc.id, usersDB)
 
+    calories_limit_flag = False
     daily_calories = get_daily_calories(usersDB, doc)
+    if daily_calories > 2650:
+        daily_calories = 2650
+        calories_limit_flag = True
+
     logging.info(f"daily calories: {daily_calories}")
 
     result = req.get("queryResult")
@@ -372,7 +398,7 @@ def plan_meal(req, usersDB):
     text = "Generating your meal plan. This may take some time. Please wait."
     send.send_text("start_meal_plan", text, tokens)
 
-    constraint_satisfaction(user, number_of_days, usersDB, doc)
+    constraint_satisfaction(user, number_of_days, usersDB, doc, calories_limit_flag)
 
     end_time = time.time()
     logging.info(f"Total time: {end_time - start_time} seconds")
