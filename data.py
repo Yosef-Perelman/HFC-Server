@@ -1,4 +1,4 @@
-health_tags = ["Dairy-Free","FODMAP-Free","Gluten-Free","Kosher","Low Sugar","Paleo","Peanut-Free",
+health_tags = ["Dairy-Free","FODMAP-Free","Gluten-Free","Kosher","Paleo","Peanut-Free",
                "Vegetarian","Alcohol-Free","Egg-Free","Fish-Free","Immuno-Supportive","Keto-Friendly","Kidney-Friendly",
                "Low Potassium","Mediterranean","Mustard-Free","No oil added","Pescatarian","Red-Meat-Free",
                "Sesame-Free","Soy-Free","Sugar-Conscious","Sulfite-Free","Tree-Nut-Free","Wheat-Free","Vegan"]

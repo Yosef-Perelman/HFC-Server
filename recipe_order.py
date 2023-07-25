@@ -258,6 +258,7 @@ def recipe_order(req, usersDB, test=False):
     if dish not in dta.dish_types:
         logging.warning("dish is not in 'data.dish_types'.")
         dish = None
+    dish_query = ""
     if dish:
         dish.replace(' ', '%20')
         dish_query = "&dishType=" + dish
@@ -266,13 +267,14 @@ def recipe_order(req, usersDB, test=False):
         return "I'm sorry, but I need some specific details to find the perfect recipe for you." \
                " Please include at least one parameter such as meal type, dish type, health tag," \
                " or diet tag in your request. " \
-               "If you need help formulating the recipe request, you can enter the app's guide found in the main menu"
+               "If you need help formulating the recipe request, you can enter the app's guide. found in the main menu."
     # todo: test it
     else:
-        dish = "main course"
-        dish.replace(' ', '%20')
-        dish_query = "&dishType=" + dish
-        logging.info(dish_query)
+        if not dish:
+            dish = "main course"
+            dish.replace(' ', '%20')
+            dish_query = "&dishType=" + dish
+            logging.info(dish_query)
 
 
     if not test:
