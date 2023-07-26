@@ -50,3 +50,7 @@ def send_evening_notification(usersDB):
     mes = "Don't Forget to Update Your Nutrition Diary Today!"
     logging.info(f"the message is: {mes}")
     send_eve_not(mes, tokens)
+
+
+# if __name__ == '__main__':
+#     send_morning_notification(usersDB)
