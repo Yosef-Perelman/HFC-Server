@@ -35,6 +35,7 @@ def send_eve_not(title, token):
     message = messaging.MulticastMessage(
         notification=messaging.Notification(
             title=title,
+            body="Tap here to enter to the diary!"
         ),
         tokens=token
     )

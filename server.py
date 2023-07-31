@@ -1,8 +1,7 @@
 # *** imports ***
-import time
 
 from flask import Flask, request
-# from flask_apscheduler import APScheduler
+from flask_apscheduler import APScheduler
 import firebase_admin
 from firebase_admin import credentials, firestore, db
 import logging
@@ -16,16 +15,16 @@ from get_response_id import double_check
 
 from datetime import datetime
 
-# import time
-# import os
-# from apscheduler.schedulers.background import BackgroundScheduler
+import time
+import os
+from apscheduler.schedulers.background import BackgroundScheduler
 
 
 # *** setup ***
 
 # flask
 app = Flask(__name__)
-# sched = APScheduler()
+sched = APScheduler()
 
 # date
 date = datetime.now().strftime("%m%d%Y")
@@ -88,23 +87,23 @@ def process_request(req):
         return "server answer: test"
 
 
-# def morning_notification():
-#     logging.info('Sending morn note. The time is: %s' % datetime.now())
-#     # send notification:
-#     send_morning_notification(usersDB)
-#
-#
-# def evening_notification():
-#     logging.info('Sending eve note. The time is: %s' % datetime.now())
-#     # send notification:
-#     send_evening_notification(usersDB)
+def morning_notification():
+    logging.info('Sending morn note. The time is: %s' % datetime.now())
+    # send notification:
+    send_morning_notification(usersDB)
+
+
+def evening_notification():
+    logging.info('Sending eve note. The time is: %s' % datetime.now())
+    # send notification:
+    send_evening_notification(usersDB)
 
 
 if __name__ == '__main__':
-    # sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 13,
-    #               minute = 18)
-    # sched.add_job(id='evening_not', func=evening_notification, trigger='cron', day_of_week='mon-sun', hour=13,
-    #               minute=57)
-    # sched.start()
+    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 13,
+                  minute = 18)
+    sched.add_job(id='evening_not', func=evening_notification, trigger='cron', day_of_week='mon-sun', hour=0,
+                  minute=15)
+    sched.start()
     app.run(port=5000, debug=True, use_reloader = False)
 
