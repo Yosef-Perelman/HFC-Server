@@ -60,7 +60,9 @@ def process_request(req):
 
     if intent == 'recipe.request':
         logging.info("Enter to 'recipe.request' intent")
-        return recipe_order(req, usersDB)
+     #   time.sleep(30)
+        return "recipe request"
+        #return recipe_order(req, usersDB)
 
     if intent == 'food.get.info':
         logging.info("Enter to 'food.get.info' intent")
@@ -92,10 +94,11 @@ def evening_notification():
 
 
 if __name__ == '__main__':
-    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 13,
-                  minute = 18)
-    sched.add_job(id='evening_not', func=evening_notification, trigger='cron', day_of_week='mon-sun', hour=13,
-                  minute=57)
+    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 10,
+                  minute = 00)
+    sched.add_job(id='evening_not', func=evening_notification, trigger='cron', day_of_week='mon-sun', hour=20,
+                  minute=00)
     sched.start()
-    app.run(port=5000, debug=True, use_reloader = False)
+    #app.run(port=5000, debug=False, use_reloader = False)
+    app.run(port=5000,debug=False, use_debugger=False, use_reloader=False)
 

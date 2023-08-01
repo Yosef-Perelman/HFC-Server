@@ -1,8 +1,9 @@
-2023-07-26 17:33:10 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2023-07-26 17:33:10 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2023-07-26 17:33:10 INFO Added job "morning_not" to job store "default"
-2023-07-26 17:33:10 INFO Added job "evening_not" to job store "default"
-2023-07-26 17:33:10 INFO Scheduler started
-2023-07-26 17:33:11 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:5000
-2023-07-26 17:33:11 INFO [33mPress CTRL+C to quit[0m
+2023-07-30 15:53:58 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-30 15:53:58 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-07-30 15:53:58 INFO Added job "morning_not" to job store "default"
+2023-07-30 15:53:58 INFO Added job "evening_not" to job store "default"
+2023-07-30 15:53:58 INFO Scheduler started
+2023-07-30 15:53:58 INFO  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2023-07-30 15:54:40 INFO request: {'responseId': 'db2678cf-cf62-4ea6-ab65-d0ef4bbab288-10b25682', 'queryResult': {'queryText': 'I want vegan recipe for lunc\u05d9', 'parameters': {'Meal': 'Lunch', 'Health': 'Vegan', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/795eb772-79dd-f684-1a5d-c1fc2387925e/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Meal': 'Lunch', 'Meal.original': 'lunc\u05d9', 'Health': 'Vegan', 'Health.original': 'vegan', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/795eb772-79dd-f684-1a5d-c1fc2387925e/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Meal': 'Lunch', 'Meal.original': 'lunc\u05d9', 'Health': 'Vegan', 'Health.original': 'vegan', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 0.8161997, 'languageCode': 'en', 'sentimentAnalysisResult': {'queryTextSentiment': {'score': -0.1, 'magnitude': 0.1}}}, 'originalDetectIntentRequest': {'source': 'DIALOGFLOW_CONSOLE', 'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/795eb772-79dd-f684-1a5d-c1fc2387925e'}
+2023-07-30 15:54:40 INFO Enter to 'recipe.request' intent
+2023-07-30 15:54:40 INFO 127.0.0.1 - - [30/Jul/2023 15:54:40] "POST /webhook HTTP/1.1" 200 -

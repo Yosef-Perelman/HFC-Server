@@ -198,7 +198,7 @@ def results(user, number_of_days, test, doc, final_solution, usersDB, calories_l
                            tokens)
 
 
-def constraint_satisfaction(user, number_of_days, usersDB=None, doc=None, test=False, calories_limit_flag=False):
+def constraint_satisfaction(user, number_of_days, usersDB=None, doc=None, calories_limit_flag=False, test=False):
     logging.info("start constraint satisfaction func")
 
     final_solution = []
