@@ -339,6 +339,6 @@ def recipe_order(req, usersDB, test=False):
         card = create_card(recipe, image)
         send.send_recipe("recipe", "Are you satisfied with this recipe?", tokens, card)
 
-    return None
+    return "finish"
 
 
