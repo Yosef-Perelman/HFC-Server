@@ -100,8 +100,8 @@ def evening_notification():
 
 
 if __name__ == '__main__':
-    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 13,
-                  minute = 18)
+    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 16,
+                  minute = 48)
     sched.add_job(id='evening_not', func=evening_notification, trigger='cron', day_of_week='mon-sun', hour=0,
                   minute=15)
     sched.start()

@@ -16,19 +16,27 @@ def send_morning_notification(usersDB):
     docs = usersDB.collection("Users").stream()
     users_ref = usersDB.collection('Users')
     tokens = []
-    for user in docs:
-        doc_ref = users_ref.document(user.id)
-        document_snapshot = doc_ref.get()
-        token = document_snapshot.get('token')
-        tokens.append(token)
-    tokens = list(dict.fromkeys(tokens))
 
     # rand a sentence:
     num = random.randint(1, 50)
     daily_sentences_origin = pd.read_csv('DB/daily_sentences/tipsforhealthylife.csv')
+    mes = daily_sentences_origin.iloc[num]["text"]
+
+    for user in docs:
+        doc_ref = users_ref.document(user.id)
+        #collect token:
+        document_snapshot = doc_ref.get()
+        token = document_snapshot.get('token')
+        tokens.append(token)
+        #update fields:
+        conv =  document_snapshot.get('conversation')
+        tip = "DAILY TIP - " + daily_sentences_origin.iloc[num]["head"] +": "\
+              +"\n\n"+mes
+        conv.append({'isUser':False,'text': tip })
+        doc_ref.update({"have_notification":True,"conversation":conv})
+    tokens = list(dict.fromkeys(tokens))
 
     # send notification:
-    mes = daily_sentences_origin.iloc[num]["text"]  # save text for after!
     logging.info(f"the message is: {mes}")
     send_morn_not("DAILY TIP - " + daily_sentences_origin.iloc[num]["head"],
                       "Good morning! Find the full tip in the app's chat. Open now for a positive start to your day!",
