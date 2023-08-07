@@ -216,7 +216,7 @@ def recipe_order(req, usersDB, test=False):
         if not fill_details_check(session_id, usersDB):
             logging.info("Failed in fill details check")
             return "You didn't filled your personal details. Please enter to the chat-bot and do it." \
-                   "You can do it by writing 'personal details'."
+                   " You can do it by writing 'personal details'."
         logging.info("Passed fill details check")
 
     result = req.get("queryResult")

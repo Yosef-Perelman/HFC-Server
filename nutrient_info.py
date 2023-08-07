@@ -43,13 +43,18 @@ def food_get_info(req):
     response_dict = json.loads(response.text)
     logging.info(response_dict)
 
-    calories = short_num(str(response_dict['totalNutrients']['ENERC_KCAL']['quantity']))
-    protein = short_num(str(response_dict['totalNutrients']['PROCNT']['quantity']))
-    fat = short_num(str(response_dict['totalNutrients']['FAT']['quantity']))
-    carbohydrates = short_num(str(response_dict['totalNutrients']['CHOCDF']['quantity']))
-    #return response_dict['calories']
-    return "Name: " + response_dict['ingredients'][0]['text'] \
-           + "\n\nCalories: " + calories \
-           + "\nProtein: " + protein \
-           + "\nFat: " + fat \
-           + "\nCarbohydrates: " + carbohydrates
+    try:
+        calories = short_num(str(response_dict['totalNutrients']['ENERC_KCAL']['quantity']))
+        protein = short_num(str(response_dict['totalNutrients']['PROCNT']['quantity']))
+        fat = short_num(str(response_dict['totalNutrients']['FAT']['quantity']))
+        carbohydrates = short_num(str(response_dict['totalNutrients']['CHOCDF']['quantity']))
+        #return response_dict['calories']
+        return "Name: " + response_dict['ingredients'][0]['text'] \
+               + "\n\nCalories: " + calories \
+               + "\nProtein: " + protein \
+               + "\nFat: " + fat \
+               + "\nCarbohydrates: " + carbohydrates
+    except:
+        return "We cannot calculate the nutrition for the ingredient. Please check the ingredient spelling." \
+               "Please make sure that you entered names of ingredients and not names of dishes." \
+               "If you still have a problem, enter to the app's guide for more information about this feature."

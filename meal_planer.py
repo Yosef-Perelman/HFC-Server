@@ -86,8 +86,9 @@ def hc(user_profile, meal, recipe, already_chosen=None):
     if user_profile.forbidden_ingredients:
         recipe_ingredients = [string.lower() for string in recipe.ingredients]
         for food in user_profile.forbidden_ingredients:
-            if food in recipe_ingredients:
-                return False
+            for item in recipe_ingredients:
+                if food in item:
+                    return False
 
     return True
 

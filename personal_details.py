@@ -3,6 +3,7 @@ import time
 
 import requests
 import logging
+import send
 
 import parse_parameters
 from datetime import datetime
@@ -108,19 +109,7 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
                " Make sure all the details you entered are in the correct format." \
                " Write 'personal details' to start over."
     #return "Very good! Your details updated, and your recommended daily calories consumption has set."
-    return "Thank you on filling out your personal details! Now, let's get started and explore what you can do:\n\n" \
-           "- Search Recipe: Find a variety of recipes tailored to your preferences and dietary needs.\n\n" \
-           "- Ask for a Meal Plan: Get personalized meal plans based on your dietary requirements, preferences, and goals.\n\n" \
-           "- Get Nutritional Information: Access nutritional information for various foods.\n\n" \
-           "- Otherway, you can return to the home page and starting manage your Nutritional Diary." \
-           " Your recommended daily calories consumption already there!\n\n" \
-           "If you need help, you are welcome to visit the app's guide found in the main menu.\n\n" \
-           "Start enjoying these features and have a great time using our app!"
-
-    # Send the message directly to app
-    # doc = get_doc(session_id, usersDB)
-    # tokens = get_token(doc)
-    # text = "Thank you on filling out your personal details! Now, let's get started and explore what you can do:\n\n" \
+    # return "Thank you on filling out your personal details! Now, let's get started and explore what you can do:\n\n" \
     #        "- Search Recipe: Find a variety of recipes tailored to your preferences and dietary needs.\n\n" \
     #        "- Ask for a Meal Plan: Get personalized meal plans based on your dietary requirements, preferences, and goals.\n\n" \
     #        "- Get Nutritional Information: Access nutritional information for various foods.\n\n" \
@@ -128,7 +117,20 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
     #        " Your recommended daily calories consumption already there!\n\n" \
     #        "If you need help, you are welcome to visit the app's guide found in the main menu.\n\n" \
     #        "Start enjoying these features and have a great time using our app!"
-    # send.send_text("personal_details", text, tokens)
+
+    #Send the message directly to app
+    doc = get_doc(session_id, usersDB)
+    tokens = get_token(doc)
+    text = "Thank you on filling out your personal details! Now, let's get started and explore what you can do:\n\n" \
+           "- Search Recipe: Find a variety of recipes tailored to your preferences and dietary needs.\n\n" \
+           "- Ask for a Meal Plan: Get personalized meal plans based on your dietary requirements, preferences, and goals.\n\n" \
+           "- Get Nutritional Information: Access nutritional information for various foods.\n\n" \
+           "- Otherway, you can return to the home page and starting manage your Nutritional Diary." \
+           " Your recommended daily calories consumption already there!\n\n" \
+           "If you need help, you are welcome to visit the app's guide found in the main menu.\n\n" \
+           "Start enjoying these features and have a great time using our app!"
+    send.send_text("text", text, tokens)
+    return "ignore"
 
 
 def personal_details(req, usersDB):
