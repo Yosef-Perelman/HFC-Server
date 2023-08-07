@@ -18,8 +18,9 @@ def calculate_age(birth_date):
 
         # Adjust age if the birth month and day have not yet occurred this year
         if (current_date.month, current_date.day) < (birth_date.month, birth_date.day):
-            age -= 1
+            age = 25
 
+        logging.info(f"actual age = {age}")
         return age
     except:
         logging.error("Error in calculate age.")
@@ -57,12 +58,16 @@ def update_in_DB(session_id, age, height, weight, activity_level, daily_calories
 
 def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_str, usersDB=None, test=False):
     logging.info("start set calorie daily func")
+    doc = get_doc(session_id, usersDB)
+    tokens = get_token(doc)
 
     if not test:
         gender = str(get_gender(session_id, usersDB))
         if gender == "error":
             logging.info("Error in get gender func so return error and get out from set calorie func.")
-            return "An error occurred."
+            text = "An error occurred, Please try again. Write 'personal details' to start over."
+            send.send_text("text", text, tokens)
+            return "ignore"
     else:
         gender = "male"
 
@@ -71,7 +76,10 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
     if not test:
         actual_age = calculate_age(age)
         if actual_age == "error":
-            return "An error occurred, Please try again. Write 'personal details' to start over."
+            text = "An error occurred, Please try again. Write 'personal details' to start over."
+            send.send_text("text", text, tokens)
+            return "ignore"
+
     else:
         actual_age = age
 
@@ -89,9 +97,11 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
                      f"the error is {e}"
                      f"The parameters of the request - age: {age}, gender: {gender}, weight: {weight}, height: {height},"
                      f"activity_level: {activity_level}.")
-        return "Something is wrong with the api connection, Please try again." \
+        text = "Something is wrong with the api connection, Please try again." \
                "Make sure all the details you entered are in the correct format.\n\n" \
                " Write 'personal details' to start over."
+        send.send_text("text", text, tokens)
+        return "ignore"
 
     response_dict = json.loads(response.text)
     try:
@@ -103,24 +113,17 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
         if not test:
             update_response = update_in_DB(session_id, age, height, weight, activity_level, daily_calories, purpose_str, usersDB)
             if update_response == 'error':
-                return "Can't update the database, please try again."
+                text = "Can't update the database, please try again."
+                send.send_text("text", text, tokens)
+                return "ignore"
     except Exception as e:
-        return "Something is wrong with the api connection, Please try again." \
+        text = "Something is wrong with the api connection, Please try again." \
                " Make sure all the details you entered are in the correct format." \
                " Write 'personal details' to start over."
-    #return "Very good! Your details updated, and your recommended daily calories consumption has set."
-    # return "Thank you on filling out your personal details! Now, let's get started and explore what you can do:\n\n" \
-    #        "- Search Recipe: Find a variety of recipes tailored to your preferences and dietary needs.\n\n" \
-    #        "- Ask for a Meal Plan: Get personalized meal plans based on your dietary requirements, preferences, and goals.\n\n" \
-    #        "- Get Nutritional Information: Access nutritional information for various foods.\n\n" \
-    #        "- Otherway, you can return to the home page and starting manage your Nutritional Diary." \
-    #        " Your recommended daily calories consumption already there!\n\n" \
-    #        "If you need help, you are welcome to visit the app's guide found in the main menu.\n\n" \
-    #        "Start enjoying these features and have a great time using our app!"
+        send.send_text("text", text, tokens)
+        return "ignore"
 
     #Send the message directly to app
-    doc = get_doc(session_id, usersDB)
-    tokens = get_token(doc)
     text = "Thank you on filling out your personal details! Now, let's get started and explore what you can do:\n\n" \
            "- Search Recipe: Find a variety of recipes tailored to your preferences and dietary needs.\n\n" \
            "- Ask for a Meal Plan: Get personalized meal plans based on your dietary requirements, preferences, and goals.\n\n" \
@@ -139,9 +142,11 @@ def personal_details(req, usersDB):
     try:
         session_id, age, height, weight, activity_level, purpose_str = parse_parameters.parse_parameters(req)
     except:
-        return "Something is wrong with the input parameters, please try again.\n" \
+        text =  "Something is wrong with the input parameters, please try again.\n" \
                " Make sure all the details you entered are in the correct format." \
                " Write 'personal details' to start over."
+        send.send_text("text", text, tokens)
+        return "ignore"
     response = set_calorie_daily(session_id, age, height, weight, activity_level, purpose_str, usersDB)
     end = time.time()
     logging.info(f"the time of personal details func is {str(end - start)}")
