@@ -267,7 +267,7 @@ def recipe_order(req, usersDB, test=False):
         return "I'm sorry, but I need some specific details to find the perfect recipe for you." \
                " Please include at least one parameter such as meal type, dish type, health tag," \
                " or diet tag in your request. " \
-               "If you need help formulating the recipe request, you can enter the app's guide. found in the main menu."
+               "If you need help formulating the recipe request, you can enter the app's guide, found in the main menu."
     # todo: test it
     else:
         if not dish:
@@ -297,7 +297,7 @@ def recipe_order(req, usersDB, test=False):
     if recipe is None:
         text = "I apologize, but we couldn't find a suitable recipe based on your preferences. " \
                "Please try adjusting your preferences." \
-               "Need help formulating your request? Check out our app's guide in the main menu for instructions."
+               " Need help formulating your request? Check out our app's guide in the main menu for instructions."
         if not test:
             send.send_text("recipe_failed", text, tokens)
             return None

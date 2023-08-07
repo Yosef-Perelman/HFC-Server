@@ -48,7 +48,6 @@ def food_get_info(req):
         protein = short_num(str(response_dict['totalNutrients']['PROCNT']['quantity']))
         fat = short_num(str(response_dict['totalNutrients']['FAT']['quantity']))
         carbohydrates = short_num(str(response_dict['totalNutrients']['CHOCDF']['quantity']))
-        #return response_dict['calories']
         return "Name: " + response_dict['ingredients'][0]['text'] \
                + "\n\nCalories: " + calories \
                + "\nProtein: " + protein \

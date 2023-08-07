@@ -17,7 +17,7 @@ def calculate_age(birth_date):
         age = current_date.year - birth_date.year
 
         # Adjust age if the birth month and day have not yet occurred this year
-        if (current_date.month, current_date.day) < (birth_date.month, birth_date.day):
+        if age < 0:
             age = 25
 
         logging.info(f"actual age = {age}")
@@ -58,10 +58,12 @@ def update_in_DB(session_id, age, height, weight, activity_level, daily_calories
 
 def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_str, usersDB=None, test=False):
     logging.info("start set calorie daily func")
-    doc = get_doc(session_id, usersDB)
-    tokens = get_token(doc)
+
+    # if not test:
 
     if not test:
+        doc = get_doc(session_id, usersDB)
+        tokens = get_token(doc)
         gender = str(get_gender(session_id, usersDB))
         if gender == "error":
             logging.info("Error in get gender func so return error and get out from set calorie func.")
@@ -100,7 +102,8 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
         text = "Something is wrong with the api connection, Please try again." \
                "Make sure all the details you entered are in the correct format.\n\n" \
                " Write 'personal details' to start over."
-        send.send_text("text", text, tokens)
+        if not test:
+            send.send_text("text", text, tokens)
         return "ignore"
 
     response_dict = json.loads(response.text)
@@ -114,13 +117,15 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
             update_response = update_in_DB(session_id, age, height, weight, activity_level, daily_calories, purpose_str, usersDB)
             if update_response == 'error':
                 text = "Can't update the database, please try again."
-                send.send_text("text", text, tokens)
+                if not test:
+                    send.send_text("text", text, tokens)
                 return "ignore"
     except Exception as e:
         text = "Something is wrong with the api connection, Please try again." \
                " Make sure all the details you entered are in the correct format." \
                " Write 'personal details' to start over."
-        send.send_text("text", text, tokens)
+        if not test:
+            send.send_text("text", text, tokens)
         return "ignore"
 
     #Send the message directly to app
@@ -132,13 +137,17 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
            " Your recommended daily calories consumption already there!\n\n" \
            "If you need help, you are welcome to visit the app's guide found in the main menu.\n\n" \
            "Start enjoying these features and have a great time using our app!"
-    send.send_text("text", text, tokens)
+    if not test:
+        send.send_text("text", text, tokens)
     return "ignore"
 
 
 def personal_details(req, usersDB):
     start = time.time()
     logging.info("start personal details func")
+    session_id = req.get("session").split('/')[-1]
+    doc = get_doc(session_id, usersDB)
+    tokens = get_token(doc)
     try:
         session_id, age, height, weight, activity_level, purpose_str = parse_parameters.parse_parameters(req)
     except:

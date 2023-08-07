@@ -52,11 +52,6 @@ def webhook():
     if not double_check(usersDB, req):
         result = req.get("queryResult")
         intent = result.get("intent").get('displayName')
-        # if intent == 'food.get.info' or intent == 'personal_details':
-        #     response = process_request(req)
-        #     return {'fulfillmentText' : response}
-        # else:
-        #     process_request(req)
         response = process_request(req)
         return {'fulfillmentText' : response}
     return {'fulfillmentText' : "ignore"}
@@ -100,10 +95,10 @@ def evening_notification():
 
 
 if __name__ == '__main__':
-    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 16,
-                  minute = 48)
-    sched.add_job(id='evening_not', func=evening_notification, trigger='cron', day_of_week='mon-sun', hour=0,
-                  minute=15)
+    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 23,
+                  minute = 29)
+    sched.add_job(id='evening_not', func=evening_notification, trigger='cron', day_of_week='mon-sun', hour=23,
+                  minute=31)
     sched.start()
     app.run(port=5000, debug=True, use_reloader = False)
 
