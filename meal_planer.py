@@ -155,39 +155,29 @@ def results(user, number_of_days, test, doc, final_solution, usersDB, calories_l
         logging.info("************\n")
 
         if not test:
+
             tokens = get_token(doc)
-            # todo: add checking for how many days their results and if it fit the request
-            # send.send_text("Meal_plan_details_1", text, tokens)
             length = len(cards)
             for i in range(length):
                 send.send_meal_plan("meal_plan", str(length), str(i + 1), tokens, cards[i])
+            message = ""
             if (length / 3) < number_of_days:
-                explanatory_message = f"We've planned tasty dishes for {(length / 3)} days," \
-                                   f" but unfortunately, we couldn't find meals for all {number_of_days} days." \
-                                   " Feel free to adjust preferences for a complete meal schedule."
-                if calories_limit_flag:
-                    explanatory_message = explanatory_message + "\nAlso,  we noticed that your recommended daily calorie" \
-                                                              " intake is higher than 2650 calories. For now, we've set" \
-                                                              " the plan to 2650 calories a day.\nIf you feel you need" \
-                                                              " more calories, you can add extra portions from the meals" \
-                                                              " in the plan or incorporate other food resources to meet" \
-                                                              " your desired intake."
-                send.send_text("Meal_plan_details_1", explanatory_message, tokens)
-            else:
-                if calories_limit_flag:
-                    explanatory_message = "We noticed that your recommended daily calorie" \
-                                         " intake is higher than 2650 calories. For now, we've set" \
-                                         " the plan to 2650 calories a day.\nIf you feel you need" \
-                                         " more calories, you can add extra portions from the meals" \
-                                         " in the plan or incorporate other food resources to meet" \
-                                         " your desired intake."
-                    send.send_text("Meal_plan_details_1", explanatory_message, tokens)
-            text = "Please note that this meal plan is a recommendation and intended to provide you with ideas and" \
+                message = message + f"We've planned tasty dishes for {int(length / 3)} days," \
+                                      f" but unfortunately, we couldn't find meals for all {number_of_days} days." \
+                                      " Feel free to adjust preferences for a complete meal schedule.\n"
+            if calories_limit_flag:
+                message = message + "We noticed that your recommended daily calorie" \
+                                                            " intake is higher than 2650 calories. For now, we've set" \
+                                                            " the plan to 2650 calories a day.\nYou can add extra portions from the meals" \
+                                                            " in the plan or incorporate other food resources to meet" \
+                                                            " your desired intake.\n"
+
+            message = message + "Please note that this meal plan is a recommendation and intended to provide you with ideas and" \
                    " inspiration. Feel free to customize it according to your preferences and dietary needs." \
                    " You can mix and match the days, adjust the ingredients, and even substitute recipes." \
                    " The goal is to make it work for you and your lifestyle. Enjoy experimenting and creating" \
                    " your personalized meal plan!"
-            send.send_text("Meal_plan_details_1", text, tokens)
+            send.send_text("Meal_plan_details_1", message, tokens)
 
     else:
         if not test:
@@ -389,6 +379,8 @@ def plan_meal(req, usersDB):
     check, healthLabels, forbiddenfoods, number_of_days = parse_parameters(parameters)
     if not check:
         return "Error in the parameters you insert, please try again."
+    if number_of_days > 5:
+        number_of_days = 5
 
     user = UserProfile(healthLabels, forbiddenfoods, daily_calories, dislike_recipes)
 
@@ -404,7 +396,7 @@ def plan_meal(req, usersDB):
     end_time = time.time()
     logging.info(f"Total time: {end_time - start_time} seconds")
 
-    return "finish"
+    return "ignore"
 
 
 # if __name__ == '__main__':
