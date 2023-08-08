@@ -160,8 +160,6 @@ def choose_recipe(recipes, session_id, usersDB):
     similarity_scores = []
     for recipe in recipes:
         recipe_vector = create_recipe_vector(recipe, unique_ingredients, unique_healthLabels, unique_dietLabels)
-        # todo: there some problem here: "RuntimeWarning: invalid value encountered in scalar divide
-        #   similarity_score = np.dot(user_preferences_vector, recipe_vector) / ("
         similarity_score = np.dot(user_preferences_vector, recipe_vector) / (
                 np.linalg.norm(user_preferences_vector) * np.linalg.norm(recipe_vector))
         similarity_scores.append(similarity_score)

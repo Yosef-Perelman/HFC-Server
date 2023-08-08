@@ -9,6 +9,16 @@ import logging
 from firebase_connection import fill_details_check, get_doc, get_daily_calories, get_recipe, get_token, \
     get_false_rated_recipes
 
+NUMBER_OF_MEALS_PER_DAY = 3
+CALORIES_PER_DAY_UPPER_LIMIT = 2650
+MAXIMUM_DAYS = 5
+THE_BREAKFAST_PART = 3
+THE_LUNCH_PART = 2
+REDUCTION_OF_THE_DEVIATION = 100
+REDUCTION_OF_THE_VARIATION = 10
+UPPER_BOUND_START = 100
+MAXIMUM_TIME_FOR_SEARCH = 60
+
 
 class UserProfile:
     def __init__(self, health, forbidden_ingredients, recommended_calories, dislike_recipes):
@@ -65,10 +75,10 @@ def hc(user_profile, meal, recipe, already_chosen=None):
     recipe_calories = float(recipe.calories)
     user_calories = user_profile.recommended_calories
     if meal.type == 'breakfast':
-        if recipe_calories > (user_calories / 3):
+        if recipe_calories > (user_calories / THE_BREAKFAST_PART):
             return False
     if meal.type == 'lunch':
-        if recipe_calories > (user_calories / 2):
+        if recipe_calories > (user_calories / THE_LUNCH_PART):
             return False
 
     if recipe.name in user_profile.dislike_recipes:
@@ -103,11 +113,11 @@ def count_unique_and_duplicates(list1, list2, list3):
 
 def sc(user_profile, recipe, current_assign):
     deviation = abs(float(current_assign[0].recipe.calories) + float(current_assign[1].recipe.calories) +
-                    float(recipe.calories) - user_profile.recommended_calories) / 100
+                    float(recipe.calories) - user_profile.recommended_calories) / REDUCTION_OF_THE_DEVIATION
     unique_ingredients, duplicate_ingredients = count_unique_and_duplicates(current_assign[0].recipe.ingredients,
                                                                             current_assign[1].recipe.ingredients,
                                                                             recipe.ingredients)
-    variation = duplicate_ingredients / unique_ingredients / 10
+    variation = duplicate_ingredients / unique_ingredients / REDUCTION_OF_THE_VARIATION
     return deviation + variation
 
 
@@ -139,12 +149,12 @@ def results(user, number_of_days, test, doc, final_solution, usersDB, calories_l
                 }
                 usersDB.collection('Recipes').add(data)
 
-            if index % 3 == 0:
+            if index % NUMBER_OF_MEALS_PER_DAY == 0:
                 if index != 0:
                     logging.info("calories of the day:" + str(day_calories))
                     logging.info("************")
                 day_calories = 0
-                logging.info("day number" + str(int(index / 3) + 1) + ":")
+                logging.info("day number" + str(int(index / NUMBER_OF_MEALS_PER_DAY) + 1) + ":")
             logging.info("recipe name: " + value.recipe.name)
             logging.info("recipe health labels:")
             logging.info(value.recipe.healthLabels)
@@ -161,8 +171,8 @@ def results(user, number_of_days, test, doc, final_solution, usersDB, calories_l
             for i in range(length):
                 send.send_meal_plan("meal_plan", str(length), str(i + 1), tokens, cards[i])
             message = ""
-            if (length / 3) < number_of_days:
-                message = message + f"We've planned tasty dishes for {int(length / 3)} days," \
+            if (length / NUMBER_OF_MEALS_PER_DAY) < number_of_days:
+                message = message + f"We've planned tasty dishes for {int(length / NUMBER_OF_MEALS_PER_DAY)} days," \
                                       f" but unfortunately, we couldn't find meals for all {number_of_days} days." \
                                       " Feel free to adjust preferences for a complete meal schedule.\n"
             if calories_limit_flag:
@@ -217,7 +227,7 @@ def constraint_satisfaction(user, number_of_days, usersDB=None, doc=None, calori
 
         current_assignment = [Meal(0, 'breakfast'), Meal(1, 'lunch'), Meal(2, 'dinner')]
 
-        upper_bound = 100
+        upper_bound = UPPER_BOUND_START
         breakfast_index = 0
         lunch_index = 0
         dinner_index = 0
@@ -228,15 +238,12 @@ def constraint_satisfaction(user, number_of_days, usersDB=None, doc=None, calori
         while not end:
 
             end_time = time.time()
-            #logging.info(f"checking the time condition. time = {end_time - start_time}")
-            if end_time - start_time > 60:
+            if end_time - start_time > MAXIMUM_TIME_FOR_SEARCH:
                 logging.warning("the 60 seconds over, the search stopped")
                 finish = True
                 break
 
-            # logging.info("starting new loop in the while loop")
             for ass in current_assignment:
-                # logging.info("starting new level in the current_assignment loop")
 
                 if flag:
                     flag = False
@@ -368,8 +375,8 @@ def plan_meal(req, usersDB):
 
     calories_limit_flag = False
     daily_calories = get_daily_calories(usersDB, doc)
-    if daily_calories > 2650:
-        daily_calories = 2650
+    if daily_calories > CALORIES_PER_DAY_UPPER_LIMIT:
+        daily_calories = CALORIES_PER_DAY_UPPER_LIMIT
         calories_limit_flag = True
 
     logging.info(f"daily calories: {daily_calories}")
@@ -379,8 +386,8 @@ def plan_meal(req, usersDB):
     check, healthLabels, forbiddenfoods, number_of_days = parse_parameters(parameters)
     if not check:
         return "Error in the parameters you insert, please try again."
-    if number_of_days > 5:
-        number_of_days = 5
+    if number_of_days > MAXIMUM_DAYS:
+        number_of_days = MAXIMUM_DAYS
 
     user = UserProfile(healthLabels, forbiddenfoods, daily_calories, dislike_recipes)
 

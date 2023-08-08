@@ -1,5 +1,3 @@
-# *** imports ***
-
 from flask import Flask, request
 from flask_apscheduler import APScheduler
 import firebase_admin
@@ -19,8 +17,8 @@ import time
 import os
 from apscheduler.schedulers.background import BackgroundScheduler
 
-
-# *** setup ***
+MORNING_NOTIFICATION_TIME = 8
+EVENING_NOTIFICATION_TIME = 20
 
 # flask
 app = Flask(__name__)
@@ -84,21 +82,19 @@ def process_request(req):
 
 def morning_notification():
     logging.info('Sending morn note. The time is: %s' % datetime.now())
-    # send notification:
     send_morning_notification(usersDB)
 
 
 def evening_notification():
     logging.info('Sending eve note. The time is: %s' % datetime.now())
-    # send notification:
     send_evening_notification(usersDB)
 
 
 if __name__ == '__main__':
-    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun', hour = 23,
-                  minute = 29)
-    sched.add_job(id='evening_not', func=evening_notification, trigger='cron', day_of_week='mon-sun', hour=23,
-                  minute=31)
+    sched.add_job(id='morning_not', func=morning_notification, trigger = 'cron', day_of_week = 'mon-sun',
+                  hour = MORNING_NOTIFICATION_TIME, minute = 0)
+    sched.add_job(id='evening_not', func=evening_notification, trigger='cron', day_of_week='mon-sun',
+                  hour=EVENING_NOTIFICATION_TIME, minute=0)
     sched.start()
     app.run(port=5000, debug=True, use_reloader = False)
 

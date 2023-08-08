@@ -22,7 +22,6 @@ def download_image(url, name):
                 return blob.public_url
             else:
                 logging.info("Failed to download image.")
-                # todo: handle in the case of error in downloading image
                 return None
         except Exception:
             logging.error("error in getting the recipe image")

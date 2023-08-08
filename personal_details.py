@@ -9,6 +9,8 @@ import parse_parameters
 from datetime import datetime
 from firebase_connection import get_doc, get_token
 
+DEFAULT_AGE = 30
+
 
 def calculate_age(birth_date):
     try:
@@ -18,7 +20,7 @@ def calculate_age(birth_date):
 
         # Adjust age if the birth month and day have not yet occurred this year
         if age < 0:
-            age = 25
+            age = DEFAULT_AGE
 
         logging.info(f"actual age = {age}")
         return age
