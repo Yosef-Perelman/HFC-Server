@@ -1,0 +1,220 @@
+2023-08-08 10:53:03 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-08-08 10:53:03 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2023-08-08 10:53:03 INFO Added job "morning_not" to job store "default"
+2023-08-08 10:53:03 INFO Added job "evening_not" to job store "default"
+2023-08-08 10:53:03 INFO Scheduler started
+2023-08-08 10:53:03 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-08-08 10:53:03 INFO [33mPress CTRL+C to quit[0m
+2023-08-08 11:22:20 ERROR enter webhook func
+2023-08-08 11:22:20 INFO request: {'responseId': '12e75350-f3b9-4c3e-966a-2fa81c8bffe6-650d7fe3', 'queryResult': {'queryText': '2', 'parameters': {'age': '1999-12-11T12:00:00+02:00', 'weight': '77', 'height': '170', 'activity': '2', 'goal': '2'}, 'allRequiredParamsPresent': True, 'fulfillmentMessages': [{'text': {'text': ['']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'age': '1999-12-11T12:00:00+02:00', 'age.original': '12/11/1999', 'weight': '77', 'weight.original': '77', 'height': '170', 'height.original': '170', 'activity': '2', 'activity.original': '2', 'goal': '2', 'goal.original': '2'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/c6ca3e62-b4fb-485d-b816-763ea5452378', 'displayName': 'personal_details'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN'}
+2023-08-08 11:22:24 INFO finish double check. time is: 3.5336318016052246
+2023-08-08 11:22:24 INFO the response id is different, the request is new
+2023-08-08 11:22:24 INFO Enter to 'personal_details' intent
+2023-08-08 11:22:24 INFO start personal details func
+2023-08-08 11:22:25 INFO start parse parameters func
+2023-08-08 11:22:25 INFO age = 1999-12-11T12:00:00+02:00
+2023-08-08 11:22:25 INFO weight = 77
+2023-08-08 11:22:25 INFO height = 170
+2023-08-08 11:22:25 INFO activity_level = level_2
+2023-08-08 11:22:25 INFO purpose = Mild weight loss
+2023-08-08 11:22:25 INFO start set calorie daily func
+2023-08-08 11:22:25 ERROR enter webhook func
+2023-08-08 11:22:25 INFO request: {'responseId': '12e75350-f3b9-4c3e-966a-2fa81c8bffe6-650d7fe3', 'queryResult': {'queryText': '2', 'parameters': {'age': '1999-12-11T12:00:00+02:00', 'weight': '77', 'height': '170', 'activity': '2', 'goal': '2'}, 'allRequiredParamsPresent': True, 'fulfillmentMessages': [{'text': {'text': ['']}}], 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'age': '1999-12-11T12:00:00+02:00', 'age.original': '12/11/1999', 'weight': '77', 'weight.original': '77', 'height': '170', 'height.original': '170', 'activity': '2', 'activity.original': '2', 'goal': '2', 'goal.original': '2'}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/c6ca3e62-b4fb-485d-b816-763ea5452378', 'displayName': 'personal_details'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN'}
+2023-08-08 11:22:25 INFO start get gender func
+2023-08-08 11:22:27 INFO finish double check. time is: 1.480280876159668
+2023-08-08 11:22:27 INFO the response id is equal, the request isn't new
+2023-08-08 11:22:27 INFO 127.0.0.1 - - [08/Aug/2023 11:22:27] "POST /webhook HTTP/1.1" 200 -
+2023-08-08 11:22:27 INFO actual age = 24
+2023-08-08 11:22:29 INFO The daily calories: 1922.1
+2023-08-08 11:22:30 INFO Trying to send text message. content: Thank you on filling out your personal details! Now, let's get started and explore what you can do:
+
+- Search Recipe: Find a variety of recipes tailored to your preferences and dietary needs.
+
+- Ask for a Meal Plan: Get personalized meal plans based on your dietary requirements, preferences, and goals.
+
+- Get Nutritional Information: Access nutritional information for various foods.
+
+- Otherway, you can return to the home page and starting manage your Nutritional Diary. Your recommended daily calories consumption already there!
+
+If you need help, you are welcome to visit the app's guide found in the main menu.
+
+Start enjoying these features and have a great time using our app!
+2023-08-08 11:22:31 INFO Successfully sent message
+2023-08-08 11:22:31 INFO the time of personal details func is 6.707510471343994
+2023-08-08 11:22:31 INFO 127.0.0.1 - - [08/Aug/2023 11:22:31] "POST /webhook HTTP/1.1" 200 -
+2023-08-08 11:23:15 ERROR enter webhook func
+2023-08-08 11:23:15 INFO request: {'responseId': '0325d8b3-2a62-4d8d-8ab7-6fb7758ae37b-650d7fe3', 'queryResult': {'queryText': 'i want vegetarian breakfast', 'parameters': {'Meal': 'Breakfast', 'Health': 'Vegetarian', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN'}
+2023-08-08 11:23:17 INFO finish double check. time is: 1.7571561336517334
+2023-08-08 11:23:17 INFO the response id is different, the request is new
+2023-08-08 11:23:17 INFO Enter to 'recipe.request' intent
+2023-08-08 11:23:17 INFO start recipe order func
+2023-08-08 11:23:18 INFO Passed fill details check
+2023-08-08 11:23:18 INFO meal:'Breakfast'
+2023-08-08 11:23:18 INFO &mealType=Breakfast
+2023-08-08 11:23:18 INFO health:'Vegetarian'
+2023-08-08 11:23:18 INFO &health=vegetarian
+2023-08-08 11:23:18 INFO diet:''
+2023-08-08 11:23:18 WARNING diet is not in 'data.diet'.
+2023-08-08 11:23:18 INFO dish:''
+2023-08-08 11:23:18 WARNING dish is not in 'data.dish_types'.
+2023-08-08 11:23:18 INFO &dishType=main course
+2023-08-08 11:23:19 INFO Trying to send text message. content: Please wait a moment while we search for a delicious recipe just for you. It won't take long!
+2023-08-08 11:23:20 ERROR enter webhook func
+2023-08-08 11:23:20 INFO request: {'responseId': '0325d8b3-2a62-4d8d-8ab7-6fb7758ae37b-650d7fe3', 'queryResult': {'queryText': 'i want vegetarian breakfast', 'parameters': {'Meal': 'Breakfast', 'Health': 'Vegetarian', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN'}
+2023-08-08 11:23:21 INFO Successfully sent message
+2023-08-08 11:23:21 INFO https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b&mealType=Breakfast&health=vegetarian&dishType=main course&random=true
+2023-08-08 11:23:21 INFO finish double check. time is: 1.2370965480804443
+2023-08-08 11:23:21 INFO the response id is equal, the request isn't new
+2023-08-08 11:23:21 INFO 127.0.0.1 - - [08/Aug/2023 11:23:21] "POST /webhook HTTP/1.1" 200 -
+2023-08-08 11:23:22 INFO start parse recipes from api func
+2023-08-08 11:23:22 INFO start choose recipe func
+2023-08-08 11:23:22 INFO start get liked recipes func.
+2023-08-08 11:23:26 INFO start parse recipes from DB func.
+2023-08-08 11:23:26 INFO start select item with probabilities func.
+2023-08-08 11:23:26 INFO Devilled Eggs
+2023-08-08 11:23:26 INFO start download image func
+2023-08-08 11:23:26 INFO the image didn't exist in the storage, trying to download it from the web...
+2023-08-08 11:23:32 INFO Image downloaded successfully!
+2023-08-08 11:23:33 INFO Trying to send recipe message.
+2023-08-08 11:23:33 INFO Successfully sent message
+2023-08-08 11:23:33 INFO 127.0.0.1 - - [08/Aug/2023 11:23:33] "POST /webhook HTTP/1.1" 200 -
+2023-08-08 11:39:33 ERROR enter webhook func
+2023-08-08 11:39:33 INFO request: {'responseId': '5c45c365-d9c9-434b-9d07-7b7eae4fd2a2-650d7fe3', 'queryResult': {'queryText': '3', 'parameters': {'Health': ['FODMAP-Free'], 'Food_Type': ['pepper'], 'number': 3.0, 'date-period': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN/contexts/reciperequest-followup', 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': ['FODMAP-Free'], 'Health.original': ['fodmap free'], 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': '', 'Food_Type': ['pepper'], 'Food_Type.original': ['pepper'], 'number': 3.0, 'number.original': '3', 'date-period': '', 'date-period.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Health': ['FODMAP-Free'], 'Health.original': ['fodmap free'], 'Food_Type': ['pepper'], 'Food_Type.original': ['pepper'], 'number': 3.0, 'number.original': '3', 'date-period': '', 'date-period.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/69e07da3-968a-4bfd-86ee-8740c754c958', 'displayName': 'meal.planning'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN'}
+2023-08-08 11:39:36 INFO finish double check. time is: 2.5629098415374756
+2023-08-08 11:39:36 INFO the response id is different, the request is new
+2023-08-08 11:39:36 INFO Enter to 'meal.planning' intent
+2023-08-08 11:39:36 INFO start plan meal func
+2023-08-08 11:39:37 INFO Passed fill details check
+2023-08-08 11:39:38 ERROR enter webhook func
+2023-08-08 11:39:38 INFO request: {'responseId': '5c45c365-d9c9-434b-9d07-7b7eae4fd2a2-650d7fe3', 'queryResult': {'queryText': '3', 'parameters': {'Health': ['FODMAP-Free'], 'Food_Type': ['pepper'], 'number': 3.0, 'date-period': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN/contexts/reciperequest-followup', 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': ['FODMAP-Free'], 'Health.original': ['fodmap free'], 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': '', 'Food_Type': ['pepper'], 'Food_Type.original': ['pepper'], 'number': 3.0, 'number.original': '3', 'date-period': '', 'date-period.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Health': ['FODMAP-Free'], 'Health.original': ['fodmap free'], 'Food_Type': ['pepper'], 'Food_Type.original': ['pepper'], 'number': 3.0, 'number.original': '3', 'date-period': '', 'date-period.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/69e07da3-968a-4bfd-86ee-8740c754c958', 'displayName': 'meal.planning'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/9fpv5l11JdqN'}
+2023-08-08 11:39:40 INFO daily calories: 1922.1
+2023-08-08 11:39:40 INFO start to make the meal plan
+2023-08-08 11:39:40 INFO Trying to send text message. content: Generating your meal plan. This may take some time. Please wait.
+2023-08-08 11:39:40 INFO finish double check. time is: 1.9428551197052002
+2023-08-08 11:39:40 INFO the response id is equal, the request isn't new
+2023-08-08 11:39:40 INFO 127.0.0.1 - - [08/Aug/2023 11:39:40] "POST /webhook HTTP/1.1" 200 -
+2023-08-08 11:39:40 INFO Successfully sent message
+2023-08-08 11:39:40 INFO start constraint satisfaction func
+2023-08-08 11:39:42 INFO finish day 0, find cocoa roasted pumpkin seeds, cajun grilled chicken, crock pot chicken leg quarters,
+2023-08-08 11:39:45 INFO finish day 1, find ginger orange pumpkin seeds, roasted pecans, grilled green curried chicken,
+2023-08-08 11:39:46 INFO finish day 2, find roasted thick potato chips, cinnamon almonds made in the crockpot, roasted cinnamon nuts,
+2023-08-08 11:39:46 INFO ****************
+2023-08-08 11:39:46 INFO This is the result of meal plan for 3 days.
+the input was: health labels = ['fodmap-free'], forbidden foods = ['pepper'].
+2023-08-08 11:39:47 INFO day number1:
+2023-08-08 11:39:47 INFO recipe name: cocoa roasted pumpkin seeds
+2023-08-08 11:39:47 INFO recipe health labels:
+2023-08-08 11:39:47 INFO ['Vegan', 'Vegetarian', 'Pescatarian', 'Dairy-Free', 'Gluten-Free', 'Wheat-Free', 'Egg-Free', 'Peanut-Free', 'Tree-Nut-Free', 'Soy-Free', 'Fish-Free', 'Shellfish-Free', 'Pork-Free', 'Red-Meat-Free', 'Crustacean-Free', 'Celery-Free', 'Mustard-Free', 'Sesame-Free', 'Lupine-Free', 'Mollusk-Free', 'Alcohol-Free', 'FODMAP-Free', 'Kosher']
+2023-08-08 11:39:47 INFO recipe ingredients:
+2023-08-08 11:39:47 INFO ['sugar', 'unsweetened cocoa powder', 'coconut oil', 'salt', 'pumpkin seeds']
+2023-08-08 11:39:49 INFO recipe name: cajun grilled chicken
+2023-08-08 11:39:49 INFO recipe health labels:
+2023-08-08 11:39:49 INFO ['Sugar-Conscious', 'Keto-Friendly', 'Dairy-Free', 'Gluten-Free', 'Wheat-Free', 'Egg-Free', 'Peanut-Free', 'Tree-Nut-Free', 'Fish-Free', 'Shellfish-Free', 'Pork-Free', 'Red-Meat-Free', 'Crustacean-Free', 'Celery-Free', 'Mustard-Free', 'Sesame-Free', 'Lupine-Free', 'Mollusk-Free', 'Alcohol-Free', 'FODMAP-Free', 'Kosher']
+2023-08-08 11:39:49 INFO recipe ingredients:
+2023-08-08 11:39:49 INFO ['Seasoning', 'boneless, skinless chicken breasts', 'brown sugar', 'lemon', 'cooking spray']
+2023-08-08 11:39:50 INFO recipe name: crock pot chicken leg quarters
+2023-08-08 11:39:50 INFO recipe health labels:
+2023-08-08 11:39:50 INFO ['Dairy-Free', 'Gluten-Free', 'Wheat-Free', 'Egg-Free', 'Peanut-Free', 'Tree-Nut-Free', 'Soy-Free', 'Fish-Free', 'Shellfish-Free', 'Pork-Free', 'Red-Meat-Free', 'Crustacean-Free', 'Celery-Free', 'Mustard-Free', 'Sesame-Free', 'Lupine-Free', 'Mollusk-Free', 'Alcohol-Free', 'No oil added', 'Sulfite-Free', 'FODMAP-Free', 'Kosher']
+2023-08-08 11:39:50 INFO recipe ingredients:
+2023-08-08 11:39:50 INFO ['chicken leg', 'bbq sauce', 'season']
+2023-08-08 11:39:51 INFO calories of the day:2042.906736600325
+2023-08-08 11:39:51 INFO ************
+2023-08-08 11:39:51 INFO day number2:
+2023-08-08 11:39:51 INFO recipe name: ginger orange pumpkin seeds
+2023-08-08 11:39:51 INFO recipe health labels:
+2023-08-08 11:39:51 INFO ['Vegan', 'Vegetarian', 'Pescatarian', 'Dairy-Free', 'Gluten-Free', 'Wheat-Free', 'Egg-Free', 'Peanut-Free', 'Tree-Nut-Free', 'Soy-Free', 'Fish-Free', 'Shellfish-Free', 'Pork-Free', 'Red-Meat-Free', 'Crustacean-Free', 'Celery-Free', 'Mustard-Free', 'Sesame-Free', 'Lupine-Free', 'Mollusk-Free', 'Alcohol-Free', 'FODMAP-Free', 'Kosher']
+2023-08-08 11:39:51 INFO recipe ingredients:
+2023-08-08 11:39:51 INFO ['pumpkin seeds', 'sugar', 'vanilla bean', 'ginger', 'orange', 'oil', 'sea salt']
+2023-08-08 11:39:53 INFO recipe name: roasted pecans
+2023-08-08 11:39:53 INFO recipe health labels:
+2023-08-08 11:39:53 INFO ['Sugar-Conscious', 'Kidney-Friendly', 'Keto-Friendly', 'Vegan', 'Vegetarian', 'Pescatarian', 'Paleo', 'Mediterranean', 'DASH', 'Dairy-Free', 'Gluten-Free', 'Wheat-Free', 'Egg-Free', 'Peanut-Free', 'Soy-Free', 'Fish-Free', 'Shellfish-Free', 'Pork-Free', 'Red-Meat-Free', 'Crustacean-Free', 'Celery-Free', 'Mustard-Free', 'Sesame-Free', 'Lupine-Free', 'Mollusk-Free', 'Alcohol-Free', 'Sulfite-Free', 'FODMAP-Free', 'Kosher', 'Immuno-Supportive']
+2023-08-08 11:39:53 INFO recipe ingredients:
+2023-08-08 11:39:53 INFO ['pecan', 'extra-virgin olive oil', 'Coarse salt']
+2023-08-08 11:40:04 INFO recipe name: grilled green curried chicken
+2023-08-08 11:40:04 INFO recipe health labels:
+2023-08-08 11:40:04 INFO ['Sugar-Conscious', 'Keto-Friendly', 'Dairy-Free', 'Gluten-Free', 'Wheat-Free', 'Egg-Free', 'Peanut-Free', 'Tree-Nut-Free', 'Soy-Free', 'Shellfish-Free', 'Pork-Free', 'Red-Meat-Free', 'Celery-Free', 'Mustard-Free', 'Sesame-Free', 'Lupine-Free', 'Alcohol-Free', 'Sulfite-Free', 'FODMAP-Free', 'Kosher']
+2023-08-08 11:40:04 INFO recipe ingredients:
+2023-08-08 11:40:04 INFO ['Curry paste', 'Fish sauce', 'Curry leaves', 'Coconut cream', 'Cumin', 'Chicken', 'Lime']
+2023-08-08 11:40:05 INFO calories of the day:1818.8213134022385
+2023-08-08 11:40:05 INFO ************
+2023-08-08 11:40:05 INFO day number3:
+2023-08-08 11:40:05 INFO recipe name: roasted thick potato chips
+2023-08-08 11:40:05 INFO recipe health labels:
+2023-08-08 11:40:05 INFO ['Sugar-Conscious', 'Vegan', 'Vegetarian', 'Pescatarian', 'Mediterranean', 'DASH', 'Dairy-Free', 'Gluten-Free', 'Wheat-Free', 'Egg-Free', 'Peanut-Free', 'Tree-Nut-Free', 'Soy-Free', 'Fish-Free', 'Shellfish-Free', 'Pork-Free', 'Red-Meat-Free', 'Crustacean-Free', 'Celery-Free', 'Mustard-Free', 'Sesame-Free', 'Lupine-Free', 'Mollusk-Free', 'Alcohol-Free', 'Sulfite-Free', 'FODMAP-Free', 'Kosher', 'Immuno-Supportive']
+2023-08-08 11:40:05 INFO recipe ingredients:
+2023-08-08 11:40:05 INFO ['potatoes', 'extra-virgin olive oil', 'rosemary', 'seasoning']
+2023-08-08 11:40:06 INFO recipe name: cinnamon almonds made in the crockpot
+2023-08-08 11:40:06 INFO recipe health labels:
+2023-08-08 11:40:06 INFO ['Low Potassium', 'Kidney-Friendly', 'Vegetarian', 'Pescatarian', 'Dairy-Free', 'Gluten-Free', 'Wheat-Free', 'Peanut-Free', 'Soy-Free', 'Fish-Free', 'Shellfish-Free', 'Pork-Free', 'Red-Meat-Free', 'Crustacean-Free', 'Celery-Free', 'Mustard-Free', 'Sesame-Free', 'Lupine-Free', 'Mollusk-Free', 'Alcohol-Free', 'No oil added', 'FODMAP-Free', 'Kosher']
+2023-08-08 11:40:06 INFO recipe ingredients:
+2023-08-08 11:40:06 INFO ['sugar', 'brown sugar', 'cinnamon', 'salt', 'egg white', 'vanilla', 'almonds', 'water']
+2023-08-08 11:40:07 INFO recipe name: roasted cinnamon nuts
+2023-08-08 11:40:07 INFO recipe health labels:
+2023-08-08 11:40:07 INFO ['Vegetarian', 'Pescatarian', 'Dairy-Free', 'Gluten-Free', 'Wheat-Free', 'Peanut-Free', 'Soy-Free', 'Fish-Free', 'Shellfish-Free', 'Pork-Free', 'Red-Meat-Free', 'Crustacean-Free', 'Celery-Free', 'Mustard-Free', 'Sesame-Free', 'Lupine-Free', 'Mollusk-Free', 'Alcohol-Free', 'No oil added', 'FODMAP-Free', 'Kosher']
+2023-08-08 11:40:07 INFO recipe ingredients:
+2023-08-08 11:40:07 INFO ['egg white', 'vanilla extract', 'almond', 'sugar', 'brown sugar', 'salt', 'cinnamon']
+2023-08-08 11:40:07 INFO calories of the day:1732.5202
+2023-08-08 11:40:07 INFO ************
+
+2023-08-08 11:40:07 INFO Trying to send meal plan message. current message number: 1
+2023-08-08 11:40:08 INFO Successfully sent message
+2023-08-08 11:40:08 INFO Trying to send meal plan message. current message number: 2
+2023-08-08 11:40:08 INFO Successfully sent message
+2023-08-08 11:40:08 INFO Trying to send meal plan message. current message number: 3
+2023-08-08 11:40:09 INFO Successfully sent message
+2023-08-08 11:40:09 INFO Trying to send meal plan message. current message number: 4
+2023-08-08 11:40:10 INFO Successfully sent message
+2023-08-08 11:40:10 INFO Trying to send meal plan message. current message number: 5
+2023-08-08 11:40:10 INFO Successfully sent message
+2023-08-08 11:40:10 INFO Trying to send meal plan message. current message number: 6
+2023-08-08 11:40:11 INFO Successfully sent message
+2023-08-08 11:40:11 INFO Trying to send meal plan message. current message number: 7
+2023-08-08 11:40:11 INFO Successfully sent message
+2023-08-08 11:40:11 INFO Trying to send meal plan message. current message number: 8
+2023-08-08 11:40:13 INFO Successfully sent message
+2023-08-08 11:40:13 INFO Trying to send meal plan message. current message number: 9
+2023-08-08 11:40:14 INFO Successfully sent message
+2023-08-08 11:40:14 INFO Trying to send text message. content: Please note that this meal plan is a recommendation and intended to provide you with ideas and inspiration. Feel free to customize it according to your preferences and dietary needs. You can mix and match the days, adjust the ingredients, and even substitute recipes. The goal is to make it work for you and your lifestyle. Enjoy experimenting and creating your personalized meal plan!
+2023-08-08 11:40:15 INFO Successfully sent message
+2023-08-08 11:40:15 INFO Total time: 35.341803550720215 seconds
+2023-08-08 11:40:15 INFO 127.0.0.1 - - [08/Aug/2023 11:40:15] "POST /webhook HTTP/1.1" 200 -
+2024-05-03 16:55:50 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-05-03 16:55:50 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-05-03 16:55:50 INFO Added job "morning_not" to job store "default"
+2024-05-03 16:55:50 INFO Added job "evening_not" to job store "default"
+2024-05-03 16:55:50 INFO Scheduler started
+2024-05-03 16:55:50 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-05-03 16:55:50 INFO [33mPress CTRL+C to quit[0m
+2024-05-03 17:07:13 ERROR enter webhook func
+2024-05-03 17:07:13 INFO request: {'responseId': '5d229d2d-2a76-4fb7-9749-278d7809f7e4-5c0737f7', 'queryResult': {'queryText': 'i want vegetarian breakfast', 'parameters': {'Meal': 'Breakfast', 'Health': 'Vegetarian', 'Diet': '', 'Dish_Type': ''}, 'allRequiredParamsPresent': True, 'outputContexts': [{'name': 'projects/hfc-app-378515/agent/sessions/2YeSFthIqEdl/contexts/reciperequest-followup', 'lifespanCount': 2, 'parameters': {'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}, {'name': 'projects/hfc-app-378515/agent/sessions/2YeSFthIqEdl/contexts/__system_counters__', 'parameters': {'no-input': 0.0, 'no-match': 0.0, 'Meal': 'Breakfast', 'Meal.original': 'breakfast', 'Health': 'Vegetarian', 'Health.original': 'vegetarian', 'Diet': '', 'Diet.original': '', 'Dish_Type': '', 'Dish_Type.original': ''}}], 'intent': {'name': 'projects/hfc-app-378515/agent/intents/daf34f1e-82a7-4a71-b834-d0aa5cad37a1', 'displayName': 'recipe.request'}, 'intentDetectionConfidence': 1.0, 'languageCode': 'en'}, 'originalDetectIntentRequest': {'payload': {}}, 'session': 'projects/hfc-app-378515/agent/sessions/2YeSFthIqEdl'}
+2024-05-03 17:09:01 INFO finish double check. time is: 108.329172372818
+2024-05-03 17:09:01 INFO the response id is different, the request is new
+2024-05-03 17:09:01 INFO Enter to 'recipe.request' intent
+2024-05-03 17:09:01 INFO start recipe order func
+2024-05-03 17:09:03 INFO Passed fill details check
+2024-05-03 17:09:03 INFO meal:'Breakfast'
+2024-05-03 17:09:03 INFO &mealType=Breakfast
+2024-05-03 17:09:03 INFO health:'Vegetarian'
+2024-05-03 17:09:03 INFO &health=vegetarian
+2024-05-03 17:09:03 INFO diet:''
+2024-05-03 17:09:03 WARNING diet is not in 'data.diet'.
+2024-05-03 17:09:03 INFO dish:''
+2024-05-03 17:09:03 WARNING dish is not in 'data.dish_types'.
+2024-05-03 17:09:03 INFO &dishType=main course
+2024-05-03 17:09:03 INFO Trying to send text message. content: Please wait a moment while we search for a delicious recipe just for you. It won't take long!
+2024-05-03 17:10:28 INFO Successfully sent message
+2024-05-03 17:10:28 INFO https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b&mealType=Breakfast&health=vegetarian&dishType=main course&random=true
+2024-05-03 17:10:30 INFO start parse recipes from api func
+2024-05-03 17:10:30 INFO start choose recipe func
+2024-05-03 17:10:30 INFO start get liked recipes func.
+2024-05-03 17:10:31 INFO 127.0.0.1 - - [03/May/2024 17:10:31] "[35m[1mPOST /webhook HTTP/1.1[0m" 500 -
+2024-06-07 10:59:19 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-06-07 10:59:19 INFO Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2024-06-07 10:59:19 INFO Added job "morning_not" to job store "default"
+2024-06-07 10:59:19 INFO Added job "evening_not" to job store "default"
+2024-06-07 10:59:19 INFO Scheduler started
+2024-06-07 10:59:19 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-06-07 10:59:19 INFO [33mPress CTRL+C to quit[0m

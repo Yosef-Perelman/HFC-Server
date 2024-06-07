@@ -388,6 +388,8 @@ def plan_meal(req, usersDB):
         return "Error in the parameters you insert, please try again."
     if number_of_days > MAXIMUM_DAYS:
         number_of_days = MAXIMUM_DAYS
+    if number_of_days < 0:
+        number_of_days = 0
 
     user = UserProfile(healthLabels, forbiddenfoods, daily_calories, dislike_recipes)
 

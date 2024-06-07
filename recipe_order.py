@@ -291,7 +291,6 @@ def recipe_order(req, usersDB, test=False):
     recipes = parse_recipes_from_api(response_dict['hits'])
     recipe = choose_recipe(recipes, session_id, usersDB)
 
-    # todo: test it!
     if recipe is None:
         text = "I apologize, but we couldn't find a suitable recipe based on your preferences. " \
                "Please try adjusting your preferences." \
