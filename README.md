@@ -10,3 +10,8 @@ The main modules of the server, where the magic happens is:
 
 The other modules contain connectivity, support, information, communication, tests and logging.
 
+
+## Configuration
+API keys and credentials are read from environment variables (see `config.py`).
+Copy `.env.example` to `.env` and fill in the values. The Firebase service-account JSON file
+is not committed; set `FIREBASE_CREDENTIALS` to its path (defaults to the original file name in the project root).

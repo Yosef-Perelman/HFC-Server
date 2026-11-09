@@ -3,6 +3,7 @@ import time
 
 import requests
 import logging
+import config
 import send
 
 import parse_parameters
@@ -90,7 +91,7 @@ def set_calorie_daily(session_id, age, height, weight, activity_level, purpose_s
     querystring = {"age": actual_age, "gender": gender, "height": height, "weight": weight, "activitylevel": activity_level}
 
     headers = {
-        "X-RapidAPI-Key": "fe8c47f227mshd760ad2995da85bp1a536djsnd48322f3c41e",
+        "X-RapidAPI-Key": config.RAPIDAPI_KEY,
         "X-RapidAPI-Host": "fitness-calculator.p.rapidapi.com"
     }
 

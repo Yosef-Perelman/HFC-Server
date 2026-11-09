@@ -2,6 +2,7 @@ import random
 import numpy as np
 import requests
 import json
+import config
 
 import data as dta
 import image_loading
@@ -192,8 +193,8 @@ def format_string(input_string):
 
 
 def api_request(meal_query, health_query, diet_query, dish_query):
-    query_string = "https://api.edamam.com/api/recipes/v2?type=public&app_id=3749f87d&" \
-                   "app_key=191597bb0eccc02907ba8e5efb98fc8b" + meal_query + health_query + diet_query + dish_query + "&random=true"
+    query_string = "https://api.edamam.com/api/recipes/v2?type=public&app_id=" + config.EDAMAM_RECIPES_APP_ID + \
+                   "&app_key=" + config.EDAMAM_RECIPES_APP_KEY + meal_query + health_query + diet_query + dish_query + "&random=true"
     logging.info(query_string)
 
     headers = {

@@ -3,10 +3,11 @@ from time import sleep
 import data
 from recipe_order import recipe_order
 import firebase_admin
+import config
 from firebase_admin import credentials, firestore
 
 
-cred = credentials.Certificate('hfc-app-b33ed-firebase-adminsdk-oqged-96055b305b.json')
+cred = credentials.Certificate(config.FIREBASE_CREDENTIALS)
 firebase_admin.initialize_app(cred, {'storageBucket': 'hfc-app-b33ed.appspot.com'})
 usersDB = firestore.client()
 

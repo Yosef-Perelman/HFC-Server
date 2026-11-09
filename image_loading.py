@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 from firebase_admin import storage
 import logging
+import config
 
 
 def download_image(url, name):
@@ -46,7 +47,7 @@ def images_arrange():
     for index, row in df.iterrows():
         name = row['name']
         format_name = name.replace(' ', '%20')
-        link = f"https://api.edamam.com/api/recipes/v2?type=public&q={format_name}&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b"
+        link = f"https://api.edamam.com/api/recipes/v2?type=public&q={format_name}&app_id={config.EDAMAM_RECIPES_APP_ID}&app_key={config.EDAMAM_RECIPES_APP_KEY}"
 
         response = requests.request("GET", link, headers=headers)
         response_dict = json.loads(response.text)
@@ -89,7 +90,7 @@ def images_arrange_for_one_pic():
 
     if not blob.exists():
         format_name = name.replace(' ', '%20')
-        link = f"https://api.edamam.com/api/recipes/v2?type=public&q={format_name}&app_id=3749f87d&app_key=191597bb0eccc02907ba8e5efb98fc8b"
+        link = f"https://api.edamam.com/api/recipes/v2?type=public&q={format_name}&app_id={config.EDAMAM_RECIPES_APP_ID}&app_key={config.EDAMAM_RECIPES_APP_KEY}"
 
         response = requests.request("GET", link, headers=headers)
         response_dict = json.loads(response.text)

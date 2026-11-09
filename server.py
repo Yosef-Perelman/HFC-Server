@@ -1,6 +1,7 @@
 from flask import Flask, request
 from flask_apscheduler import APScheduler
 import firebase_admin
+import config
 from firebase_admin import credentials, firestore, db
 import logging
 
@@ -28,7 +29,7 @@ sched = APScheduler()
 date = datetime.now().strftime("%m%d%Y")
 
 # firebase
-cred = credentials.Certificate('hfc-app-b33ed-firebase-adminsdk-oqged-96055b305b.json')
+cred = credentials.Certificate(config.FIREBASE_CREDENTIALS)
 firebase_admin.initialize_app(cred, {'storageBucket': 'hfc-app-b33ed.appspot.com'})
 usersDB = firestore.client()
 

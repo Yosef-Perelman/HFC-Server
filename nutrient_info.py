@@ -1,6 +1,7 @@
 import json
 import requests
 import logging
+import config
 
 
 fill_text = '%20'
@@ -27,8 +28,8 @@ def food_get_info(req):
     logging.info(food)
     query = query + food
 
-    url = 'https://api.edamam.com/api/nutrition-data?app_id=5cb3740f&' \
-          'app_key=a9e3c561a5d66e6b507a809b9b28e07b&nutrition-type=cooking' + query
+    url = 'https://api.edamam.com/api/nutrition-data?app_id=' + config.EDAMAM_NUTRITION_APP_ID + \
+          '&app_key=' + config.EDAMAM_NUTRITION_APP_KEY + '&nutrition-type=cooking' + query
 
     logging.info(url)
 
